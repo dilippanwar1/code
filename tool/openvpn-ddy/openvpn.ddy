@@ -1,0 +1,20 @@
+client
+dev tun       #要与服务器中的配置一致。
+proto udp              #要与服务器中的配置一致。
+remote 50.116.0.170 5553    #将服务器IP替换为你的服务器IP，端口与服务器中配置一致。
+resolv-retry infinite
+nobind
+persist-key
+persist-tun
+ca ./ca.crt
+cert ./ddy.crt
+key ./ddy.key
+ns-cert-type server
+#redirect-gateway
+keepalive 20 60
+#tls-auth ta.key 1
+comp-lzo
+verb 3
+mute 20
+route-method exe
+route-delay 2

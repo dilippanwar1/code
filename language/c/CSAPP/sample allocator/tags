@@ -1,0 +1,150 @@
+
+a.out,26
+H‹Eø‹@‰EH‹Eø‹@‰7,8270
+
+csapp.c,1994
+void unix_error(9,173
+void posix_error(16,317
+void dns_error(22,451
+void app_error(28,574
+pid_t Fork(40,864
+void Execve(50,997
+pid_t Wait(57,1166
+pid_t Waitpid(67,1306
+void Kill(77,1502
+void Pause(86,1635
+unsigned int Sleep(92,1685
+unsigned int Alarm(101,1826
+void Setpgid(105,1900
+pid_t Getpgrp(113,2035
+handler_t *Signal(Signal122,2221
+void Sigprocmask(136,2636
+void Sigemptyset(143,2795
+void Sigfillset(150,2908
+void Sigaddset(157,3019
+void Sigdelset(164,3146
+int Sigismember(171,3273
+int Open(184,3538
+ssize_t Read(193,3703
+ssize_t Write(202,3856
+off_t Lseek(211,4017
+void Close(220,4181
+int Select(228,4277
+int Dup2(238,4511
+void Stat(247,4634
+void Fstat(253,4750
+void *Mmap(Mmap262,4973
+void Munmap(271,5192
+void *Malloc(Malloc281,5463
+void *Realloc(Realloc290,5589
+void *Calloc(Calloc299,5734
+void Free(308,5880
+void Fclose(316,6055
+FILE *Fdopen(Fdopen322,6137
+char *Fgets(Fgets332,6283
+FILE *Fopen(Fopen342,6463
+void Fputs(352,6626
+size_t Fread(358,6737
+void Fwrite(367,6941
+int Socket(378,7190
+void Setsockopt(387,7351
+void Bind(395,7548
+void Listen(403,7706
+int Accept(411,7826
+void Connect(420,7995
+struct hostent *Gethostbyname(Gethostbyname433,8273
+struct hostent *Gethostbyaddr(Gethostbyaddr443,8468
+void Pthread_create(456,8820
+void Pthread_cancel(465,9051
+void Pthread_join(472,9187
+void Pthread_detach(480,9374
+void Pthread_exit(488,9528
+pthread_t Pthread_self(492,9591
+void Pthread_once(496,9653
+void Sem_init(504,9879
+void P(510,10018
+void V(516,10094
+ssize_t rio_readn(529,10436
+ssize_t rio_writen(555,11047
+static ssize_t rio_read(585,11924
+void rio_readinitb(617,12750
+ssize_t rio_readnb(629,12979
+ssize_t rio_readlineb(655,13607
+ssize_t Rio_readn(681,14177
+void Rio_writen(690,14345
+void Rio_readinitb(696,14472
+ssize_t Rio_readnb(701,14543
+ssize_t Rio_readlineb(710,14714
+int open_clientfd(729,15286
+int open_listenfd(759,16220
+int Open_clientfd(792,17301
+int Open_listenfd(805,17554
+
+csapp.h,262
+#define __CSAPP_H__3,41
+#define DEF_MODE 30,585
+#define DEF_UMASK 31,652
+typedef struct sockaddr SA;36,794
+#define RIO_BUFSIZE 41,921
+} rio_t;47,1222
+#define	MAXLINE	55,1402
+#define MAXBUF 56,1452
+#define LISTENQ 57,1501
+typedef void handler_t(78,2129
+
+main.c,15
+int main(5,37
+
+makefile,31
+check-syntax:check-syntax1,0
+
+memlib.c,392
+#define MAX_HEAP 17,378
+static char *mem_heap;mem_heap22,458
+static char *mem_brk;mem_brk23,521
+static char *mem_max_addr;mem_max_addr24,589
+void mem_init(29,707
+void *mem_sbrk(mem_sbrk41,1055
+void mem_deinit(59,1427
+void mem_reset_brk(66,1534
+void *mem_heap_lo(mem_heap_lo74,1652
+void *mem_heap_hi(mem_heap_hi82,1762
+size_t mem_heapsize(90,1877
+size_t mem_pagesize(98,2023
+
+mm.c,800
+#define NEXT_FITx17,444
+#define WSIZE 22,525
+#define DSIZE 23,619
+#define CHUNKSIZE 24,677
+#define MAX(26,771
+#define PACK(29,863
+#define GET(32,969
+#define PUT(33,1041
+#define GET_SIZE(36,1170
+#define GET_ALLOC(37,1246
+#define HDRP(40,1391
+#define FTRP(41,1476
+#define NEXT_BLKP(44,1632
+#define PREV_BLKP(45,1727
+static char *heap_listp heap_listp49,1870
+static char *rover;rover51,1947
+int mm_init(67,2392
+void *mm_malloc(mm_malloc96,3255
+void mm_free(136,4518
+static void *coalesce(coalesce160,4932
+void *mm_realloc(mm_realloc205,6150
+void mm_checkheap(242,6837
+static void *extend_heap(extend_heap254,7049
+static void place(280,8086
+static void *find_fit(find_fit304,8638
+static void printblock(339,9537
+static void checkblock(359,9961
+void checkheap(370,10236
+
+mm.h,17
+} team_t;15,363
+
+tags,0
+
+memlib.h,0

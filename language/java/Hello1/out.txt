@@ -1,0 +1,75 @@
+1:/*************************************************************************
+2: *
+3: *      Demonstrates reading text files using two different approaches
+4: *
+5: *************************************************************************/
+6:
+7:import java.io.*;
+8:import java.util.*;
+9:
+10:public class Read
+11:{
+12:   public static void main (String[] args )
+13:   {
+14:      int counter = 0;
+15:
+16:		/* first approach */
+17:
+18:		BufferedReader file = null;
+19:
+20:		try
+21:		{
+22:			file = new BufferedReader(new FileReader("Read.java"));
+23:			String line;
+24:
+25:			while ((line = file.readLine()) != null)
+26:			{
+27:				counter++;
+28:				System.out.println(counter + ":" + line);
+29:			}
+30:		}
+31:      catch (FileNotFoundException e)
+32:      {
+33:         System.err.println("cannot open file");
+34:      }
+35:      catch (IOException e)
+36:      {
+37:         System.exit(0);
+38:      }
+39:      finally
+40:      {
+41:         try
+42:         {
+43:            if (file != null) file.close();
+44:         }
+45:         catch (IOException e)
+46:         {
+47:            System.err.println(e);
+48:         }
+49:      }
+50:
+51:		/* second approach */
+52:
+53:      counter = 0;
+54:		Scanner scanner = null;
+55:		try
+56:		{
+57:			scanner = new Scanner(new File("Read.java"));
+58:
+59:			while(scanner.hasNextLine())
+60:			{
+61:				counter++;
+62:				System.out.println(counter + ":" + scanner.nextLine());
+63:			}
+64:		}
+65:      catch (FileNotFoundException e)
+66:      {
+67:         System.err.println("cannot open file");
+68:      }
+69:      finally
+70:      {
+71:         if (scanner != null) scanner.close();
+72:      }
+73:   }
+74:}
+75:

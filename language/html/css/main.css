@@ -1,0 +1,7 @@
+p.bird:first-letter {
+    font-size: 200%;
+}
+
+p.bird:first-line {
+    font-weight: bold;
+}

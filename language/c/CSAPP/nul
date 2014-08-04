@@ -1,0 +1,193 @@
+	.section	__TEXT,__text,regular,pure_instructions
+	.globl	_main
+	.align	4, 0x90
+_main:
+Leh_func_begin1:
+	pushq	%rbp
+Ltmp0:
+	movq	%rsp, %rbp
+Ltmp1:
+	subq	$256, %rsp
+Ltmp2:
+	movl	%edi, -4(%rbp)
+	movq	%rsi, -16(%rbp)
+	movl	-4(%rbp), %eax
+	cmpl	$2, %eax
+	je	LBB1_2
+	movq	___stderrp@GOTPCREL(%rip), %rax
+	movq	(%rax), %rax
+	leaq	L_.str(%rip), %rcx
+	movabsq	$1, %rdx
+	movabsq	$23, %rsi
+	movq	%rcx, %rdi
+	movq	%rsi, -192(%rbp)
+	movq	%rdx, %rsi
+	movq	-192(%rbp), %rdx
+	movq	%rax, %rcx
+	callq	_fwrite
+	jmp	LBB1_8
+LBB1_2:
+	movq	-16(%rbp), %rax
+	movq	8(%rax), %rax
+	xorl	%ecx, %ecx
+	xorb	%dl, %dl
+	movq	%rax, %rdi
+	movl	%ecx, %esi
+	movb	%dl, %al
+	callq	_open
+	movl	%eax, %ecx
+	movl	%ecx, -172(%rbp)
+	movl	-172(%rbp), %ecx
+	cmpl	$0, %ecx
+	jge	LBB1_4
+	callq	___error
+	movl	(%rax), %eax
+	movl	%eax, %edi
+	callq	_strerror
+	movq	%rax, %rcx
+	movq	___stderrp@GOTPCREL(%rip), %rdx
+	movq	(%rdx), %rdx
+	xorb	%sil, %sil
+	leaq	L_.str1(%rip), %rdi
+	movq	%rdi, -200(%rbp)
+	movq	%rdx, %rdi
+	movq	-200(%rbp), %rdx
+	movb	%sil, -201(%rbp)
+	movq	%rdx, %rsi
+	movq	%rcx, %rdx
+	movb	-201(%rbp), %cl
+	movb	%cl, %al
+	callq	_fprintf
+	jmp	LBB1_8
+LBB1_4:
+	movl	-172(%rbp), %eax
+	leaq	-168(%rbp), %rcx
+	movl	%eax, %edi
+	movq	%rcx, %rsi
+	callq	_fstat$INODE64
+	movl	%eax, %ecx
+	cmpl	$0, %ecx
+	jge	LBB1_6
+	movq	___stderrp@GOTPCREL(%rip), %rax
+	movq	(%rax), %rax
+	leaq	L_.str2(%rip), %rcx
+	movabsq	$1, %rdx
+	movabsq	$12, %rsi
+	movq	%rcx, %rdi
+	movq	%rsi, -216(%rbp)
+	movq	%rdx, %rsi
+	movq	-216(%rbp), %rdx
+	movq	%rax, %rcx
+	callq	_fwrite
+	jmp	LBB1_8
+LBB1_6:
+	movq	-72(%rbp), %rax
+	movl	-172(%rbp), %ecx
+	movabsq	$0, %rdx
+	movl	$1, %esi
+	movl	$2, %edi
+	movl	%edi, -220(%rbp)
+	movq	%rdx, %rdi
+	movl	%esi, -224(%rbp)
+	movq	%rax, %rsi
+	movl	-224(%rbp), %eax
+	movq	%rdx, -232(%rbp)
+	movl	%eax, %edx
+	movl	-220(%rbp), %r8d
+	movl	%ecx, -236(%rbp)
+	movl	%r8d, %ecx
+	movl	-236(%rbp), %r8d
+	movq	-232(%rbp), %r9
+	callq	_mmap
+	movq	%rax, -184(%rbp)
+	movq	-72(%rbp), %rax
+	movq	-184(%rbp), %rcx
+	movl	-224(%rbp), %edx
+	movl	%edx, %edi
+	movq	%rcx, %rsi
+	movq	%rax, %rdx
+	callq	_write
+	cmpq	$0, %rax
+	jge	LBB1_8
+	movq	___stderrp@GOTPCREL(%rip), %rax
+	movq	(%rax), %rax
+	leaq	L_.str3(%rip), %rcx
+	movabsq	$1, %rdx
+	movabsq	$11, %rsi
+	movq	%rcx, %rdi
+	movq	%rsi, -248(%rbp)
+	movq	%rdx, %rsi
+	movq	-248(%rbp), %rdx
+	movq	%rax, %rcx
+	callq	_fwrite
+LBB1_8:
+	movl	-20(%rbp), %eax
+	addq	$256, %rsp
+	popq	%rbp
+	ret
+Leh_func_end1:
+
+	.section	__TEXT,__cstring,cstring_literals
+L_.str:
+	.asciz	 "please enter file name\n"
+
+L_.str1:
+	.asciz	 "open error: %s\n"
+
+L_.str2:
+	.asciz	 "fstat error\n"
+
+L_.str3:
+	.asciz	 "mmap error\n"
+
+	.section	__TEXT,__eh_frame,coalesced,no_toc+strip_static_syms+live_support
+EH_frame0:
+Lsection_eh_frame:
+Leh_frame_common:
+Lset0 = Leh_frame_common_end-Leh_frame_common_begin
+	.long	Lset0
+Leh_frame_common_begin:
+	.long	0
+	.byte	1
+	.asciz	 "zR"
+	.byte	1
+	.byte	120
+	.byte	16
+	.byte	1
+	.byte	16
+	.byte	12
+	.byte	7
+	.byte	8
+	.byte	144
+	.byte	1
+	.align	3
+Leh_frame_common_end:
+	.globl	_main.eh
+_main.eh:
+Lset1 = Leh_frame_end1-Leh_frame_begin1
+	.long	Lset1
+Leh_frame_begin1:
+Lset2 = Leh_frame_begin1-Leh_frame_common
+	.long	Lset2
+Ltmp3:
+	.quad	Leh_func_begin1-Ltmp3
+Lset3 = Leh_func_end1-Leh_func_begin1
+	.quad	Lset3
+	.byte	0
+	.byte	4
+Lset4 = Ltmp0-Leh_func_begin1
+	.long	Lset4
+	.byte	14
+	.byte	16
+	.byte	134
+	.byte	2
+	.byte	4
+Lset5 = Ltmp1-Ltmp0
+	.long	Lset5
+	.byte	13
+	.byte	6
+	.align	3
+Leh_frame_end1:
+
+
+.subsections_via_symbols
