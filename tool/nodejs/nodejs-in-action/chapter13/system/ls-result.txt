@@ -1,0 +1,5 @@
+total 16
+-rw-rw-r-- 1 deyuan deyuan 154 Aug  4 21:17 exec.js
+-rw-rw-r-- 1 deyuan deyuan 170 Aug  4 21:19 ls-result.txt
+-rw-rw-r-- 1 deyuan deyuan 248 Aug  4 21:39 spawn.js
+-rw-rw-r-- 1 deyuan deyuan 180 Aug  4 00:35 uncaught.js
