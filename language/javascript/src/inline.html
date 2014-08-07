@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Listing 4.4</title>
+    <script type="text/javascript" src="../scripts/assert.js"></script>
+    <link href="../styles/assert.css" rel="stylesheet" type="text/css">
+  </head>
+
+  <body>
+    <script type="text/javascript">
+
+      var ninja = {
+        chirp: function(n) {
+          return n > 1 ? ninja.chirp(n - 1) + "-chirp" : "chirp";
+        }
+      };
+
+      var ninja2 = {
+        chirp: function signal(n) {                              //#1
+          return n > 1 ? signal(n - 1) + "-chirp" : "chirp";
+        }
+      };
+
+      var samurai = { chirp: ninja.chirp };                     //#1
+
+      // The recusive function refers to ninja.chirp(); if ninja
+      // is clear, then the call will fail. But ninja2 will work.
+      ninja = {};                                               //#2
+
+      try {
+        assert(samurai.chirp(3) == "chirp-chirp-chirp",         //#3
+               "Is this going to work?");
+      }
+      catch(e){
+        assert(false,
+               "Uh, this isn't good! Where'd ninja.chirp go?");
+      }
+
+    </script>
+  </body>
+</html>
