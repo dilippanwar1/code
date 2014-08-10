@@ -38,7 +38,7 @@ def guestbook_key(guestbook_name=None):
 class MainPage(webapp2.RequestHandler):
   def get(self):
     self.response.out.write('<html><body>')
-    guestbook_name=self.request.get('guestbook_name')
+    guestbook_name = self.request.get('guestbook_name')
 
     # Ancestor Queries, as shown here, are strongly consistent with the High
     # Replication Datastore. Queries that span entity groups are eventually
@@ -90,6 +90,7 @@ class Guestbook(webapp2.RequestHandler):
     self.redirect('/?' + urllib.urlencode({'guestbook_name': guestbook_name}))
 
 
-app = webapp2.WSGIApplication([('/', MainPage),
-                               ('/sign', Guestbook)],
-                              debug=True)
+app = webapp2.WSGIApplication([
+  ('/', MainPage),
+  ('/sign', Guestbook)
+], debug=True)
