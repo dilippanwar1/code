@@ -86,6 +86,7 @@ def create_retrieve():
     last_name='Salieri',
     hire_date=datetime.datetime.now().date(),
     attended_hr_training = True)
+  employee.first_name = 100
   employee.put()
   import pdb
   pdb.set_trace()
