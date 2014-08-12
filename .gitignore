@@ -1,7 +1,15 @@
-source
-startup
+# Ignore all occurrence of node_modules.
 node_modules
-language/go/bin
+
+# Ignore following directories.
+startup/*
+language/go/bin/*
+
+# Ignore folling files.
 .DS_Store
 
-!source/go-workspace/README.md
+# Ignore source directory but preserve go-workspace.
+source/*
+!source/go-workspace
+source/go-workspace/*
+!source/go-workspace/README.me
