@@ -12,4 +12,4 @@ language/go/bin/*
 source/*
 !source/go-workspace
 source/go-workspace/*
-!source/go-workspace/README.me
+!source/go-workspace/README.md
