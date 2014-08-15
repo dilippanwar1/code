@@ -13,3 +13,9 @@ source/*
 !source/go-workspace
 source/go-workspace/*
 !source/go-workspace/README.md
+
+# Ignore go src directory but not my code.
+language/go/src/*
+!language/go/src/github.com
+language/go/src/github.com/*
+!language/go/src/github.com/ddysher
