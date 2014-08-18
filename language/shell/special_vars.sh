@@ -13,3 +13,7 @@ echo $!
 # A string representation of a params; run 'bash special_vars.sh hi ddy.'
 # will print: hi ddy.
 echo $@
+
+# $? is used to find the error code of the last executed command.
+ls xxx
+echo $?
