@@ -4,8 +4,8 @@ import "fmt"
 
 
 type Person struct {
-	name string `json:"name"`
-	age int `json:"age"`
+	name string
+	age int
 }
 
 
@@ -33,4 +33,10 @@ func main() {
 	// Create a Person with all default value.
 	p := Person{}
 	fmt.Println(p)
+
+	// Create a slice of Person with default value.
+	people := []Person{}
+	people = append(people, Person{"Deyuan", 26})
+	people = append(people, Person{"Sijia", 26})
+	fmt.Println(people)
 }
