@@ -9,8 +9,10 @@ type Rect struct {
 }
 
 
-// This area method has a receiver type of *Rect, which means it support the
+// This area method has a receiver type of *Rect, which means it supports the
 // syntax: r.area(), where r is of type Rect or *Rect (Go will do the conversion).
+// According to the spec, this method is the same as the function:
+//   func area(r *Rect) int
 func (r *Rect) area() int {
 	return r.width * r.height
 }

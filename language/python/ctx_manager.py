@@ -10,3 +10,14 @@ class Openfile:
 
 with Openfile('hehe') as w:
   print w
+
+
+
+
+
+
+
+
+
+
+
