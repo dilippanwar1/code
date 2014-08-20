@@ -1,4 +1,4 @@
-# Experiment with some functionalities in functools module.
+# Experiment with functionalities in functools module.
 
 # functools.partial(func[,*args][, **keywords])
 #   Return a new partial object which when called will behave like func called
@@ -28,7 +28,7 @@ def partial_equivalent(func, *args, **keywords):
 
 from functools import partial
 
-basetwo = partial_equivalent(int, base=2)
+basetwo = partial(int, base=2)
 basetwo.__doc__ = 'Convert base 2 string to an int.'
 print basetwo('10010')          # 18
 
