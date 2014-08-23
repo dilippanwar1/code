@@ -32,12 +32,16 @@ RUN apt-get install -y mongodb-10gen
 RUN mkdir -p /data/db
 
 ##################### INSTALLATION END #####################
+# To avoid conflicts with host machine, you may want to start the container
+# with -p host_port:27017 to avoid port conflict, and -v host_dir:/data/db
+# to avoid path conflict, e.g.
+#   sudo docker run -p 27000:27017 -v /data/mongdb:/data/db ddysher/mongodb
+
+# Make the mongodb data path available.
+VOLUME ["/data/db"]
 
 # Expose the default port
 EXPOSE 27017
-
-# Default port to execute the entrypoint (MongoDB)
-CMD ["--port 27017"]
 
 # Set default container command
 ENTRYPOINT usr/bin/mongod
