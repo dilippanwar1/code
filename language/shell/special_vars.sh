@@ -17,3 +17,9 @@ echo $@
 # $? is used to find the error code of the last executed command.
 ls xxx
 echo $?
+
+# $# returns the number of parameters
+echo $#
+
+# pid of the current shell (not subshell)
+echo $$
