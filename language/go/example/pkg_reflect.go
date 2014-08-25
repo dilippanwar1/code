@@ -22,23 +22,28 @@ type Car struct {
 }
 
 type Bike struct {
-	made string
+	made  string
 	brand string
 }
 
 type Train struct {
 	speed int
-	size int
+	size  int
 }
 
 func main() {
 
+	// 'vehicle' is a map from vehicle type name to its corresponding struct.
+	// Using interface{} can help store them in the same map.
 	vehicle := map[string]interface{}{
-		"car": Car{"Ford", 2008},
-		"bike": Bike{"Fiet", "CC"},
+		"car":   Car{"Ford", 2008},
+		"bike":  Bike{"Fiet", "CC"},
 		"train": Train{200, 100},
 	}
 
+	// 'typeMap' is a map from vehicle type name to its corresponding type.
+	// All values in map 'vehicle' have static type interface{}, the 'typMap'
+	// holds their dynamic tpyes.
 	typeMap := make(map[string]reflect.Type)
 	for name, obj := range vehicle {
 		typeMap[name] = reflect.TypeOf(obj)
@@ -46,4 +51,15 @@ func main() {
 
 	fmt.Println(vehicle)
 	fmt.Println(typeMap)
+
+	// ValueOf returns a new Value initialized to the concrete value
+	// stored in the interface.
+	var mystery interface{} = Car{"BMW", 2014}
+	fmt.Println(reflect.TypeOf(mystery))
+
+	// 'mystery_value' has type: "reflect.Value".
+	mystery_value := reflect.ValueOf(mystery)
+	fmt.Println(mystery_value.Kind())    // struct
+	fmt.Println(mystery_value.IsValid()) // true
+	fmt.Println(mystery_value.FieldByName("made"))
 }

@@ -2,7 +2,6 @@ package main
 
 import "fmt"
 
-
 func main() {
 
 	// This construct creates a slice.
@@ -12,6 +11,10 @@ func main() {
 	for i := 0; i < len(p); i++ {
 		fmt.Printf("p[%d] = %d\n", i, p[i])
 	}
+
+	// This construct creates an empty slice.
+	e := []string{}
+	fmt.Println("Empty slice:", e)
 
 	// Another way to create a slice is using builtin make. Slice is
 	// zero-valued, i.e. "" for string.
@@ -38,7 +41,7 @@ func main() {
 	fmt.Println("sliced", l)
 
 	// This slices up to (but excluding) s[5].
-  l = s[:5]
+	l = s[:5]
 	fmt.Println("sl2:", l)
 
 	// And this slices up from (and including) s[2].
