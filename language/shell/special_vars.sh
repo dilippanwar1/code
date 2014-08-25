@@ -6,20 +6,25 @@ echo $0
 # This is somewhat equivalent to $0.
 echo ${BASH_SOURCE[0]}
 
+
 # $! is PID of the most recent background command.
 sleep 1 &
 echo $!
+
+# pid of the current shell (not subshell)
+echo $$
+
 
 # A string representation of a params; run 'bash special_vars.sh hi ddy.'
 # will print: hi ddy.
 echo $@
 
-# $? is used to find the error code of the last executed command.
-ls xxx
-echo $?
+echo ${@:2}
 
 # $# returns the number of parameters
 echo $#
 
-# pid of the current shell (not subshell)
-echo $$
+
+# $? is used to find the error code of the last executed command.
+ls xxx
+echo $?
