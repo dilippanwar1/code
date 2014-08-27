@@ -55,10 +55,3 @@ then warn of a tiger."
        5
        6)
       ((< number 3) 1))
-
-
-
-
-
-
-

@@ -22,6 +22,7 @@
 ;; A pair of address-boxes is called a cons cell or dotted pair.
 
 
+;; Baisc set, cdr, cons.
 (setq bouquet '(rose violet buttercup))
 (setq flowers (cdr bouquet))
 bouquet
@@ -30,17 +31,23 @@ flowers
 bouquet
 flowers
 
+;; List equal.
 (eq (cdr (cdr bouquet)) flowers)
 
-
-
-;; reverse and nreverse
+;; Reverse (nreverse) list.
 (setq bouquet '(rose violet buttercup))
 (reverse bouquet)
 bouquet
 (nreverse bouquet)
 bouquet
 
-
-
+;; Add to to list.
 (append '(1 2 3) '(4 5 6) '(7 8 9))
+(add-to-list 'jasmine bouquet)
+
+;; Remove from list.
+(setq bouquet '(rose violet buttercup))
+;; 'remq' will remove element from list, return a new list (do not modify
+;; original list.
+(remq 'rose bouquet)
+bouquet
