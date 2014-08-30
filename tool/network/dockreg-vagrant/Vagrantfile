@@ -1,0 +1,34 @@
+# -*- mode: ruby -*-
+# vi: set ft=ruby :
+
+VAGRANTFILE_API_VERSION = "2"
+
+
+Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
+
+  # The base Vagrant box is an Ubuntu 14.04 with 2 Docker images pulled into
+  # the VM : ubuntu and etcd. This is done only to speed the provisioning of
+  # the host, i.e. we can install the images during provision, but it requires
+  # pulling the images, which is slow.
+  config.vm.box = "dockreg-demo"
+  config.vm.box_url = "https://db.tt/Y8DhM1dT"
+
+  ip1 = "10.1.0.101"
+  hostname1 = "host-1"
+
+  ip2 = "10.1.0.102"
+  hostname2 = "host-2"
+
+  config.vm.define "host-1" do |host|
+  	host.vm.hostname = hostname1
+  	host.vm.network "private_network", ip: ip1
+    host.vm.provision "shell", :path => "build.sh", :args => [hostname1,ip1,""]
+  end
+
+  config.vm.define "host-2" do |host|
+    host.vm.hostname = hostname2
+  	host.vm.network "private_network", ip: ip2
+    host.vm.provision "shell", :path => "build.sh", :args => [hostname2,ip2,"-peers #{ip1}:7001"]
+  end
+
+end
