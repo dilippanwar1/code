@@ -2,7 +2,6 @@ package main
 
 import "fmt"
 
-
 func main() {
 
 	nums := []int{2, 3, 4}
@@ -13,6 +12,11 @@ func main() {
 		sum += num
 	}
 	fmt.Println("sum:", sum)
+
+	// range provides index if there is only one variable at left.
+	for i := range nums {
+		fmt.Println("i:", i)
+	}
 
 	for i, num := range nums {
 		if num == 3 {
