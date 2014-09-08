@@ -50,10 +50,10 @@ func main() {
 	// otherwise, it will block until index reach 5.
 	client.Watch("/message", 5, false, nil, nil)
 
-	// When passing 'etcdIncoming' and 'etcdStop' to client.Watch, it is a long
-	// term watch.  client.Watch will block at the channel. After someone receives
-	// the channel, it will go on to watch that prefix. If a stop channel is given,
-	// the client can close long-term watch using the stop channel.
+	// When passing 'etcdIncoming' to client.Watch, it is a long term watch.
+	// client.Watch will block at the channel. After someone receives the channel,
+	// it will go on to watch that prefix. If a stop channel is given, the client
+	// can close long-term watch using the stop channel.
 	etcdIncoming := make(chan *etcd.Response)
 	etcdStop := make(chan bool)
 	go watchWrapper(client, "/message", 0, false, etcdIncoming, etcdStop)

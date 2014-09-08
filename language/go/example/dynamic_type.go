@@ -4,10 +4,20 @@
 // run time. The dynamic type may vary during execution but is always assignable
 // to the static type of the interface variable. For non-interface types,
 // the dynamic type is always the static type.
+//
+// The interface{} type is the interface that has no methods. Since there
+// is no implements keyword, all types implement at least zero methods, and
+// satisfying an interface is done automatically, all types satisfy the empty
+// interface. That means that if you write a function that takes an interface{}
+// value as a parameter, you can supply that function with any value.
+//
+// An interface value is constructed of two words of data; one word is used
+// to point to a method table for the value’s underlying type, and the other
+// word is used to point to the actual data being held by that value.
+
 package main
 
 import "fmt"
-
 
 func main() {
 

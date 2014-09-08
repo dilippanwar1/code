@@ -3,7 +3,6 @@ package main
 import "fmt"
 import "time"
 
-
 func main() {
 
 	i := 2
@@ -35,5 +34,15 @@ func main() {
 		fmt.Println("it's before noon")
 	default:
 		fmt.Println("it's after noon")
+	}
+
+	// Only the first match will be executed, it is essentially if..elseif.
+	switch {
+	case i > 1:
+		fmt.Println("i > 1")
+	case i < 3:
+		fmt.Println("i < 3")
+	default:
+		fmt.Println("i ?")
 	}
 }
