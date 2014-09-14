@@ -22,6 +22,10 @@ func main() {
 			continue
 		}
 
+		fmt.Println("-------------In", inConn,
+			"Local", inConn.LocalAddr(), "Remote", inConn.RemoteAddr())
+		fmt.Println("------------Out", outConn,
+			"Local", outConn.LocalAddr(), "Remote", outConn.RemoteAddr())
 		proxyTCP(inConn.(*net.TCPConn), outConn.(*net.TCPConn))
 	}
 }
@@ -31,6 +35,9 @@ func proxyTCP(in, out *net.TCPConn) {
 		in.RemoteAddr(), in.LocalAddr(), out.LocalAddr(), out.RemoteAddr())
 	go copyBytes(in, out)
 	go copyBytes(out, in)
+	// time.Sleep(2 * time.Second)
+	// in.Close()
+	// out.Close()
 }
 
 func copyBytes(in, out *net.TCPConn) {
@@ -39,7 +46,6 @@ func copyBytes(in, out *net.TCPConn) {
 	if _, err := io.Copy(in, out); err != nil {
 		fmt.Println("I/O error: %v", err)
 	}
-	fmt.Println("Called ")
-	in.CloseRead()
-	out.CloseWrite()
+	fmt.Println(in, "Close Read", in.CloseRead())
+	fmt.Println(out, "Close Write", out.CloseWrite())
 }
