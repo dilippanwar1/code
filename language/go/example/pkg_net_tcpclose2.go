@@ -15,6 +15,12 @@ func main() {
 			continue
 		}
 		fmt.Println("Get connection.")
-		inConn.Close()
+
+		// Use only CloseRead and CloseWrite won't close the socket.
+		inTCPConn := inConn.(*net.TCPConn)
+		inTCPConn.CloseRead()
+		inTCPConn.CloseWrite()
+
+		// inConn.Close()
 	}
 }

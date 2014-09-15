@@ -32,7 +32,7 @@ int main(int argc , char *argv[])
   puts("Connected\n");
 
   // Keep communicating with server
-  while(1) {
+  while (1) {
     printf("Enter message : ");
     scanf("%s" , message);
 
