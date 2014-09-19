@@ -52,14 +52,25 @@ func main() {
 	fmt.Println(vehicle)
 	fmt.Println(typeMap)
 
+	// TypeOf returns the reflection Type of the value in the interface{}.
+	var mystery interface{} = Car{"BMW", 2014}
+	fmt.Println(reflect.TypeOf(mystery))                 // main.Car
+	fmt.Println("Name:", reflect.TypeOf(mystery).Name()) // Car
+
 	// ValueOf returns a new Value initialized to the concrete value
 	// stored in the interface.
-	var mystery interface{} = Car{"BMW", 2014}
-	fmt.Println(reflect.TypeOf(mystery))
 
 	// 'mystery_value' has type: "reflect.Value".
 	mystery_value := reflect.ValueOf(mystery)
-	fmt.Println(mystery_value.Kind())    // struct
-	fmt.Println(mystery_value.IsValid()) // true
-	fmt.Println(mystery_value.FieldByName("made"))
+	fmt.Println(reflect.TypeOf(mystery_value))     // reflect.Value
+	fmt.Println(mystery_value.Kind())              // struct
+	fmt.Println(mystery_value.IsValid())           // true
+	fmt.Println(mystery_value.FieldByName("made")) // BMW
+
+	m := make(map[string]int)
+	// Elem returns a type's element type.
+	// It panics if the type's Kind is not Array, Chan, Map, Ptr, or Slice.
+	fmt.Println(reflect.TypeOf(m))        // map[string]int
+	fmt.Println(reflect.TypeOf(m).Elem()) // int
+	fmt.Println(reflect.TypeOf(m).Key())  // string
 }

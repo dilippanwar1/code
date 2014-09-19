@@ -2,7 +2,6 @@ package main
 
 import "fmt"
 
-
 func main() {
 
 	// Here we create an array a that will hold exactly 5 ints. The type of

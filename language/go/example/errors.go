@@ -1,13 +1,17 @@
 package main
 
-import "errors"
-import "fmt"
-import "reflect"
-
+import (
+	"errors"
+	"fmt"
+)
 
 // Basic usage 1:
-// Note by convention, errors are the last return value and
-// have type error, which is a builtin interface.
+// Note by convention, errors are the last return value and have type
+// error, which is a builtin interface. An 'error' variable represents
+// any value that can describe itself as a string.
+//   type error interface {
+//     Error() string
+//   }
 func f1(arg int) (int, error) {
 	if arg == 42 {
 		// 'errors.New' construct a basic 'error' value.
@@ -16,7 +20,6 @@ func f1(arg int) (int, error) {
 	// A nil value means no error.
 	return arg + 3, nil
 }
-
 
 // Basic usage 2:
 // It's possible to use custom types as errors by implementing
@@ -36,7 +39,6 @@ func f2(arg int) (int, error) {
 	}
 	return arg + 3, nil
 }
-
 
 func main() {
 
@@ -60,7 +62,7 @@ func main() {
 	// use the data in a custom error, you’ll need to get the error as an
 	// instance of the custom error type via type assertion.
 	_, e := f2(42)
-	if ae, ok :=  e.(*ArgError); ok {
+	if ae, ok := e.(*ArgError); ok {
 		fmt.Println(ae.arg)
 		fmt.Println(ae.msg)
 	}

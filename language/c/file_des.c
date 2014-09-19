@@ -19,6 +19,14 @@ int main(void) {
 
   printf("%d, %d, %d\n", fd1, fd2, fd3);
 
+  /* List open file descriptor using ls -l /proc/{PID}/fd */
+  /* 0 -> /dev/pts/29 */
+  /* 1 -> /dev/pts/29 */
+  /* 2 -> /dev/pts/29 */
+  /* 3 -> /home/deyuan/code/language/c/bool.c */
+  /* 4 -> /home/deyuan/code/language/c/bool.c */
+  /* 5 -> /home/deyuan/code/language/c/bool.c */
+
   close(fd1);
   close(fd2);
   close(fd3);

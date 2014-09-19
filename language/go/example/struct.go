@@ -2,12 +2,10 @@ package main
 
 import "fmt"
 
-
 type Person struct {
 	name string
-	age int
+	age  int
 }
-
 
 func main() {
 
@@ -39,4 +37,17 @@ func main() {
 	people = append(people, Person{"Deyuan", 26})
 	people = append(people, Person{"Sijia", 26})
 	fmt.Println(people)
+
+	// Create a slice of Person and initialize them.
+	pp := []Person{
+		{
+			name: "Deyuan",
+			age:  25,
+		},
+		{
+			name: "Sijia",
+			age:  25,
+		},
+	}
+	fmt.Println(pp)
 }
