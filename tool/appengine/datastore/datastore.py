@@ -86,10 +86,9 @@ def create_retrieve():
     last_name='Salieri',
     hire_date=datetime.datetime.now().date(),
     attended_hr_training = True)
-  employee.first_name = 100
+  # Cannot assign integer.
+  # employee.first_name = 100
   employee.put()
-  import pdb
-  pdb.set_trace()
   # Create an address with 'employee' as its parent.
   address = Address(
     parent=employee,
@@ -102,6 +101,18 @@ def create_retrieve():
   employee_key = db.Key.from_path('Employee', 'asalieri')
   same_employee = db.get(employee_key)
   logging.info(same_employee.first_name + ' ' + same_employee.last_name)
+
+
+  address2 = Address(
+    parent=db.Key.from_path('Employee', 'deyuanyuan'),
+    street='2316 Murray',
+    city='Pittsburgh')
+  address2.put()
+
+  for address in Address.all():
+    print address.street
+    print address.parent_key().name()
+
 create_retrieve()
 
 # Demonstration, won't work.
