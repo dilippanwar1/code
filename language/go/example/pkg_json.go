@@ -22,8 +22,8 @@ func basics() {
 	b, _ := json.Marshal(m)
 
 	if bytes.Equal(b, []byte(`{"Name":"Alice","Body":"Hello","Time":1234567890}`)) {
-		// Every byte is ASCII of the corresponding char in the json string. Note
-		// the number printed by Go is in decimal:
+		// Every byte is the ASCII of the corresponding character in the json
+		// string. Note the number printed by Go is in decimal:
 		// [123 34 78 97 109 101 34 58 34 65 108 105 99 101 34 44 34 66 111 100 121
 		//  34 58 34 72 101 108 108 111 34 44 34 84 105 109 101 34 58 49 50 51 52 53
 		//  54 55 56 57 48 125]
@@ -35,14 +35,15 @@ func basics() {
 	// If b contains valid JSON that fits in Message, after the call err will be
 	// nil and the data from b will have been stored in the struct mm.
 	var mm Message
-	json.Unmarshal(b, &mm)
-	fmt.Println(mm)
+	err := json.Unmarshal(b, &mm)
+	fmt.Println(err)
+	fmt.Println("Unmarshal valid JSON", mm)
 
 	// Only known field (Name) will be populated.
 	var mmm Message
 	b = []byte(`{"Name":"Bob","Food":"Pickle"}`)
 	json.Unmarshal(b, &mmm)
-	fmt.Println(mmm)
+	fmt.Println("Only known field will be populated", mmm)
 }
 
 type FamilyMember struct {
