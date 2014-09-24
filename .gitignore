@@ -1,5 +1,6 @@
 # Ignore all occurrence of node_modules.
 node_modules
+bin
 
 # Ignore following directories.
 startup/*
