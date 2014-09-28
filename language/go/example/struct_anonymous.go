@@ -4,15 +4,14 @@ import "fmt"
 
 type Kitchen struct {
 	numOfPlates int
-	numOfLamps int
+	numOfLamps  int
 }
 
 type House struct {
-	Kitchen												// anonymous field
+	Kitchen    // anonymous field
 	numOfRooms int
 	numOfLamps int
 }
-
 
 func main() {
 
