@@ -11,7 +11,7 @@
 FROM ubuntu:14.04
 # Install Node.js and npm
 RUN apt-get -qq update
-RUN apt-get -qqy install -y nodejs npm
+RUN apt-get -qq install -y nodejs npm
 # Bundle app source
 COPY . /src
 # Install app dependencies
