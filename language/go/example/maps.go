@@ -2,7 +2,6 @@ package main
 
 import "fmt"
 
-
 func main() {
 
 	// Constructor 1:
@@ -31,4 +30,10 @@ func main() {
 	// Declare and initialize a new map in the same line with this syntax.
 	n := map[string]int{"foo": 1, "bar": 2}
 	fmt.Println("map:", n)
+
+	keys := []string{}
+	for k := range n {
+		keys = append(keys, k)
+	}
+	fmt.Println("map keys:", keys)
 }
