@@ -83,3 +83,25 @@ class TestGetSetItem():
 test_getsetitem = TestGetSetItem()
 test_getsetitem['100'] = 100
 print test_getsetitem['100']
+
+
+print '===================== TestGetAttrCall =============================='
+
+class Base():
+  def PrintValue(self, value):
+    print value
+
+_BASE = Base()
+
+class TestGetAttrCall():
+
+  def __getattr__(self, key):
+    if key == 'PrintValue':
+      return lambda x: None
+    return _BASE.PrintValue
+
+
+test_getattrcall = TestGetAttrCall()
+test_getattrcall.PrintValue(100)
+print dir(_BASE)
+print dir(test_getattr)

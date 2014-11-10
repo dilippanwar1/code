@@ -2,7 +2,6 @@ package main
 
 import "fmt"
 
-
 func main() {
 
 	// Constructor 1:
@@ -19,6 +18,9 @@ func main() {
 	// Use builtin delete to delete a key (provide the key val).
 	delete(m, "k2")
 	fmt.Println("Deleted k2:", m)
+
+	// 'delete' is no-op if there is no such element.
+	delete(m, "k3")
 
 	// The optional second return value when getting a value from a map indicates
 	// if the key presents in the map. This can be used to  disambiguate between
