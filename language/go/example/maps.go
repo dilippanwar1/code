@@ -19,6 +19,9 @@ func main() {
 	delete(m, "k2")
 	fmt.Println("Deleted k2:", m)
 
+	// 'delete' is no-op if there is no such element.
+	delete(m, "k3")
+
 	// The optional second return value when getting a value from a map indicates
 	// if the key presents in the map. This can be used to  disambiguate between
 	// missing keys and keys with zero values like 0 or "".  Here, present will be

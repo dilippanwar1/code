@@ -1,5 +1,6 @@
 #!/bin/bash
 
+# Common idiom of "-" (hyphen): set a variable iff it's not previously set.
 # If CONFIG_FILE is empty, then print 'config-default.sh';
 # if CONFIG_FILE is not empty, then print CONFIG_FILE.
 echo ${CONFIG_FILE-"config-default.sh"}

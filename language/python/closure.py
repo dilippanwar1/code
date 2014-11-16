@@ -43,7 +43,6 @@ print sub(one, two)
 print add(one, three)
 
 
-
 def outer(x):
   y = ''
   def inner():
