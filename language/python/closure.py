@@ -51,3 +51,13 @@ def outer(x):
 
 foo = outer(1)
 print foo.func_closure
+
+
+value = 100
+
+def valuePrinter():
+  print value
+
+valuePrinter()
+value = 200
+valuePrinter()
