@@ -1,10 +1,13 @@
 #
 # k8s-inspect Dockerfile
 #
-# Build the image using
+# Build the image using:
 #   sudo docker build -t ddysher/k8s-inspect .
 #
-# Run the image using
+# Push the image (docker login first):
+#   sudo docker push ddysher/k8s-inspect
+#
+# Run the image using:
 #   sudo docker run -d ddysher/k8s-inspect
 
 

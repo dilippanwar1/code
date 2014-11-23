@@ -17,7 +17,7 @@
     }
   },
   "labels": {
-    "name": "redis",
-    "role": "master"
+    "name": "k8s-inspect",
+    "role": "test"
   }
 }
