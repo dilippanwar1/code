@@ -17,6 +17,8 @@ source/go-workspace/*
 
 # Ignore go src directory but not my code.
 language/go/src/*
+language/go/pkg/*
+language/go/bin/*
 !language/go/src/github.com
 language/go/src/github.com/*
 !language/go/src/github.com/ddysher
