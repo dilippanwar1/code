@@ -1,5 +1,11 @@
 #!/bin/bash
-# Several Shell Examples
+# Shell Command
+
+# The characters "$( )" tell the shell, "substitute the results of the enclosed
+# command". The older backtick form also works, but try to avoid it.
+echo $(date +"%x %r %Z")
+echo `date +"%x %r %Z"`
+
 
 # 'cat /dev/urandom' returns unlimited random characters (non-blocking);
 #   /dev/random is blocking.

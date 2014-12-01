@@ -1,5 +1,14 @@
 #!/bin/bash
 
+# There can't be any space between "=" sign. "$title" is called parameter
+# expansion.
+title="My title"
+echo $title
+echo ${title}                   # This is preferred over $title
+echo "$title"                   # This also works
+echo "${title}"
+echo "\${title}"                # Need to escape $ if we want to print it
+
 # Common idiom of "-" (hyphen): set a variable iff it's not previously set.
 # If CONFIG_FILE is empty, then print 'config-default.sh';
 # if CONFIG_FILE is not empty, then print CONFIG_FILE.
@@ -15,9 +24,3 @@ echo $RANDOM
 # PWD is shell variable that returns a current working directory.
 echo $PWD
 echo $(pwd)
-
-# EXIT is built-in. The echo command is executed when shell exits,
-# either normally or upon receiving signals.
-trap "echo Bye from exit" EXIT
-
-sleep 1

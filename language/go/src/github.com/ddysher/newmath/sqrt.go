@@ -1,6 +1,12 @@
 // Package newmath is a trivial example package.
 package newmath
 
+import "fmt"
+
+func init() {
+	fmt.Println("I will be ran as long as anyone imports me.")
+}
+
 // Sqrt returns an approximation to the square root of x.
 func Sqrt(x float64) float64 {
 	z := 1.0
