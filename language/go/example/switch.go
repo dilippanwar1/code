@@ -45,4 +45,14 @@ func main() {
 	default:
 		fmt.Println("i ?")
 	}
+
+	// There is no automatically fall through, to achieve that, use
+	// comma-sepparated lists.
+	c := "?"
+	switch c {
+	case ".", "?", "*":
+		fmt.Println("Got it")
+	default:
+		fmt.Println("In vain")
+	}
 }

@@ -1,16 +1,19 @@
-# Ignore all occurrence of node_modules.
+# Ignore all occurrence of following directories and files.
+.vagrant
 node_modules
 bin
 
 # Ignore following directories.
 startup/*
-language/go/bin/*
+source/*
 
-# Ignore folling files.
+# Ignore following files.
 .DS_Store
 
+#
+# Golang ignore files
+#
 # Ignore source directory but preserve go-workspace.
-source/*
 !source/go-workspace
 source/go-workspace/*
 !source/go-workspace/README.md

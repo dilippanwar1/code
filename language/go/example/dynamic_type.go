@@ -42,7 +42,7 @@ func main() {
 		fmt.Println("Cannot convert a to float32")
 	}
 
-	// Take action based on type.
+	// Take action based on type (type switch).
 	switch t := a.(type) {
 	case string:
 		fmt.Println("a has type string", t)

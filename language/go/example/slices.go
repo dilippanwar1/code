@@ -7,6 +7,7 @@ func main() {
 	// This construct creates a slice.
 	p := []int{2, 3, 5, 7, 11, 13}
 	fmt.Println(p)
+	fmt.Println(cap(p)) // 6
 
 	for i := 0; i < len(p); i++ {
 		fmt.Printf("p[%d] = %d\n", i, p[i])
@@ -15,6 +16,7 @@ func main() {
 	// This construct creates an empty slice.
 	e := []string{}
 	fmt.Println("Empty slice:", e)
+	fmt.Println(cap(e)) // 0
 
 	// Another way to create a slice is using builtin make. Slice is
 	// zero-valued, i.e. "" for string.
@@ -59,4 +61,18 @@ func main() {
 		}
 	}
 	fmt.Println("2d:", twoD)
+
+	// Passing slice to a function is essentially passing the reference.
+	sc := make([]int, 3)
+	sliceChanger(sc)
+	fmt.Println(sc)
+
+	// We can also 'slice' (verb here) an array, slice.
+	ss := [5]int{1, 2, 3, 4, 5}
+	fmt.Printf("%T\n", ss[0:2]) // ss[0:2] return a slice
+	fmt.Printf("%T\n", ss)
+}
+
+func sliceChanger(s []int) {
+	s[0] = 888
 }

@@ -5,9 +5,9 @@
 package main
 
 import (
-	"os"
-	"io"
 	"fmt"
+	"io"
+	"os"
 )
 
 func CopyFile(dstName, srcName string) (written int64, err error) {
@@ -36,7 +36,7 @@ func CopyFile(dstName, srcName string) (written int64, err error) {
 func a() {
 	i := 0
 	defer fmt.Println(i) // Print 0
-	i++
+	i++                  // Will not affect defer's argument value
 	return
 }
 
@@ -55,10 +55,9 @@ func b() {
 //    returns 2.  This is convenient for modifying the error return value of a
 //    function
 func c() (i int) {
-	defer func() { i++ } ()				// Print 2
+	defer func() { i++ }() // Print 2
 	return 1
 }
-
 
 func main() {
 	a()
