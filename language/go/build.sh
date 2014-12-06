@@ -9,7 +9,7 @@ BUILD_PATH="$(cd "$(dirname "$0")" && pwd)"
 # Export and override GOPATH.
 export GOPATH=$BUILD_PATH
 
-# Export PATH, avoid duplicate assign.
+# Export PATH, avoid duplicate assignment.
 if [[ $PATH != *$BUILD_PATH* ]]; then
   export PATH=$BUILD_PATH/bin:$PATH
 fi
