@@ -37,7 +37,7 @@ fi
 if true; false; then            # only the last command counts
   echo "This is true"
 else
-  echo "This is false"
+  echo "This is false"          # Print false
 fi
 
 

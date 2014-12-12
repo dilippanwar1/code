@@ -1,5 +1,5 @@
 #!/bin/bash
-# Shell Command
+# Shell examples
 
 # The characters "$( )" tell the shell, "substitute the results of the enclosed
 # command". The older backtick form also works, but try to avoid it.
