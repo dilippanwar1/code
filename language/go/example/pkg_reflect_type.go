@@ -66,6 +66,8 @@ func main() {
 	fmt.Println(mystery_value.Kind())              // struct
 	fmt.Println(mystery_value.IsValid())           // true
 	fmt.Println(mystery_value.FieldByName("made")) // BMW
+	fieldByName := mystery_value.FieldByName("made")
+	fmt.Println(reflect.TypeOf(fieldByName))
 
 	m := make(map[string]int)
 	// Elem returns a type's element type.
