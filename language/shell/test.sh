@@ -1,5 +1,6 @@
 #!/bin/bash
-# Shell test command
+#
+# Experiment with shell test command
 
 # The test command is used most often with the if command to perform true/false
 # decision. The command is unusual in that it has two different syntactic forms:
@@ -18,9 +19,9 @@ test 3 -gt 4 && echo True || echo false # false
 
 # Use with if statement
 if [ -f ~/.bash_profile ]; then
-    echo "You have a .bash_profile. Things are fine."
+  echo "You have a .bash_profile. Things are fine."
 else
-    echo "Yikes! You have no .bash_profile!"
+  echo "Yikes! You have no .bash_profile!"
 fi
 
 

@@ -1,4 +1,5 @@
 #!/bin/bash
+#
 # Special variables in Shell
 
 # $0 is the name of the shell script; sometimes used to get directory.
@@ -25,7 +26,8 @@ echo $@                     # output: Hi, ddysher
 echo "$@"                   # The same as $@
 echo ${@:2}                 # output: ddysher (see param_expansion.sh)
 
-# $# returns the number of parameters
+# $# returns the number of parameters (does not include $0)
+# E.g. Run 'bash special_vars.sh Hi, ddysher'
 echo $#                         # output: 2
 
 # $? is used to find the error code of the last executed command.

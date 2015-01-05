@@ -1,6 +1,7 @@
 #!/bin/bash
-# Shell if flow control
-
+#
+# Experiment with shell if flow control
+#
 # If statement has the following syntax:
 #
 #  if commands; then
