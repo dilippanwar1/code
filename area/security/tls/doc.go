@@ -43,6 +43,9 @@ package main
 //   revocation lists, attribute certificates, and a certification path validation
 //   algorithm.
 
+// Example Steps:
 // $ go run generate.go
-// $ go run server.go &
-// $ go run client.go
+// $ go run server_tcp.go &
+// $ go run client_tcp.go
+// $ go run server_http.go &
+// $ go run client_http.go

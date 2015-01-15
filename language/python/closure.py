@@ -53,11 +53,14 @@ foo = outer(1)
 print foo.func_closure
 
 
-value = 100
+def TestValueScope():
+  value = 100
 
-def valuePrinter():
-  print value
+  def valuePrinter():
+    print value
 
-valuePrinter()
-value = 200
-valuePrinter()
+  valuePrinter()
+  value = 200
+  valuePrinter()
+
+TestValueScope()
