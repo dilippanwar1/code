@@ -23,7 +23,7 @@ func main() {
 	delete(m, "k3")
 
 	// The optional second return value when getting a value from a map indicates
-	// if the key presents in the map. This can be used to  disambiguate between
+	// if the key presents in the map. This can be used to disambiguate between
 	// missing keys and keys with zero values like 0 or "".  Here, present will be
 	// false, but _ is still 0.
 	_, present := m["k2"]
