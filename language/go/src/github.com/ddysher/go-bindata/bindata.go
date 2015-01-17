@@ -76,7 +76,7 @@ func golden_alpha_txt() (*asset, error) {
 		return nil, err
 	}
 
-	info := bindata_file_info{name: "golden/alpha.txt", size: 8, mode: os.FileMode(420), modTime: time.Unix(1419780842, 0)}
+	info := bindata_file_info{name: "golden/alpha.txt", size: 8, mode: os.FileMode(436), modTime: time.Unix(1421512536, 0)}
 	a := &asset{bytes: bytes, info:  info}
 	return a, nil
 }
@@ -96,7 +96,7 @@ func golden_file1_go() (*asset, error) {
 		return nil, err
 	}
 
-	info := bindata_file_info{name: "golden/file1.go", size: 0, mode: os.FileMode(420), modTime: time.Unix(1419780104, 0)}
+	info := bindata_file_info{name: "golden/file1.go", size: 0, mode: os.FileMode(436), modTime: time.Unix(1421512536, 0)}
 	a := &asset{bytes: bytes, info:  info}
 	return a, nil
 }
@@ -116,7 +116,7 @@ func golden_index_html() (*asset, error) {
 		return nil, err
 	}
 
-	info := bindata_file_info{name: "golden/index.html", size: 15, mode: os.FileMode(420), modTime: time.Unix(1419780689, 0)}
+	info := bindata_file_info{name: "golden/index.html", size: 15, mode: os.FileMode(436), modTime: time.Unix(1421512536, 0)}
 	a := &asset{bytes: bytes, info:  info}
 	return a, nil
 }
@@ -136,7 +136,7 @@ func golden_love_c() (*asset, error) {
 		return nil, err
 	}
 
-	info := bindata_file_info{name: "golden/love.c", size: 285, mode: os.FileMode(420), modTime: time.Unix(1419833011, 0)}
+	info := bindata_file_info{name: "golden/love.c", size: 285, mode: os.FileMode(436), modTime: time.Unix(1421512536, 0)}
 	a := &asset{bytes: bytes, info:  info}
 	return a, nil
 }

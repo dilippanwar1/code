@@ -17,8 +17,8 @@ import (
 
 func main() {
 	// 'serverCert' is self-signed; 'clientCert' is signed by serverCert.
-	serverCert, _ := CreateSelfSignedCertificateAndKey("CMU", "ca1.crt", "ca1.key")
-	clientCert, _ := CreateCertificateAndKey("UESTC", "cert2.crt", "cert2.key", "ca1.crt", "ca1.key")
+	serverCert, _ := CreateSelfSignedCertificateAndKey("ORG1", "ca1.crt", "ca1.key")
+	clientCert, _ := CreateCertificateAndKey("ORG2", "cert2.crt", "cert2.key", "ca1.crt", "ca1.key")
 	if err := EncodeToPEMFormat("ca1.crt", "ca1.key"); err != nil {
 		log.Print("Err encoding to PEM format", err)
 	}
@@ -35,7 +35,7 @@ func CreateSelfSignedCertificateAndKey(organization, certPath, keyPath string) (
 	template := x509.Certificate{
 		SerialNumber: big.NewInt(1653),
 		Subject: pkix.Name{
-			Country:      []string{"China"},
+			Country:      []string{"ABC"},
 			Organization: []string{organization},
 		},
 		NotBefore:             time.Now(),
@@ -74,7 +74,7 @@ func CreateCertificateAndKey(organization, certPath, keyPath, parentCertPath, pa
 	template := x509.Certificate{
 		SerialNumber: big.NewInt(1658),
 		Subject: pkix.Name{
-			Country:      []string{"China"},
+			Country:      []string{"ABC"},
 			Organization: []string{organization},
 		},
 		NotBefore:    time.Now(),
