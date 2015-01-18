@@ -30,7 +30,6 @@ func watchWrapper(client *etcd.Client, prefix string, waitIndex uint64, recursiv
 }
 
 func main() {
-
 	client, err := newEtcdClient()
 	if err != nil {
 		fmt.Println(err)
