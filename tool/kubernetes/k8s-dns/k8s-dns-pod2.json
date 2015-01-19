@@ -1,14 +1,14 @@
 {
-  "id": "k8s-inspect-pod",
+  "id": "k8s-dns-pod2",
   "apiVersion": "v1beta1",
   "kind": "Pod",
   "desiredState": {
     "manifest": {
       "version": "v1beta1",
-      "id": "k8s-inspect-pod",
+      "id": "k8s-dns-pod2",
       "containers": [{
-        "name": "k8s-inspect",
-        "image": "ddysher/k8s-inspect"
+        "name": "k8s-dns-pod2",
+        "image": "ddysher/k8s-dns-pod2",
       }],
       "restartpolicy": {
         "never": {}
@@ -16,7 +16,6 @@
     }
   },
   "labels": {
-    "name": "k8s-inspect",
-    "role": "test"
+    "name": "k8s-dns-pod2",
   }
 }
