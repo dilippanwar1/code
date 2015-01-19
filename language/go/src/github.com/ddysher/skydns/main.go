@@ -3,12 +3,12 @@
 //
 // Steps (Ubuntu14.04):
 // 1. $ etcd
-// 2. $ sudo skydns -addr=127.0.2.2:53 -nameservers=8.8.8.8:53
+// 2. $ sudo ./skydns -addr=127.0.2.2:53 -nameservers=8.8.8.8:53
 //   For now, we have an etcd instance running, and a skydns server runing at 127.0.2.2:53,
 //   the skydns instance will use etcd as backend (127.0.0.1:4001 by default). If it cann't
 //   find dns entry, skydns will forward request to name resolving server 8.8.8.8:53.  Note
-//   skyDNS is running at the default dns port udp:53, so we need to run it as root and also
-//   make sure skydns is in root's PATH. An alternative solution might be using iptables.
+//   skyDNS is running at the default dns port udp:53, so we need to run it as root. An
+//   alternative solution might be using iptables.
 // 3. Edit /etc/resolv.conf, add "nameserver 127.0.2.2" to TOP of file.
 //   The reason we use standard port 53 for skydns is due to this file - it assumes port 53
 //   for the given ip address. Also, we need to add 127.0.2.2 as the first nameserver due to
