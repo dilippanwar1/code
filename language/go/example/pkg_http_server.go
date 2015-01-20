@@ -7,7 +7,6 @@ import (
 )
 
 func flushHandler(w http.ResponseWriter, r *http.Request) {
-
 	fmt.Println("Inside flushHandler")
 	fmt.Fprintf(w, "Hello world from my Go program!\n")
 

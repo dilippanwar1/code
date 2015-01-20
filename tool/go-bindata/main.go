@@ -12,7 +12,8 @@
 //  $ go run main.go binddata.go
 //
 // Internally, it works by reading the files, copy to the new file, with a lot
-// of bookkeeping (use fmt.Fprintf), see go-bindata/release.go.
+// of bookkeeping (use fmt.Fprintf), see go-bindata/release.go. The files' data
+// are stored as byte array in the result file.
 package main
 
 import "fmt"
