@@ -55,4 +55,16 @@ func main() {
 	default:
 		fmt.Println("In vain")
 	}
+
+	i = 0
+L:
+	for ; i < 10; i++ {
+		switch i {
+		case 2:
+			// This break will break out the for loop. Use 'break' without
+			// the L tag won't work.
+			break L
+		}
+	}
+	fmt.Println(i)
 }
