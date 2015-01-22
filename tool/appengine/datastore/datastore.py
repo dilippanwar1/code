@@ -1,3 +1,12 @@
+"""
+Download google appengine python sdk and start with:
+  $ sudo ~/code/source/google_appengine/dev_appserver.py .
+Assuming working dir is current directory and sdk is installed in code/source.
+
+Application URL: localhost:8080
+Admin Console URL: localhost:8000
+"""
+
 import webapp2
 import logging
 import datetime
@@ -12,7 +21,8 @@ from google.appengine.ext import db
 # Each entity in the Datastore has a key that uniquely identifies it. The key
 # consists of the following components:
 #   The namespace of the entity, which allows for multitenancy
-#   The kind of the entity, which categorizes it for the purpose of Datastore queries
+#   The kind of the entity, which categorizes it for the purpose of Datastore
+#     queries
 #   An identifier for the individual entity, which can be either:
 #     a key name string
 #     an integer numeric ID
@@ -57,8 +67,8 @@ class Employee(db.Model):
 #
 # Follow previous example, when saving address like this:
 #   address = Address(parent=employee, street='2043 Wightman', city='Pittsburgh')
-# Then address key, identifier will look like this (Note we don't use key_name for
-# address, but employee has key_name):
+# Then address key, identifier will look like this (Note we don't use key_name
+# for address, but employee has key_name):
 #   Entity Kind: Address
 #   Entity Key:  ag1kZXZ-ZGF0YXN0b3JlcioLEghFbXBsb3llZSIIYXNhbGllcmkMCxIHQWRkcmVzcxiAgICAgPCLCgw
 #   ID:          5681726336532480
@@ -79,41 +89,97 @@ class Person(db.Model):
 
 
 def create_retrieve():
-  # Create an employee with key_name.
+  # Create an employee with key_name. Multiple run of the function will
+  # only create one entity.
   employee = Employee(
     key_name='asalieri',
     first_name='Antonio',
     last_name='Salieri',
     hire_date=datetime.datetime.now().date(),
     attended_hr_training = True)
-  # Cannot assign integer.
+  # Cannot assign integer to a string property.
   # employee.first_name = 100
   employee.put()
-  # Create an address with 'employee' as its parent.
+  employee_key = employee.key()          # 'key' has type db.Key
+  # We are creating employee using key_name, so it will have a key name and
+  # no id. The key itself is a hash of the information mentioned above.
+  logging.info('Employee key: %s' % employee_key)
+  logging.info('Employee id: %s' %  employee_key.id())
+  logging.info('Employee key name: %s' %  employee_key.name())
+  logging.info('Employee key to_path: %s' %  employee_key.to_path())
+
+  # Create an address with 'employee' as its parent. Multiple run of the
+  # function will create multiple entities.
   address = Address(
     parent=employee,
     street='2043 Wightman',
     city='Pittsburgh')
   address.put()
-  logging.info(employee.key())
-  logging.info(address.key())
-  # Retrieve employee from datastore (Give its kind and key_name).
-  employee_key = db.Key.from_path('Employee', 'asalieri')
-  same_employee = db.get(employee_key)
-  logging.info(same_employee.first_name + ' ' + same_employee.last_name)
+  address_key = address.key()
+  # We are creating address without key_name, so datastore will allocate
+  # an id for the entity.
+  logging.info('Address key: %s' % address_key)
+  logging.info('Address id: %s' %  address_key.id())
+  logging.info('Address key name: %s' %  address_key.name())
+  logging.info('Address key to_path: %s' %  address_key.to_path())
 
-
+  # Create another address for later use, note 'deyuanyuan' doesn't exist.
   address2 = Address(
     parent=db.Key.from_path('Employee', 'deyuanyuan'),
     street='2316 Murray',
     city='Pittsburgh')
   address2.put()
 
-  for address in Address.all():
-    print address.street
-    print address.parent_key().name()
+  # Now load entities from datastore, and we have no access to above variables.
 
-create_retrieve()
+  # Retrieve employee from datastore (Give its kind and key_name).
+  #   Key.from_path(kind, id_or_name, parent=None, namespace=None)
+  employee_key = db.Key.from_path('Employee', 'asalieri')
+  same_employee = db.get(employee_key)
+  logging.info('Retrieved employee "%s" using key name' % (
+    same_employee.first_name + ' ' + same_employee.last_name))
+
+  for address in Address.all():
+    logging.info("Address: %s for %s" % (
+        address.street, address.parent_key().name()))
+
+
+def allocate_ids():
+  # Create an employee using key name.
+  employee = Employee(
+    key_name='asalieri',
+    first_name='Antonio',
+    last_name='Salieri',
+    hire_date=datetime.datetime.now().date(),
+    attended_hr_training = True)
+  employee.put()
+  employee_key = employee.key()
+  logging.info('Employee key: %s' % employee_key)
+  logging.info('Employee id: %s' %  employee_key.id())
+  logging.info('Employee key name: %s' %  employee_key.name())
+  logging.info('Employee key to_path: %s' %  employee_key.to_path())
+
+  # Now call allocate_ids, these ids will be reserved and will not be used
+  # by datastore automatically.
+  ids = db.allocate_ids(employee.key(), 10)
+  ids_range = range(ids[0], ids[1] + 1)
+  logging.info('Allocated IDs: %s' % (ids,))
+
+  # Create an instance using our reserved id.
+  one_id = ids[0]
+  logging.info('Create entity using ID: %s' % one_id)
+  new_key = db.Key.from_path('Employee', one_id)
+  new_instance = Employee(key=new_key)
+  new_instance.put()
+  assert new_instance.key().id() == one_id
+
+  # When creating ones using automatical id, datastore will use other ids.
+  another_instance = Employee()
+  another_instance.put()
+  another_id = another_instance.key().id()
+  logging.info('Create entity using automatic id: %s' % another_id)
+  assert another_id  not in ids_range
+
 
 # Demonstration, won't work.
 def query():
@@ -141,12 +207,32 @@ def query():
 #========================================================================
 # Handlers
 #========================================================================
-class MainPage(webapp2.RequestHandler):
+class Example1(webapp2.RequestHandler):
   def get(self):
+    create_retrieve()
+    self.response.headers['Content-Type'] = 'text/plain'
+    self.response.write('Hello, World!')
+
+
+class Example2(webapp2.RequestHandler):
+  def get(self):
+    allocate_ids()
+    self.response.headers['Content-Type'] = 'text/plain'
+    self.response.write('Hello, World!')
+
+
+class DeleteAll(webapp2.RequestHandler):
+  def get(self):
+    for address in Address.all():
+      db.delete(address)
+    for employee in Employee.all():
+      db.delete(employee)
     self.response.headers['Content-Type'] = 'text/plain'
     self.response.write('Hello, World!')
 
 
 app = webapp2.WSGIApplication([
-  ('/', MainPage),
+  ('/example1', Example1),
+  ('/example2', Example2),
+  ('/deleteall', DeleteAll),
 ], debug=True)
