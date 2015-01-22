@@ -1,6 +1,7 @@
 #!/bin/bash
-# Shell if flow control
-
+#
+# Experiment with shell if flow control
+#
 # If statement has the following syntax:
 #
 #  if commands; then
@@ -37,7 +38,7 @@ fi
 if true; false; then            # only the last command counts
   echo "This is true"
 else
-  echo "This is false"
+  echo "This is false"          # Print false
 fi
 
 

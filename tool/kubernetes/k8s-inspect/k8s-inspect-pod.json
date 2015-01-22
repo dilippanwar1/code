@@ -8,12 +8,11 @@
       "id": "k8s-inspect-pod",
       "containers": [{
         "name": "k8s-inspect",
-        "image": "ddysher/k8s-inspect",
-        "ports": [{
-          "containerPort": 8000,
-          "hostPort": 9000,
-        }]
-      }]
+        "image": "ddysher/k8s-inspect"
+      }],
+      "restartpolicy": {
+        "never": {}
+      },
     }
   },
   "labels": {

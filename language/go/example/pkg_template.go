@@ -13,7 +13,8 @@ func main() {
 	// Create a template with a name.
 	t := template.New("Example")
 
-	// Field substituition - {{.FieldName}}.
+	// Parse template string. Note the syntax for Field substituition
+	// i.e. {{.FieldName}}.
 	t, _ = t.Parse("Hello {{.Name}}\n")
 
 	p := Persion{Name: "Mary"}

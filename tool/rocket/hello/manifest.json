@@ -1,20 +1,20 @@
 {
-    "acVersion": "1.0.0",
-    "acKind": "AppManifest",
-    "name": "coreos.com/hello-1.0.0",
-    "os": "linux",
-    "arch": "amd64",
-    "exec": [
-        "/bin/hello"
-    ],
-    "ports": [
-        {
-            "name": "www",
-            "protocol": "tcp",
-            "port": 5000
-        }
-    ],
-    "annotations": {
-        "authors": "Kelsey Hightower <kelsey.hightower@gmail.com>"
+  "acVersion": "1.0.0",
+  "acKind": "AppManifest",
+  "name": "coreos.com/hello-1.0.0",
+  "os": "linux",
+  "arch": "amd64",
+  "exec": [
+    "/bin/hello"
+  ],
+  "ports": [
+    {
+      "name": "www",
+      "protocol": "tcp",
+      "port": 5000
     }
+  ],
+  "annotations": {
+    "authors": "Kelsey Hightower <kelsey.hightower@gmail.com>"
+  }
 }
