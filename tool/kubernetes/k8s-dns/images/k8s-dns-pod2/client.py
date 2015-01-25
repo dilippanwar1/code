@@ -1,6 +1,9 @@
 import requests
+import socket
 
-# Not working yet
-r = requests.get("k8s-dns-service1.kubernetes.local:9876")
+ipaddress = socket.gethostbyname("k8s-dns-service1")
+print ipaddress
 
-print r
+# Need to supply port number.
+response = requests.get("http://k8s-dns-service1:8765")
+print response

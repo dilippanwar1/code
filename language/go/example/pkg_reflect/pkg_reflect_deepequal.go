@@ -20,5 +20,6 @@ func main() {
 
 	map1 := map[string]string{"ddy": "Deyuan Deng", "lsj": "Sijia Luo"}
 	map2 := map[string]string{"lsj": "Sijia Luo", "ddy": "Deyuan Deng"}
-	fmt.Println(reflect.DeepEqual(map1, map2)) // True
+	fmt.Println(reflect.DeepEqual(map1, map2))   // True
+	fmt.Println(reflect.DeepEqual(&map1, &map2)) // True
 }

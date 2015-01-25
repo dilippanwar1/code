@@ -9,10 +9,12 @@
       "containers": [{
         "name": "k8s-dns-pod2",
         "image": "ddysher/k8s-dns-pod2",
+        "imagePullPolicy": "Always",
       }],
       "restartpolicy": {
         "never": {}
       },
+      "dnsPolicy": "ClusterFirst"
     }
   },
   "labels": {
