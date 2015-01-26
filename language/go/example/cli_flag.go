@@ -20,6 +20,9 @@ func (i *interval) String() string {
 	return fmt.Sprint(*i)
 }
 
+// Set is another part of the flag.Value interface. Command line value will
+// be passed to the method, and it is responsible to parse the value then
+// stores it in the receiver (here, pointer *i).
 func (i *interval) Set(value string) error {
 	if len(*i) > 0 {
 		return errors.New("interval flag already set")
