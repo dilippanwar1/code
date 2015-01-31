@@ -43,17 +43,21 @@ func main() {
 	}
 
 	// NewClientTransport creates a new stream transport from the provided network
-	// connection. The network connection is expected to already provide a tls session.
-	// SPDY based on TLS.
+	// connection. After Dial(), server & client TCP connection has been established,
+	// this method will prepare spdy connection in the background.
 	transport, err := spdy.NewClientTransport(client)
 	if err != nil {
 		log.Fatal(err)
 	}
 
+	// NewSendChannel() will initiate a new spdy stream, i.e. s.conn.CreateStream().
+	// Upon calling the method, a new stream is created, and client sends SYN_STREAM
+	// frame to server.
 	sender, err := transport.NewSendChannel()
 	if err != nil {
 		log.Fatal(err)
 	}
+	// Open up another pipe to get return status.
 	receiver, remoteSender := libchan.Pipe()
 
 	command := &RemoteCommand{

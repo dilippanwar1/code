@@ -58,7 +58,7 @@ func main() {
 	}
 
 	// NewTransportListener is a warpper of net.Listener. It creates a net listener
-	// and returns to caller,
+	// and returns to caller.
 	tl, err := spdy.NewTransportListener(listener, spdy.NoAuthenticator)
 	if err != nil {
 		log.Fatal(err)
@@ -66,7 +66,9 @@ func main() {
 
 	for {
 		// Block until a new connection is established, and create a new stream. For example,
-		// when client call net.Dial("tcp", "127.0.0.1:9323"), this method will return.
+		// when client call net.Dial("tcp", "127.0.0.1:9323"), this method will return. Apart
+		// from calling net.Accept(), this method will also prepare spdy connection (i.e. call
+		// spdystream.Serve().
 		t, err := tl.AcceptTransport()
 		if err != nil {
 			log.Print(err)
@@ -77,8 +79,9 @@ func main() {
 			for {
 				// When a new connection is made, i.e. client call net.Dial(), server blocks
 				// here until client calls NewSendChannel().
-				// So in this go function, we have an established TCP connection. And server
-				// is waiting for client to create a new channel (stream) to exchange infomation.
+				// In this go function, we have an established TCP connection, and server has
+				// started backgroup spdy connection service. It is waiting for client to
+				// create a new channel (stream) to exchange infomation.
 				receiver, err := t.WaitReceiveChannel()
 				if err != nil {
 					log.Print(err)
@@ -101,6 +104,11 @@ func main() {
 						}
 
 						cmd := exec.Command(command.Cmd, command.Args...)
+
+						// This is redirect command output (cmd.Stdout) to command.Stdout.
+						// command.Stdout is passed in from client; at runtime, it has type
+						// spdy.byteStreamWrapper. When command write to its stdout, it is
+						// then write to the stream.
 						cmd.Stdout = command.Stdout
 						cmd.Stderr = command.Stderr
 
@@ -117,6 +125,9 @@ func main() {
 						res := cmd.Run()
 						command.Stdout.Close()
 						command.Stderr.Close()
+
+						// Compute exit status. 'res' from cmd.Run() implements error interface,
+						// so we can't get an integer return status.
 						returnResult := &CommandResponse{}
 						if res != nil {
 							if exiterr, ok := res.(*exec.ExitError); ok {

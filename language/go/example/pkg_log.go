@@ -17,7 +17,6 @@ var (
 )
 
 func Init(traceHandle io.Writer, infoHandle io.Writer, warningHandle io.Writer, errorHandle io.Writer) {
-
 	Trace = log.New(traceHandle, "Trace: ", log.Ldate|log.Ltime|log.Lshortfile)
 	Info = log.New(infoHandle, "Info: ", log.Ldate|log.Ltime|log.Lshortfile)
 	Warn = log.New(warningHandle, "Warn: ", log.Ldate|log.Ltime|log.Lshortfile)
