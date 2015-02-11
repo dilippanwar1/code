@@ -7,7 +7,6 @@ import (
 )
 
 func main() {
-
 	periodPtr := flag.Duration("period", 10*time.Second, "The period flag.")
 
 	flag.Parse()
@@ -17,4 +16,8 @@ func main() {
 	fmt.Println(int(t))
 
 	fmt.Println(*periodPtr)
+
+	t1 := time.Date(2012, 1, 1, 0, 0, 0, 0, time.UTC)
+	t2 := time.Date(2012, 1, 2, 0, 0, 0, 0, time.UTC)
+	fmt.Println(t2.Sub(t1))
 }
