@@ -33,10 +33,12 @@ func main() {
 	pubMap.Add("NewInt", 123)
 	pubMap.AddFloat("Float", 0.5)
 	pubMap.AddFloat("NewFloat", 0.9)
-	pubMap.Do(kvfunc)
 
+	// Do calls kvfunc for each entry in our published metrics.
+	// Here, we print all of them.
 	expvar.Do(kvfunc)
 
+	// Visit the metrics through "/debug/vars" endpoint.
 	http.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
 		fmt.Fprint(w, "hello gophers")
 	})
