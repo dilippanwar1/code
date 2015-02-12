@@ -22,15 +22,15 @@ import "fmt"
 func main() {
 
 	// 'a' can be any value, an int or string.
-	var a interface{} = 2
+	var a interface{} = 2 // a has dynamic type int and value 2 (static type interface{})
 	fmt.Println(a)
 
-	a = "Change to string type"
+	a = "Change to string type" // a changes its dynamic type to string (static type interface{})
 	fmt.Println(a)
 
 	// We convert 'a interface{}' type using a dot and the required
 	// type in parentheses.  This is called type assertion.
-	b := a.(string)
+	b := a.(string) // b has static type string
 	fmt.Println(b)
 
 	// If we can't convert a variable by a given type, go will panic.
@@ -53,4 +53,8 @@ func main() {
 	default:
 		fmt.Println("unknown")
 	}
+
+	var f float32 = 1.1
+	i := int32(f) // type conversion
+	fmt.Println(i)
 }
