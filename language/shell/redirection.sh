@@ -15,6 +15,12 @@ make 2> File
 # Redirect both stdout and stderr to file "File".
 echo "Redirect both stdout and stderr" &> File
 
+# Multiple lines
+(
+  echo "#! /bin/bash"
+  echo "echo ComeOn"
+) > File
+
 # Combine stdout and stderr to stdout
 # Here is one way to remember this construct (altough it is not entirely
 # accurate): at first, 2>1 may look like a good way to redirect stderr to
