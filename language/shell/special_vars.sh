@@ -3,36 +3,33 @@
 # Special variables in Shell
 
 # $0 is the name of the shell script; sometimes used to get directory.
-echo $0                         # output: special_vars.sh
-# This is somewhat equivalent to $0.
+# ${BASH_SOURCE[0]} is somewhat equivalent to $0.
+# Output: special_vars.sh, special_vars.sh .
+echo "Shell name and working directory:" \
+     $0, ${BASH_SOURCE[0]}, $(dirname "${BASH_SOURCE}")
 
-echo ${BASH_SOURCE[0]}          # output: special_vars.sh
-echo $(dirname "${BASH_SOURCE}")
-
-echo $1                         # First param
-echo $2                         # Second param
-echo "${1}"                     # Also First param
+# First param, second param. Two other forms.
+echo "Test Params:" $1, $2, ${1}, "${1}"
 
 # $! is PID of the most recent background command.
 sleep 1 &
-echo $!                         # output: 4359 (PID of sleep 1)
+echo "PID of recent backgroud comand:" $! # output: 4359 (PID of sleep 1)
 
 # pid of the current shell (not subshell).
-echo $$                         # output: 4358
+echo "PID of current shell program:" $$ # output: 4358
 
-# A string representation of a params.
-# E.g. Run 'bash special_vars.sh Hi, ddysher'
-echo $@                     # output: Hi, ddysher
-echo "$@"                   # The same as $@
-echo ${@:2}                 # output: ddysher (see param_expansion.sh)
+# A string representation of a params. The last one see param_expansion.sh
+# E.g. Run 'bash special_vars.sh Hi ddysher'
+# Output: Hi ddysher, Hi ddysher, Hi ddysher, ddysher
+echo "String repr of params" $@, ${@}, "$@", ${@:2}
 
 # $# returns the number of parameters (does not include $0)
 # E.g. Run 'bash special_vars.sh Hi, ddysher'
-echo $#                         # output: 2
+echo "Number of params: $#"     # output: 2
 
 # $? is used to find the error code of the last executed command.
 ls xxx
-echo $?                         # output: 2 (cannot find file)
+echo "Error code:" $?           # output: 2 (cannot find file)
 
 # Show current set of flags
-echo $-
+echo "Current set flag:" $-
