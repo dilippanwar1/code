@@ -1,1 +1,2 @@
-Redirect both stdout and stderr
+#! /bin/bash
+echo ComeOn
