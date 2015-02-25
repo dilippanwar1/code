@@ -62,6 +62,7 @@ calculate_value(1,2,*arr)
 def accepts_hash(var)
   # 'inspect' will print out what it received
   print "Got: ", var.inspect
+  print "\n"
 end
 
 # Note the missing parenthesis around the arguments for the accepts_hash function
@@ -75,9 +76,9 @@ accepts_hash(:arg1 => 'giving arg1', :argN => 'giving argN')
 accepts_hash({:arg1 => 'giving arg1', :argN => 'giving argN'})
 
 
-def config_vm_network (port, config)
-  puts port
+def config_vm_network (type, config)
+  puts type
   puts config
 end
 
-config_vm_network "forwarded_port", guest: 80, host: 8080
+config_vm_network :shell, guest: 80, host: 8080
