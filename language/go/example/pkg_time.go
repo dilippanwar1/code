@@ -15,6 +15,10 @@ func main() {
 	fmt.Println(t)
 	fmt.Println(int(t))
 
+	t = time.Minute
+	fmt.Println(t)
+	fmt.Println(int(t))
+
 	fmt.Println(*periodPtr)
 
 	t1 := time.Date(2012, 1, 1, 0, 0, 0, 0, time.UTC)
