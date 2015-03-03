@@ -9,6 +9,10 @@
 #   content to be used as command's standard input
 #  token
 # Where 'token' can be any string of characters.
+# Here doc with pipe:
+#  cat << EOF | cmd
+#    text
+#  EOF
 
 cat <<EOF
 <html>
@@ -22,4 +26,10 @@ cat <<EOF
     Your page content goes here.
 </body>
 </html>
+EOF
+
+cat <<EOF | xargs echo
+---
+  Your page content goes here.
+---
 EOF
