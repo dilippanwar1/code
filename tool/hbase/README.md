@@ -117,3 +117,5 @@ License
 
 This work is released under the MIT license. A copy of the license is provided
 in the LICENSE file.
+
+Cloned from: https://github.com/zsiciarz/vagrant-hbase

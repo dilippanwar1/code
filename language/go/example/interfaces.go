@@ -48,6 +48,14 @@ func measure(geo Geometry) {
 	fmt.Println(geo.Perim())
 }
 
+func nilInterface(geo Geometry) {
+	if geo == nil {
+		fmt.Println("geo is nil")
+	} else {
+		fmt.Println("geo is not nil")
+	}
+}
+
 func main() {
 
 	s := Square{width: 3, height: 4}
@@ -55,4 +63,6 @@ func main() {
 
 	measure(s)
 	measure(c)
+
+	nilInterface(nil)
 }
