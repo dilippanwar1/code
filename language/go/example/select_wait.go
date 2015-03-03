@@ -26,13 +26,13 @@ func main() {
 	// Use select to wait both of these values simultaneously.
 	// After waits for the duration to elapse and then sends the
 	// current time on the returned channel.
-	for i := 0; i < 25; i++ {
+	for i := 0; i < 10; i++ {
 		select {
 		case msg1 := <-c1:
 			fmt.Println("received", msg1)
 		case msg2 := <-c2:
 			fmt.Println("received", msg2)
-		case <-time.After(time.Millisecond * 100):
+		case <-time.After(time.Millisecond * 500):
 			fmt.Println("waiting")
 		}
 	}
