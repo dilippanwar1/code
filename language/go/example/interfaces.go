@@ -43,6 +43,10 @@ func (c Circle) Perim() float64 {
 // If a variable has an interface type, i.e. geo, then we can call methods
 // that are in the named interface.
 func measure(geo Geometry) {
+	underlying, ok := geo.(Square)
+	if ok {
+		fmt.Println("get square", underlying)
+	}
 	fmt.Println(geo)
 	fmt.Println(geo.Area())
 	fmt.Println(geo.Perim())
