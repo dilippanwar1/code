@@ -7,6 +7,11 @@ import (
 	"reflect"
 )
 
+var (
+	// Aliased, useful to do mocking, etc.
+	lookupIP = net.LookupIP
+)
+
 func main() {
 	if len(os.Args) != 2 {
 		fmt.Fprintf(os.Stderr, "Usage: %s ip-addr\n", os.Args[0])
@@ -25,5 +30,9 @@ func main() {
 	} else {
 		fmt.Println("The address is", addr.String())
 	}
+
+	addrs, _ := lookupIP("google.com")
+	fmt.Println(addrs)
+
 	os.Exit(0)
 }
