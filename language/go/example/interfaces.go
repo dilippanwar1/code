@@ -22,6 +22,11 @@ type Circle struct {
 	radius float64
 }
 
+// Define two dummy values and discard them. This is usually used to as
+// a static (compile time) check that implementation satifies interface.
+var _ Geometry = Square{}
+var _ Geometry = Circle{}
+
 // To implement an interface in Go, we just need to implement all the methods
 // in the interface. Here we implement Geometry on Square and Circle.
 func (s Square) Area() float64 {
