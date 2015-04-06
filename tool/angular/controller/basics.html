@@ -7,18 +7,18 @@
 
   <body>
     <!-- 'ng-controller' defines a Controller to be bound with the view. Here,
-    we put ContactController inside the div, so it will have its influence on
-    the this div. -->
+         we put ContactController inside the div, so it will have its influence
+         on the this div. -->
     <div ng-controller="ContactController">
-      Email:<input type="text" ng-model="newcontact"/>
+      Email: <input type="text" ng-model="newcontact"/>
       <!-- It is also possible to define functions on $scope and use the same
-      in View. The function add() is bound to Add button using an attribute
-      'ng-click'. -->
+              in View. The function add() is bound to Add button using attribute
+              'ng-click'. -->
       <button ng-click="add()">Add</button>
       <h2>Contacts</h2>
       <ul>
         <!-- 'ng-repeat' loops through contacts, which is added in $scope.contacts,
-        and display each 'contact'. -->
+            and display each 'contact'. -->
         <li ng-repeat="contact in contacts"> {{ contact }} </li>
       </ul>
     </div>
