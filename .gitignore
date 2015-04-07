@@ -9,6 +9,9 @@ source/*
 
 # Ignore following files.
 .DS_Store
+GPATH
+GRTAGS
+GTAGS
 
 #
 # Golang ignore files
