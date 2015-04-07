@@ -1,8 +1,3 @@
-// About DNS in general:
-//   https://www.digitalocean.com/community/tutorials/an-introduction-to-dns-terminology-components-and-concepts
-// Search domain:
-//   http://superuser.com/questions/184361/what-is-the-search-domains-field-for-in-the-tcp-ip-dns-settings-control-panel
-//
 // Steps (Ubuntu14.04):
 // 1. $ etcd
 // 2. $ sudo ./skydns -addr=127.0.2.2:53 -nameservers=8.8.8.8:53
