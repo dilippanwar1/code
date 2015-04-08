@@ -1,3 +1,6 @@
+# Experiment with ruby block.
+
+
 # The block argument (name) contains the current array element, and everything
 # else until the closing brace contains code to operate on the block argument.
 # The block argument is always enclosed in vertical lines (pipe symbols).
@@ -37,7 +40,6 @@ puts my_array.collect do
 end
 
 
-# coding: utf-8
 # Blocks are so closely related to Procs that it gives many newbies a
 # headache trying to decipher how they actually differ. I will try to
 # ease on comprehension with a (hopefully not too corny) metaphor. Blocks,
@@ -103,6 +105,7 @@ end
 parameters do |x,y| puts "#{x}, #{y}" end
 
 
+# Example usage from vagrant.
 def config_vm_define (vm_name)
   print "Configure vm ", vm_name, "\n"
   yield "Provide a host object to configure."

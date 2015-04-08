@@ -1,3 +1,6 @@
+# Experiment with ruby if condition.
+
+
 democrats = ["Carter", "Clinton"]
 republicans = ["Ford", "Reagan", "Bush1", "Bush2"]
 party = ARGV[0]
