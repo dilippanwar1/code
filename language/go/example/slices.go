@@ -1,6 +1,9 @@
 package main
 
-import "fmt"
+import (
+	"fmt"
+	"os/exec"
+)
 
 func main() {
 
@@ -71,6 +74,22 @@ func main() {
 	ss := [5]int{1, 2, 3, 4, 5}
 	fmt.Printf("%T\n", ss[0:2]) // ss[0:2] return a slice
 	fmt.Printf("%T\n", ss)
+
+	// Concatenate two slices
+	commandArgs := []string{"-l"}
+	commandOtherArgs := []string{"-a"}
+
+	commandArgs = append(commandArgs, commandOtherArgs...)
+	command := exec.Command("ls", commandArgs...)
+	output, err := command.CombinedOutput()
+	if err != nil {
+		fmt.Println(err)
+	}
+	fmt.Println(string(output))
+
+	args := []string{}
+	args = append(args, "source", "target")
+	fmt.Println(args)
 }
 
 func sliceChanger(s []int) {
