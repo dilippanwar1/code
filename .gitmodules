@@ -1,0 +1,9 @@
+[submodule "tool/hbase/vagrant-hbase"]
+	path = tool/hbase/vagrant-hbase
+	url = https://github.com/zsiciarz/vagrant-hbase.git
+[submodule "tool/cassandra/vagrant-cassandra"]
+	path = tool/cassandra/vagrant-cassandra
+	url = https://github.com/bcantoni/vagrant-cassandra
+[submodule "tool/ansible/ansible-tuto"]
+	path = tool/ansible/ansible-tuto
+	url = https://github.com/leucos/ansible-tuto.git
