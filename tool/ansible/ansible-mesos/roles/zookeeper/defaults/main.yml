@@ -1,0 +1,18 @@
+---
+# defaults file for zookeeper
+
+# == Important variables.
+# Each host should define its own zoo_id.
+zoo_id: 0
+# Play which uses the role needs to supply a list of zookeeper_hosts.
+# Default to only current host.
+zookeeper_hosts:
+  - "{{ inventory_hostname }}"
+
+# == Other variables for misc configuration.
+client_port: 2181
+init_limit: 5
+sync_limit: 2
+tick_time: 2000
+data_dir: /var/lib/zookeeper
+log_dir: /var/log/zookeeper

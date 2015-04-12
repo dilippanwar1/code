@@ -1,0 +1,10 @@
+---
+# tasks file for mesos
+
+- include: common.yml
+
+- include: mesos-master.yml
+  when: mesos_install_mode == "master"
+
+- include: mesos-slave.yml
+  when: mesos_install_mode == "slave"

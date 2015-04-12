@@ -1,0 +1,21 @@
+---
+# tasks file for packages
+
+- name: Update system package cache
+  apt: update_cache=yes
+
+- name: Install common package
+  apt: pkg="{{item}}" state=present
+  with_items:
+    - software-properties-common
+    - wget
+    - curl
+    - unzip
+    - python-setuptools
+    - python-dev
+
+- name: Install java package
+  apt: pkg="{{item}}" state=present
+  with_items:
+    - openjdk-{{java_version}}-jre-headless
+    - openjdk-{{java_version}}-jdk

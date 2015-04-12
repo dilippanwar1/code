@@ -1,0 +1,20 @@
+---
+# tasks file for zookeeper
+
+- name: Update apt cache
+  apt: update_cache=yes
+
+- name: Apt install required zookeeper packages.
+  apt: pkg={{item}} state=installed
+  with_items:
+    - zookeeper
+    - zookeeperd
+
+- name: Overwrite myid file.
+  template: src=myid.j2 dest=/etc/zookeeper/conf/myid
+
+- name: Overwrite default config file
+  template: src=zoo.cfg.j2 dest=/etc/zookeeper/conf/zoo.cfg
+
+- name: Restart zookeeper
+  service: name=zookeeper state=restarted enabled=yes

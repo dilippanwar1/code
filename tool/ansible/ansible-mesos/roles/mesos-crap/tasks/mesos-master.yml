@@ -1,0 +1,59 @@
+---
+# Tasks for Mesos master
+
+# == Remove default configs
+- name: Remove default mesos configs
+  sudo: yes
+  file: state=absent path=/etc/mesos/
+  file: state=absent path=/etc/default/mesos/
+
+- name: Remove mesos zk file
+  sudo: yes
+  file: state=absent path=/etc/mesos/zk
+
+- name: Remove default mesos master config
+  sudo: yes
+  file: state=absent path=/etc/mesos-master/
+  file: state=absent path=/etc/default/mesos-master
+
+# == Recreate config directory
+- name: Create default config directory
+  sudo: yes
+  file: state=directory dest=/etc/mesos
+
+- name: Create default master config directory
+  sudo: yes
+  file: state=directory dest=/etc/mesos-master
+
+# == Set configurations
+- name: Set zookeeper url
+  sudo: yes
+  copy: content="{{ mesos_zookeeper_masters }}" dest=/etc/mesos/zk mode=0644
+
+- name: Set mesos master quorum count
+  sudo: yes
+  template: src=quorum.j2 dest=/etc/mesos-master/quorum mode=0644
+
+- name: Set mesos master hostname
+  sudo: yes
+  copy: content="{{ mesos_hostname }}" dest=/etc/mesos-master/hostname mode=0644
+
+- name: Set mesos master ip
+  sudo: yes
+  copy: content="{{ mesos_ip }}" dest=/etc/mesos-master/ip mode=0644
+
+- name: Set mesos master cluster name
+  sudo: yes
+  copy: content="{{ mesos_cluster_name }}" dest=/etc/mesos-master/cluster mode=0644
+
+- name: Disable mesos slave service
+  sudo: yes
+  copy: content="manual" dest=/etc/init/mesos-slave.override mode=0644
+
+- name: Stop mesos slave service
+  sudo: yes
+  service: name=mesos-slave state=stopped
+
+- name: Start mesos master service
+  sudo: yes
+  shell: start mesos-master
