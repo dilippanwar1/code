@@ -19,8 +19,12 @@ func main() {
 	fmt.Println(outer)
 
 	// Compile error: inner is undefined.
-	// fmt.Println(inner)
+	//   fmt.Println(inner)
 
+	// Output:
+	// One: 1
+	// Ah oh oh 2
+	// Two: 2
 	var val int
 	var err error
 	if val, err = getVal(); err != nil {

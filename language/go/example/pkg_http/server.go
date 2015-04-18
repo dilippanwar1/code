@@ -28,9 +28,10 @@ func helloHandler(w http.ResponseWriter, r *http.Request) {
 }
 
 func main() {
+	// 'http.HandleFunc' uses a default ServeMux; ServeMux is an HTTP request multiplexer.
 	http.HandleFunc("/hello", helloHandler)
 	http.HandleFunc("/flush", flushHandler)
 
-	// listen for connections at port 9999 on the local machine
+	// Listen for connections at port 9999 on the local machine.
 	http.ListenAndServe("localhost:9999", nil)
 }

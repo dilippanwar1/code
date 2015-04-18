@@ -8,7 +8,6 @@ type Data struct {
 }
 
 func main() {
-
 	nums := []int{2, 3, 4}
 	sum := 0
 
@@ -37,30 +36,37 @@ func main() {
 
 	// range on string literal: index of byte and byte code.
 	for i, c := range "go" {
+		// 0 103
+		// 1 111
 		fmt.Println(i, c)
 	}
 
 	// Note range will do a copy of slice value.
 	var list1 = []Data{{"Item11", "desc of 11"}, {"Item12", "desc of 12"}, {"Item13", "desc of 13"}}
-	var list2 = []*Data{{"Item21", "desc of 1"}, {"Item22", "desc of 2"}, {"Item23", "desc of 23"}}
+	var list2 = []*Data{{"Item21", "desc of 21"}, {"Item22", "desc of 22"}, {"Item23", "desc of 23"}}
 
 	// 1. This will not work, as range yields a copy not pointer.
 	for _, item := range list1 {
 		item.Desc = "change the desc"
 	}
+	// [{Item11 desc of 11} {Item12 desc of 12} {Item13 desc of 13}]
 	fmt.Println(list1)
 
-	// 2. This works as the copy is anyway pointer to element.
+	// 2. This works as the copy is a copy of the pointer, so it
+	//    points to same element.
 	for _, item := range list2 {
 		item.Desc = "change the desc"
 	}
+	// {Item21 change the desc} {Item22 change the desc} {Item23 change the desc}
 	for _, it := range list2 {
 		fmt.Print(*it, " ")
 	}
+	fmt.Print("\n")
 
 	// 3. Only way on list is without range :(
 	for i := 0; i < len(list1); i++ {
 		list1[i].Desc = "change the desc"
 	}
-	fmt.Println("\n", list1)
+	// [{Item11 change the desc} {Item12 change the desc} {Item13 change the desc}]
+	fmt.Println(list1)
 }

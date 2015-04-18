@@ -3,8 +3,8 @@ package main
 import "fmt"
 
 // The final parameter in a function signature may have a type prefixed
-// with .... A function with such a parameter is called variadic and may
-// be invoked with zero or more arguments for that parameter.
+// with '...'.  A function with such a parameter is called variadic and
+// may be invoked with zero or more arguments for that parameter.
 func sum(num int, items ...int) int {
 	total := 0
 	for i := 0; i < num; i++ {
@@ -15,12 +15,12 @@ func sum(num int, items ...int) int {
 
 func fn(args ...string) {
 	fmt.Println(args[0])
-	fmt.Println(args[1])
+	fmt.Printf("%T\n", args) // args has type '[]string'
 	fmt.Printf("The whole slice: %v\n", args)
 }
 
 func main() {
-	fmt.Println(sum(5, 1, 2, 3, 4, 5))
+	fmt.Println(sum(5, 1, 2, 3, 4, 5)) // 15
 	fmt.Println("--")
 	fn("Hey", "there")
 	fmt.Println("--")

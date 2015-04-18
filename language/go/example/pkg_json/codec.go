@@ -19,7 +19,10 @@ func main() {
 
 	for {
 		var v map[string]interface{}
-		// Input something like: {"Name": "deyuan"}.
+		// Since the input stream is os.Stdin, dec.Decode will block until
+		// it gets input. Input something like:
+		// $ {"Name": "deyuan"}
+		// $ {"Name": "deyuan", "Age": 10}
 		if err := dec.Decode(&v); err != nil {
 			log.Println(err)
 			return
@@ -29,6 +32,8 @@ func main() {
 				delete(v, k)
 			}
 		}
+		// Since the output stream is os.Stdout, enc.Encode will directly
+		// output to shell.
 		if err := enc.Encode(&v); err != nil {
 			log.Println(err)
 		}

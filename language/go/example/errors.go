@@ -15,7 +15,7 @@ import (
 func f1(arg int) (int, error) {
 	if arg == 42 {
 		// 'errors.New' construct a basic 'error' value.
-		return -1, errors.New("Can't work with 43")
+		return -1, errors.New("Can't work with 42")
 	}
 	// A nil value means no error.
 	return arg + 3, nil
@@ -41,7 +41,6 @@ func f2(arg int) (int, error) {
 }
 
 func main() {
-
 	for _, i := range []int{7, 42} {
 		if r, e := f1(i); e != nil {
 			fmt.Println("f1 failed:", e)
@@ -58,9 +57,10 @@ func main() {
 		}
 	}
 
-	// 'e' is a pointer to struct ArgError. If you want to programmatically
-	// use the data in a custom error, you’ll need to get the error as an
-	// instance of the custom error type via type assertion.
+	// 'e' is a pointer to struct ArgError, and it has a dynamic type of
+	// error interface. If you want to programmatically use the data in
+	// a custom error, you’ll need to get the error as an instance of the
+	// custom error type via type assertion.
 	_, e := f2(42)
 	if ae, ok := e.(*ArgError); ok {
 		fmt.Println(ae.arg)

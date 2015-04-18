@@ -36,14 +36,14 @@ func basics() {
 	// nil and the data from b will have been stored in the struct mm.
 	var mm Message
 	err := json.Unmarshal(b, &mm)
-	fmt.Println(err)
-	fmt.Println("Unmarshal valid JSON", mm)
+	fmt.Println(err)                        // <nil>
+	fmt.Println("Unmarshal valid JSON", mm) // {Alice Hello 1234567890}
 
 	// Only known field (Name) will be populated.
 	var mmm Message
 	b = []byte(`{"Name":"Bob","Food":"Pickle"}`)
 	json.Unmarshal(b, &mmm)
-	fmt.Println("Only known field will be populated", mmm)
+	fmt.Println("Only known field will be populated", mmm) // {Bob  0}
 }
 
 type FamilyMember struct {

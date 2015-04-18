@@ -6,15 +6,18 @@ import (
 )
 
 func main() {
+	// Interfaces returns a list of the system's network interfaces.
 	intfs, err := net.Interfaces()
 	if err != nil {
 		fmt.Println("Error list interfaces:", err)
 		return
 	}
+
+	// There are a couple of flags to test the properties of interfaces.
 	i := 0
 	for i = range intfs {
-		if flagsSet(intfs[i].Flags, net.FlagUp) && flagsClear(intfs[i].Flags, net.FlagLoopback|net.FlagPointToPoint) {
-			// This interface should suffice.
+		if isFlagsSet(intfs[i].Flags, net.FlagUp) && isFlagsClear(intfs[i].Flags, net.FlagLoopback|net.FlagPointToPoint) {
+			// Find an interface that's up but not a loopback.
 			break
 		}
 	}
@@ -22,16 +25,16 @@ func main() {
 		fmt.Println("No one fits")
 		return
 	}
-	fmt.Println("Found interface of index:", i)
+
+	fmt.Printf("Found interface from index[%d], %+v\n", i, intfs[i])
 	addrs, err := intfs[i].Addrs()
-	fmt.Printf("%+v\n", intfs[i])
 	fmt.Println(addrs)
 }
 
-func flagsSet(flags net.Flags, test net.Flags) bool {
+func isFlagsSet(flags net.Flags, test net.Flags) bool {
 	return flags&test != 0
 }
 
-func flagsClear(flags net.Flags, test net.Flags) bool {
+func isFlagsClear(flags net.Flags, test net.Flags) bool {
 	return flags&test == 0
 }

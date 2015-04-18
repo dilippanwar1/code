@@ -7,6 +7,8 @@ import (
 	"time"
 )
 
+// The input string value 'Thu May 31 00:00:01 +0000 2012' is not a valid
+// time.Time type. To marshal/unmarshal, we need to define out custom type.
 var input = `
 {
   "created_at": "Thu May 31 00:00:01 +0000 2012"
@@ -33,7 +35,6 @@ func naive() {
 //   type Unmarshaler interface {
 //     UnmarshalJSON([]byte) error
 //   }
-
 type Timestamp time.Time
 
 func (t *Timestamp) UnmarshalJSON(b []byte) error {
@@ -48,16 +49,18 @@ func (t *Timestamp) UnmarshalJSON(b []byte) error {
 func custom() {
 	var val map[string]Timestamp
 
+	// Convert json to a Go object.
 	if err := json.Unmarshal([]byte(input), &val); err != nil {
 		panic(err)
 	}
 
-	fmt.Println(val)
+	fmt.Println(val) // output: map[created_at:{63474019201 0 0xc208064060}]
 	for k, v := range val {
 		fmt.Println(k, reflect.TypeOf(v))
 	}
 }
 
 func main() {
+	// naive()
 	custom()
 }

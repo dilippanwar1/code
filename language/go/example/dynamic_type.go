@@ -20,7 +20,6 @@ package main
 import "fmt"
 
 func main() {
-
 	// 'a' can be any value, an int or string.
 	var a interface{} = 2 // a has dynamic type int and value 2 (static type interface{})
 	fmt.Println(a)

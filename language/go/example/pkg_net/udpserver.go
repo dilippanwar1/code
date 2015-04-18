@@ -9,7 +9,6 @@ import (
 )
 
 func main() {
-
 	service := ":1200"
 	udpAddr, err := net.ResolveUDPAddr("udp4", service)
 	fmt.Println(udpAddr)
@@ -24,7 +23,6 @@ func main() {
 }
 
 func handleClient(conn *net.UDPConn) {
-
 	var buf [512]byte
 
 	// Block until client connection. Note that conn.ReadFromUDP() accepts

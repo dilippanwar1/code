@@ -1,13 +1,15 @@
 package main
 
-import "fmt"
-import "time"
+import (
+	"fmt"
+	"time"
+)
 
 func main() {
-
 	i := 2
 	fmt.Print("write ", i, " as ")
 
+	// Note that 'break' is by default.
 	switch i {
 	case 1:
 		fmt.Println("one")
@@ -62,9 +64,10 @@ L:
 		switch i {
 		case 2:
 			// This break will break out the for loop. Use 'break' without
-			// the L tag won't work.
+			// the L tag won't work (it will break out the switch, so the
+			// loop will continue).
 			break L
 		}
 	}
-	fmt.Println(i)
+	fmt.Println(i) // 2
 }

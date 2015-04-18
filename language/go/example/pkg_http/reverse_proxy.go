@@ -23,5 +23,4 @@ func main() {
 	if err = http.ListenAndServe(":8888", nil); err != nil {
 		log.Fatal(err)
 	}
-	log.Println("Server started")
 }
