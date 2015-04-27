@@ -6,11 +6,13 @@
     "manifest": {
       "version": "v1beta1",
       "id": "k8s-dns-pod2",
-      "containers": [{
-        "name": "k8s-dns-pod2",
-        "image": "ddysher/k8s-dns-pod2",
-        "imagePullPolicy": "Always",
-      }],
+      "containers": [
+        {
+          "name": "k8s-dns-pod2",
+          "image": "ddysher/k8s-dns-pod2",
+          "imagePullPolicy": "Always"
+        }
+      ],
       "restartpolicy": {
         "never": {}
       },
@@ -18,6 +20,6 @@
     }
   },
   "labels": {
-    "name": "k8s-dns-pod2",
+    "name": "k8s-dns-pod2"
   }
 }

@@ -1,5 +1,5 @@
 apiVersion: v1beta1
-id: storage
+id: volume
 kind: Pod
 desiredState:
   manifest:
@@ -7,7 +7,7 @@ desiredState:
     id: storage
     containers:
       - name: redis
-        image: dockerfile/redis
+        image: redis
         volumeMounts:
           # name must match the volume name below
           - name: redis-persistent-git-storage

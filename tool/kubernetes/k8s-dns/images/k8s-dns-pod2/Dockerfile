@@ -9,7 +9,7 @@
 # Run the image:
 #   sudo docker run -d ddysher/k8s-dns-pod1
 
-FROM dockerfile/python
+FROM python:2.7.9
 
 RUN pip install requests
 
