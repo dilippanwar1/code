@@ -29,6 +29,16 @@ def itertoolsfromiterable():
   print
 
 
+# Cartesian product of input iterables.
+def itertoolsproduct():
+  iter1 = set([1, 2])
+  iter2 = [4, 5]
+  iter3 = {7: '7'}
+  # output: [(1, 4, 7), (1, 5, 7), (2, 4, 7), (2, 5, 7)]
+  print list(itertools.product(iter1, iter2, iter3))
+
+
 if __name__ == "__main__":
-  itertoolschain()
-  itertoolsfromiterable()
+  # itertoolschain()
+  # itertoolsfromiterable()
+  itertoolsproduct()

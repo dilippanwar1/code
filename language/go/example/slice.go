@@ -93,6 +93,11 @@ func main() {
 	args := []string{}
 	args = append(args, "source", "target")
 	fmt.Println(args) // [source target]
+
+	// We can do len() of nil, the result is 0.
+	var ads []string
+	ads = nil
+	fmt.Println(len(ads)) // 0
 }
 
 func sliceChanger(s []int) {
