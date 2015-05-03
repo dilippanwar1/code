@@ -2,6 +2,7 @@ package main
 
 import (
 	"fmt"
+	"sync"
 )
 
 type Fetcher interface {
@@ -10,38 +11,46 @@ type Fetcher interface {
 	Fetch(url string) (body string, urls []string, err error)
 }
 
-// Crawl uses fetcher to recursively crawl
-// pages starting with url, to a maximum of depth.
-func crawlWorker(url string, depth int, fetcher Fetcher, ch chan) {
-	// TODO: Fetch URLs in parallel.
-	// TODO: Don't fetch the same URL twice.
-	// This implementation doesn't do either:
+var fetched = struct {
+	lock sync.Mutex
+	urls map[string]bool
+}{urls: make(map[string]bool)}
+
+// Crawl uses fetcher to recursively crawl pages
+// starting with url, to a maximum of depth.
+func Crawl(url string, depth int, fetcher Fetcher) {
 	if depth <= 0 {
+		return
+	}
+
+	fetched.lock.Lock()
+	if _, ok := fetched.urls[url]; ok {
+		fetched.lock.Unlock()
 		return
 	}
 	body, urls, err := fetcher.Fetch(url)
 	if err != nil {
 		fmt.Println(err)
+		fetched.lock.Unlock()
 		return
 	}
-	fmt.Printf("found: %s %q\n", url, body)
-	for _, u := range urls {
-		ch <- u
-		// Crawl(u, depth-1, fetcher)
-	}
-	return
-}
+	fetched.urls[url] = true
+	fetched.lock.Unlock()
 
-func Crawl(url string, depth int, fetcher Fetcher) {
-	visited := map[string]int
-	ch = make(chan string)
-	go crawlWorker(url, depth, fetcher)
-	for {
-		next := <- ch
-		if res, ok := visited[next]; !ok {
-			visited[next]++
-			go crawlWorker(next, depth-1, fetch, ch)
-		}
+	fmt.Println(url, body)
+
+	// Crawl each child url with a new goroutine, and wait for all
+	// of them to complete. This can be done using waitgroup also.
+	done := make(chan bool)
+	for _, url := range urls {
+		go func(url string) {
+			Crawl(url, depth-1, fetcher)
+			done <- true
+		}(url)
+	}
+
+	for _ = range urls {
+		<-done
 	}
 }
 

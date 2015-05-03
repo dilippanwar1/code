@@ -2,7 +2,8 @@ package main
 
 import (
 	"fmt"
-	"code.google.com/p/go-tour/tree"
+
+	"golang.org/x/tour/tree"
 )
 
 // Walk walks the tree t sending all values
@@ -13,7 +14,7 @@ func Walk(t *tree.Tree, ch chan int) {
 }
 
 func walk_(t *tree.Tree, ch chan int) {
-	if (t == nil) {
+	if t == nil {
 		return
 	}
 	walk_(t.Left, ch)
@@ -29,7 +30,7 @@ func Same(t1, t2 *tree.Tree) bool {
 	go Walk(t1, ch1)
 	go Walk(t2, ch2)
 	for v1 := range ch1 {
-		v2 := <- ch2
+		v2 := <-ch2
 		if v1 != v2 {
 			return false
 		}

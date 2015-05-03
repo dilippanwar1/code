@@ -37,6 +37,13 @@ func Test2() {
 	}
 }
 
+func Test3() {
+	select {
+	case xc <- x: // Wait until x is sent to xc
+	case y := <-yc: // Wati until y is received from yc
+	}
+}
+
 func main() {
 	Test2()
 }

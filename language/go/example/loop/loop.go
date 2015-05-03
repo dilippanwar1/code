@@ -33,4 +33,13 @@ func main() {
 	fmt.Println(mergeResults(slice1, slice2)) // [1 2 3 4 5 6 7 8]
 	fmt.Println(slice1)
 	fmt.Println(slice2)
+
+	// Print:
+	//  [0 1 1]
+	//  [0 1 1 2]
+	ints := []int{0, 1}
+	for i := range ints {
+		ints = append(ints, i+1)
+		fmt.Println("Array ints:", ints)
+	}
 }
