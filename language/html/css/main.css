@@ -5,3 +5,19 @@ p.bird:first-letter {
 p.bird:first-line {
     font-weight: bold;
 }
+
+.as_link {
+  color: blue;
+  cursor: pointer;
+  font-weight: bold;
+}
+.as_link:hover {
+  text-decoration: underline;
+}
+.as_link.as_disabled {
+  color: gray;
+  cursor: auto;
+}
+.as_link:hover.as_disabled {
+  text-decoration: none;
+}
