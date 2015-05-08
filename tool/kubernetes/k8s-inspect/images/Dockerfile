@@ -9,7 +9,7 @@
 # Run the image:
 #   sudo docker run -d ddysher/k8s-inspect
 
-FROM dockerfile/python
+FROM python:2.7
 
 RUN pip install netifaces
 
