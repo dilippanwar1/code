@@ -1,0 +1,12 @@
+apiVersion: v1beta3
+kind: Pod
+metadata:
+  name: k8s-inspect
+  labels:
+    name: k8s-inspect
+    role: test
+spec:
+  containers:
+  - name: k8s-inspect
+    image: kube-registry.default.local/k8s-inspect
+  restartPolicy: Never
