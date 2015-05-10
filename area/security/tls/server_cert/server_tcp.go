@@ -1,3 +1,5 @@
+// Server presents a certificate server_cert1.crt which is signed by CA, and will be accepted by client.
+// Server presents a certificate server_cert2.crt which is not signed by CA, and will be rejected by client.
 package main
 
 import (
@@ -9,15 +11,10 @@ import (
 )
 
 func main() {
-	ca_b, _ := ioutil.ReadFile("ca1.crt")
-	ca, _ := x509.ParseCertificate(ca_b)
-	priv_b, _ := ioutil.ReadFile("ca1.key")
+	cert_b, _ := ioutil.ReadFile("../certs.d/server_cert1.crt")
+	priv_b, _ := ioutil.ReadFile("../certs.d/server_cert1.key")
 	priv, _ := x509.ParsePKCS1PrivateKey(priv_b)
 
-	pool := x509.NewCertPool()
-	pool.AddCert(ca)
-
-	// TLS Server Configuration.
 	config := tls.Config{
 		// Certificates is the certificate of the server, used to present to the other side of
 		// the connection (the client). This is required for tls communication. Here since the
@@ -25,17 +22,10 @@ func main() {
 		// may contain a handful of certificate: certificate chain.
 		Certificates: []tls.Certificate{
 			tls.Certificate{
-				Certificate: [][]byte{ca_b},
+				Certificate: [][]byte{cert_b},
 				PrivateKey:  priv,
 			},
 		},
-		// Server can optionally require client to provide certificate (here using ClientAuth).
-		// If it does, ClientCAs hold all root certificate authorities server trust, and use
-		// them to verify clients. In our example, server trusts 'ca', which is self-signed by
-		// server, since in generate.go, client's certificate is signed by server, thus client
-		// can talk to this serve.
-		ClientAuth: tls.RequireAndVerifyClientCert,
-		ClientCAs:  pool,
 	}
 
 	service := "0.0.0.0:9443"
@@ -68,14 +58,6 @@ func handleClient(conn net.Conn) {
 				log.Printf("server: conn: read: %s", err)
 			}
 			break
-		}
-
-		// Get basic TLS details about the established connection.
-		tlscon, ok := conn.(*tls.Conn)
-		if ok {
-			state := tlscon.ConnectionState()
-			sub := state.PeerCertificates[0].Subject
-			log.Println(sub)
 		}
 
 		log.Printf("server: conn: echo %q\n", string(buf[:n]))

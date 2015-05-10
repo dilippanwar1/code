@@ -1,8 +1,8 @@
 # TLS example in Go
 
 ## About TLS/SSL in general:
-- [how-does-ssl-tls-work](http:security.stackexchange.com/questions/20803/how-does-ssl-tls-work])
-- [transport-layer-security](https:securityblog.redhat.com/2013/07/24/transport-layer-security/])
+- [how-does-ssl-tls-work](http://security.stackexchange.com/questions/20803/how-does-ssl-tls-work])
+- [transport-layer-security](https://securityblog.redhat.com/2013/07/24/transport-layer-security])
 
 ## Certificate:
 Certificate file usually has extension .crt, .cer or .cert. It's fully
@@ -25,10 +25,10 @@ and mechanisms for certificate publication and issuing.
 As mentioned above, certificate contains information about public key.
 Private key file ususally has extension .key. A private key is an
 encryption/decryption key known only to the party or parties that
-exchange secret messages
+exchange secret messages.
 
 ## PEM:
-PEM is Governed by RFCs, it's used preferentially by open-source software.
+PEM is governed by RFCs, it's used preferentially by open-source software.
 It can have a variety of extensions (.pem, .key, .cer, .cert, more). It is
 a container format that may include just the public key certificate (such as
 with Apache installs, and CA certificate files /etc/ssl/certs), or may
@@ -56,3 +56,10 @@ $ go run client_tcp.go
 $ go run server_http.go &
 $ go run client_http.go
 ```
+
+`generate.go` will create three set of certificates. The first one is used
+in server, self-signed by server, which we used as CA (ca1.crt). The second
+is used in client and signed by server (cert2.crt). The third one is self
+signed by client (certX.crt). In server_tcp.go, we require client to present
+its certificate, and only trust client with certificate signed by the server.
+So client with certX.crt will be rejected.

@@ -10,27 +10,32 @@ import (
 )
 
 func main() {
-	cert2_b, _ := ioutil.ReadFile("cert2.crt")
-	priv2_b, _ := ioutil.ReadFile("cert2.key")
-	priv2, _ := x509.ParsePKCS1PrivateKey(priv2_b)
+	cert_b, _ := ioutil.ReadFile("../certs.d/client_cert1.crt")
+	priv_b, _ := ioutil.ReadFile("../certs.d/client_cert1.key")
+	priv, _ := x509.ParsePKCS1PrivateKey(priv_b)
+
+	// The client trust ca.crt.
+	ca_b, _ := ioutil.ReadFile("../certs.d/ca.crt")
+	ca, _ := x509.ParseCertificate(ca_b)
+	pool := x509.NewCertPool()
+	pool.AddCert(ca)
 
 	// TLS Client Configuration.
 	config := tls.Config{
 		Certificates: []tls.Certificate{
 			tls.Certificate{
-				Certificate: [][]byte{cert2_b},
-				PrivateKey:  priv2,
+				Certificate: [][]byte{cert_b},
+				PrivateKey:  priv,
 			},
 		},
-		// InsecureSkipVerify controls whether a client verifies the server's certificate
-		// chain and host name. If InsecureSkipVerify is true, TLS accepts any certificate
-		// presented by the server and any host name in that certificate. This is useful
-		// for testing, e.g. self-signed certificate.
-		InsecureSkipVerify: true,
+		RootCAs: pool,
 	}
 
 	conn, err := tls.Dial("tcp", "127.0.0.1:9443", &config)
 	if err != nil {
+		// Got error if server presents a bad certificate (server_cert2).
+		// x509: certificate signed by unknown authority (possibly because of "crypto/rsa: verification
+		// error" while trying to verify candidate authority certificate "serial:1653")
 		log.Fatalf("client: dial: %s", err)
 	}
 	defer conn.Close()

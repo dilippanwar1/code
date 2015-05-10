@@ -12,6 +12,7 @@ import (
 
 func main() {
 	tr := &http.Transport{
+		// We need to skip verify the certificate, as it's self signed.
 		TLSClientConfig: &tls.Config{InsecureSkipVerify: true},
 	}
 	client := &http.Client{Transport: tr}

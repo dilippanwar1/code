@@ -1,4 +1,3 @@
-// generate.go generates two certificates and private keys.
 package main
 
 import (
@@ -11,26 +10,38 @@ import (
 	"io/ioutil"
 	"log"
 	"math/big"
+	"net"
 	"os"
 	"time"
 )
 
 func main() {
-	// 'serverCert' is self-signed; 'clientCert' is signed by serverCert.
-	serverCert, _ := CreateSelfSignedCertificateAndKey("ORG1", "ca1.crt", "ca1.key")
-	clientCert, _ := CreateCertificateAndKey("ORG2", "cert2.crt", "cert2.key", "ca1.crt", "ca1.key")
-	if err := EncodeToPEMFormat("ca1.crt", "ca1.key"); err != nil {
+	// 'caCert' is CA's certificate, self-signed. (ca.crt)
+	// 'serverCert1' is server's certificate, signed by CA. (server_cert1.crt, server_cert1.key)
+	// 'serverCert2' is server's certificate, self-signed.  (server_cert2.crt, server_cert2.key)
+	// 'clientCert1' is client's certificate, signed by CA. (client_cert1.crt, client_cert1.key)
+	// 'clientCert2' is client's certificate, self-signed.  (client_cert2.crt, client_cert2.key)
+	caCert, _ := CreateSelfSignedCertificateAndKey("CA", "ca.crt", "ca.key", true)
+	serverCert1, _ := CreateCertificateAndKey("ORG_SERVER", "server_cert1.crt", "server_cert1.key", "ca.crt", "ca.key")
+	serverCert2, _ := CreateSelfSignedCertificateAndKey("ORG_SERVER", "server_cert2.crt", "server_cert2.key", false)
+	clientCert1, _ := CreateCertificateAndKey("ORG_CLIENT", "client_cert1.crt", "client_cert1.key", "ca.crt", "ca.key")
+	clientCert2, _ := CreateSelfSignedCertificateAndKey("ORG_CLIENT", "client_cert2.crt", "client_cert2.key", false)
+	if err := EncodeToPEMFormat("ca.crt", "ca.key"); err != nil {
 		log.Print("Err encoding to PEM format", err)
 	}
 
-	err1 := serverCert.CheckSignatureFrom(serverCert)
+	err1 := serverCert1.CheckSignatureFrom(caCert)
 	log.Print("Check signature:", err1 == nil)
-	err2 := clientCert.CheckSignatureFrom(serverCert)
-	log.Print("Check signature:", err2 == nil)
+	err2 := serverCert2.CheckSignatureFrom(caCert)
+	log.Print("Check signature:", err2 != nil)
+	err3 := clientCert1.CheckSignatureFrom(caCert)
+	log.Print("Check signature:", err3 == nil)
+	err4 := clientCert2.CheckSignatureFrom(caCert)
+	log.Print("Check signature:", err4 != nil)
 }
 
 // CreateSelfSignedCertificateAndKey creates self-signed certificate and key, and save them to given files.
-func CreateSelfSignedCertificateAndKey(organization, certPath, keyPath string) (*x509.Certificate, error) {
+func CreateSelfSignedCertificateAndKey(organization, certPath, keyPath string, isCA bool) (*x509.Certificate, error) {
 	// Create a x509 certificate template.
 	template := x509.Certificate{
 		SerialNumber: big.NewInt(1653),
@@ -42,9 +53,11 @@ func CreateSelfSignedCertificateAndKey(organization, certPath, keyPath string) (
 		NotAfter:              time.Now().AddDate(10, 0, 0),
 		SubjectKeyId:          []byte{1, 2, 3, 4, 5},
 		BasicConstraintsValid: true,
-		IsCA:        true,
-		ExtKeyUsage: []x509.ExtKeyUsage{x509.ExtKeyUsageClientAuth, x509.ExtKeyUsageServerAuth},
-		KeyUsage:    x509.KeyUsageDigitalSignature | x509.KeyUsageCertSign,
+		IsCA:           isCA,
+		ExtKeyUsage:    []x509.ExtKeyUsage{x509.ExtKeyUsageClientAuth, x509.ExtKeyUsageServerAuth},
+		KeyUsage:       x509.KeyUsageDigitalSignature | x509.KeyUsageCertSign,
+		EmailAddresses: []string{"deyuan.deng@gmail.com"},
+		IPAddresses:    []net.IP{net.ParseIP("127.0.0.1")}, // This is important for certificate verification.
 	}
 
 	// Generate a RSA key pair (public & private key).
@@ -77,11 +90,13 @@ func CreateCertificateAndKey(organization, certPath, keyPath, parentCertPath, pa
 			Country:      []string{"ABC"},
 			Organization: []string{organization},
 		},
-		NotBefore:    time.Now(),
-		NotAfter:     time.Now().AddDate(10, 0, 0),
-		SubjectKeyId: []byte{1, 2, 3, 4, 6},
-		ExtKeyUsage:  []x509.ExtKeyUsage{x509.ExtKeyUsageClientAuth, x509.ExtKeyUsageServerAuth},
-		KeyUsage:     x509.KeyUsageDigitalSignature | x509.KeyUsageCertSign,
+		NotBefore:      time.Now(),
+		NotAfter:       time.Now().AddDate(10, 0, 0),
+		SubjectKeyId:   []byte{1, 2, 3, 4, 6},
+		ExtKeyUsage:    []x509.ExtKeyUsage{x509.ExtKeyUsageClientAuth, x509.ExtKeyUsageServerAuth},
+		KeyUsage:       x509.KeyUsageDigitalSignature | x509.KeyUsageCertSign,
+		EmailAddresses: []string{"deyuan.deng@gmail.com"},
+		IPAddresses:    []net.IP{net.ParseIP("127.0.0.1")},
 	}
 
 	// Load parent certificate and private key to sign.
@@ -97,6 +112,7 @@ func CreateCertificateAndKey(organization, certPath, keyPath, parentCertPath, pa
 	}
 	pub := &priv.PublicKey
 
+	// Generate certificate. Note we use a real parent certificate to sign the new certificate.
 	cerBytes, _ := x509.CreateCertificate(rand.Reader, &template, parentCert, pub, parentKey)
 	if err != nil {
 		log.Print("Error creating certificate")

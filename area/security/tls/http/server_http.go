@@ -22,7 +22,7 @@ func main() {
 			ClientAuth: tls.RequestClientCert,
 		},
 	}
-	if err := server.ListenAndServeTLS("ca1.crt.pem", "ca1.key.pem"); err != nil {
+	if err := server.ListenAndServeTLS("../certs.d/ca.crt.pem", "../certs.d/ca.key.pem"); err != nil {
 		glog.Errorf("Unable to listen for secure address: (%v).", err)
 	}
 }
