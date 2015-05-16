@@ -11,7 +11,10 @@ func flushHandler(w http.ResponseWriter, r *http.Request) {
 	fmt.Fprintf(w, "Hello world from my Go program!\n")
 
 	// Create a http.Flusher to allow server to send buffered data.
-	flusher, _ := w.(http.Flusher)
+	flusher, ok := w.(http.Flusher)
+	if !ok {
+		fmt.Println("Can't convert ResponseWriter to Flusher")
+	}
 	flusher.Flush()
 
 	for i := 0; i < 5; i++ {
@@ -22,16 +25,7 @@ func flushHandler(w http.ResponseWriter, r *http.Request) {
 	}
 }
 
-func helloHandler(w http.ResponseWriter, r *http.Request) {
-	fmt.Println("Inside helloHandler")
-	fmt.Fprintf(w, "Hello world from my Go program!\n")
-}
-
 func main() {
-	// 'http.HandleFunc' uses a default ServeMux; ServeMux is an HTTP request multiplexer.
-	http.HandleFunc("/hello", helloHandler)
 	http.HandleFunc("/flush", flushHandler)
-
-	// Listen for connections at port 9999 on the local machine.
 	http.ListenAndServe("localhost:9999", nil)
 }
