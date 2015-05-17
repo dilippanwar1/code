@@ -2,27 +2,12 @@ package main
 
 import (
 	"fmt"
-	"os"
 
 	"github.com/coreos/go-etcd/etcd"
 )
 
-// Return new client if we can connect to etcd; otherwise, return nil and err.
-func newEtcdClient() (*etcd.Client, error) {
-	client := etcd.NewClient([]string{})
-	if _, err := client.Get("/", false, false); err != nil {
-		fmt.Println("Unable to connect to ectd.")
-		return nil, err
-	}
-	return client, nil
-}
-
 func main() {
-	client, err := newEtcdClient()
-	if err != nil {
-		fmt.Println(err)
-		os.Exit(1)
-	}
+	client := etcd.NewClient([]string{})
 
 	// Create three keys.
 	client.Set("/key_order/msg1", "{Name:Deyuan,Age:25}", 0)

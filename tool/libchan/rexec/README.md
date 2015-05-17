@@ -1,7 +1,7 @@
 # rexec
 
-rexec is a sample application demonstrating libchan nested channels and
-bytestreams through remote executation calls.  This is a minimal
+rexec is a sample application demonstrating libchan nested channels
+and bytestreams through remote executation calls.  This is a minimal
 implementation to demonstrate the usage of libchan.
 
 ### Usage
