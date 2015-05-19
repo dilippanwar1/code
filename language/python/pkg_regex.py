@@ -15,5 +15,12 @@ def CompileFindall():
   print
 
 
+# re.sub(pattern, repl, string, count=0, flags=0). Replace `pattern` in
+# `string` with `repl`, with optional `count` and `flag`.
+def Substitute():
+  print re.sub('.*a', 'b', 'aaaaaaaaabc') # bbc
+
+
 if __name__ == "__main__":
   CompileFindall()
+  Substitute()

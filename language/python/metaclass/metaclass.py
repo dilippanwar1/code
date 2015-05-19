@@ -15,6 +15,7 @@ print foo.__class__             # <type 'function'>
 
 class Bar(object): pass
 b = Bar()
+print Bar.__class__             # <type 'type'>
 print b.__class__               # <class '__main__.Bar'>
 
 # Now, what is the __class__ of any __class__ ?

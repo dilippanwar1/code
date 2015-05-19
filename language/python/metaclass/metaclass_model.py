@@ -1,8 +1,9 @@
+# A minimal experiment with django models/fields.
+
 class ModelMetaclass(type):
   """Mode metaclass that's used to create model."""
 
   def __new__(cls, clsname, bases, attrs):
-
     # Convenient reference to type.__new__.
     super_new = super(ModelMetaclass, cls).__new__
 
@@ -30,6 +31,7 @@ class ModelMetaclass(type):
 
 class Model(object):
   """The model class that's supposed to be inherited by real Models."""
+
   __metaclass__ = ModelMetaclass
 
   def __init__(self, **kwargs):
@@ -75,18 +77,28 @@ class StringProperty(Property):
       raise TypeError('String field length can only be less than 10.')
 
 
-#
 # Use cases. Define a model Person, and initilize it.
 #
 # For this script, the execution sequence is:
 # 1. Create ModelMetaclass.
-# 2. Create Model by calling ModelMetaclass.__new__(), catched by if.
+# 2. Create Model by calling ModelMetaclass.__new__(), with params:
+#      cls = <class '__main__.ModelMetaclass'>
+#      clsname = 'Model'
+#      bases = (<type 'object'>,)
+#      attrs = {'__return__': {...}, '__module__': '__main__', '__metaclass__': <class '__main__.ModelMetaclass'>, '__doc__': "The model class that's supposed to be inherited by real Models.", '__init__': <function __init__ at 0x7fde6698ba28>}
 # 3. Create IntegerProperty and String Property.
-# 4. Create Person by calling ModelMetaclass.__new__().
-# 5. Create person object by calling ModelMetaclass.__init__().
+# 4. Create Person by calling ModelMetaclass.__new__(), with params:
+#      cls = <class '__main__.ModelMetaclass'>
+#      clsname = 'Person'
+#      bases = (<class '__main__.Model'>,)
+#      attrs = {'__return__': {...}, 'age': <__main__.IntegerProperty object at 0x7f148bea66d0>, '__module__': '__main__', 'name': <__main__.StringProperty object at 0x7f148bea6650>}
+#    Note that after Person is created by ModelMetaclass, it has a new class
+#    variable 'fields', and can be accessed using Person.fields.
+# 5. Create person object by calling Model.__init__().
 class Person(Model):
   name = StringProperty()
   age = IntegerProperty()
+
 
 person = Person(name='Deyuan', age=25)
 print person.name
