@@ -1,7 +1,7 @@
 """
 Download google appengine python sdk and start with:
-  $ sudo ~/code/source/google_appengine/dev_appserver.py .
-Assuming working dir is current directory and sdk is installed in code/source.
+  $ ~/code/source/google_appengine/dev_appserver.py .
+Assume working dir is current directory and sdk is installed in code/source.
 
 Application URL: localhost:8080
 Admin Console URL: localhost:8000
@@ -10,6 +10,8 @@ Admin Console URL: localhost:8000
 import webapp2
 import logging
 import datetime
+
+import properties
 
 from google.appengine.ext import db
 
@@ -181,7 +183,7 @@ def allocate_ids():
   assert another_id  not in ids_range
 
 
-# Demonstration, won't work.
+# Demonstration only.
 def query():
   # all() returns a Query object that represents all entities for the kind
   # corresponding to this model.
@@ -205,20 +207,55 @@ def query():
 
 
 #========================================================================
+# Datastore property
+#========================================================================
+
+class Group(db.Model):
+  title = db.StringProperty()
+  # Represent a group memebers, a map of {'level': 'name'}, where level
+  # is one of 'admin', 'normal' and name is a list of string.
+  members = properties.JsonProperty(default={'admin': [], 'name': []})
+
+
+def custom_properties():
+  group = Group(
+    title='datastore',
+    members={'admin': ['deyuan'], 'normal': ['deyuan2', 'deyuan3']})
+  group.put()
+  group_key = group.key()
+  same_group = db.get(group_key)
+
+  group = Group(title='datastore2')
+  group.put()
+  group_key = group.key()
+  same_group = db.get(group_key)
+  same_group.members['admin'].append('deyuan')
+  print same_group.members
+
+
+
+#========================================================================
 # Handlers
 #========================================================================
 class Example1(webapp2.RequestHandler):
   def get(self):
     create_retrieve()
     self.response.headers['Content-Type'] = 'text/plain'
-    self.response.write('Hello, World!')
+    self.response.write('Hello, World! Example1')
 
 
 class Example2(webapp2.RequestHandler):
   def get(self):
     allocate_ids()
     self.response.headers['Content-Type'] = 'text/plain'
-    self.response.write('Hello, World!')
+    self.response.write('Hello, World! Example2')
+
+
+class Example3(webapp2.RequestHandler):
+  def get(self):
+    custom_properties()
+    self.response.headers['Content-Type'] = 'text/plain'
+    self.response.write('Hello, World! Example3')
 
 
 class DeleteAll(webapp2.RequestHandler):
@@ -228,11 +265,12 @@ class DeleteAll(webapp2.RequestHandler):
     for employee in Employee.all():
       db.delete(employee)
     self.response.headers['Content-Type'] = 'text/plain'
-    self.response.write('Hello, World!')
+    self.response.write('Hello, World! DeleteAll')
 
 
 app = webapp2.WSGIApplication([
   ('/example1', Example1),
   ('/example2', Example2),
+  ('/example3', Example3),
   ('/deleteall', DeleteAll),
 ], debug=True)
