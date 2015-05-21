@@ -1,3 +1,6 @@
+import os
+import pprint
+
 from django.core.urlresolvers import reverse
 from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import get_object_or_404, render
@@ -9,9 +12,14 @@ from .models import Question, Choice
 def index(request):
   latest_question_list = Question.objects.order_by('-pub_date')[:5]
   template = loader.get_template('polls/index.html')
+  # Using {{ auto_escaped_var }} will show escaped version; to disable
+  # auto escaping, use {{ auto_escaped_var|safe }}.
   context = RequestContext(request, {
       'latest_question_list': latest_question_list,
+      'auto_escaped_var': '<img src=x onerror=alert()>',
       })
+  pprint.pprint(os.environ)
+  pprint.pprint(vars(request))
   return HttpResponse(template.render(context))
 
 
