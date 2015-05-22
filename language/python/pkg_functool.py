@@ -1,4 +1,4 @@
-# Experiment with functionalities in functools module.
+# Experiment with functools module.
 
 # functools.partial(func[,*args][, **keywords])
 #   Return a new partial object which when called will behave like func called

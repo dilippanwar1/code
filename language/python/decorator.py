@@ -72,8 +72,8 @@ print
 class Tags(object):
 
   def __init__(self, tag_name):
-    # NOTE: If there are decorator arguments, the function to be decorated
-    # is not passed to the constructor! Only parameter is passed in.
+    # If there are decorator arguments, the function to be decorated is
+    # not passed to the constructor! Only parameter is passed in.
     self.tag_name = tag_name
 
   def __call__(self, func):
