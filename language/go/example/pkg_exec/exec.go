@@ -7,7 +7,7 @@ import (
 	"syscall"
 )
 
-func main() {
+func StdinStdout() {
 	// cmd1 will run without problem, but we haven't set its stdin/stdout, so we can't
 	// see its output yet. According to go documentation, if stdin/stdout are not set,
 	// the new process will read from/write to os.DevNull.
@@ -38,4 +38,17 @@ func main() {
 	if err := cmd4.Run(); err != nil {
 		fmt.Printf("Error running command4 %v\n", err)
 	}
+}
+
+func CmdError() {
+	cmd1 := exec.Command("ls", "notexist")
+	output, err := cmd1.CombinedOutput()
+	if err != nil {
+		fmt.Println(err)
+	}
+	fmt.Printf("%s", string(output))
+}
+
+func main() {
+	CmdError()
 }
