@@ -1,39 +1,46 @@
-# Experiment with functools module.
+#!/bin/python
+
+from functools import partial, wraps
 
 # functools.partial(func[,*args][, **keywords])
 #   Return a new partial object which when called will behave like func called
 #   with the positional arguments args and keyword arguments keywords. If more
 #   arguments are supplied to the call, they are appended to args. If additional
-#   keyword arguments are supplied, they extend and override keywords. Roughly
-#   equivalent to:
+#   keyword arguments are supplied, they extend and override keywords.
+#
+# functools.partial() is used for partial function application which "freezes"
+# some portion of a function's arguments and/or keywords resulting in a new
+# object with a simplified signature. E.g. we want to evaluate a math function:
+# f(x; a, b, c) = 1000a + 100b + 10c + x
+def f(a, b, c, x):
+  return 1000*a + 100*b + 10*c + x
 
-def partial_equivalent(func, *args, **keywords):
-  def newfunc(*fargs, **fkeywords):
-    # All the new function does is combine current parameters with closure
-    # parameters, and then call original function.
-    newkeywords = keywords.copy()
-    newkeywords.update(fkeywords)
-    return func(*(args + fargs), **newkeywords)
-  # Not strictly needed for partial equivalent to work.
-  newfunc.func = func
-  newfunc.args = args
-  newfunc.keywords = keywords
-  return newfunc
-
-# The partial() is used for partial function application which "freezes" some
-# portion of a function's arguments and/or keywords resulting in a new object
-# with a simplified signature. For example, partial() can be used to create a
-# callable that behaves like the int() function where the base argument defaults
-# to two:
-
-from functools import partial
-
-basetwo = partial(int, base=2)
-basetwo.__doc__ = 'Convert base 2 string to an int.'
-print basetwo('10010')          # 18
+# If the parameters are (3, 1, 4), then we can define a parital function:
+g = partial(f, 3, 1, 4)
+print g(5)                      # 3145
 
 
-def get_name(first_name, last_name):
-  return '%s %s' % (first_name, last_name)
-deng_family = partial_equivalent(get_name, last_name='Deng')
-print deng_family('Deyuan')
+# functools.wraps(wrapped[, assigned][, updated])
+#   functools.wraps is typically used with decorator, to fix built-invariables.
+#   See http://stackoverflow.com/questions/308999/what-does-functools-wraps-do
+#
+# @wraps takes 'func', the wrapped function, and return a partial object. The
+# partial object is a simple wrap around update_wrapper, where the  wrapped
+# parameter is set to 'func'. Then update_wrapper is then called with wrapper
+# parameter equals 'decorated'. At last, wrapper is returned. See library
+# /usr/lib/python2.7/functools.py
+def logger(func):
+  @wraps(func)
+  def decorated(*args, **kwargs):
+    print 'Method called......'
+    result = func(*args, **kwargs)
+    return result
+  return decorated
+
+@logger
+def add(a, b):
+  """Add two variables."""
+  return 'add result is %d' % (a + b)
+
+print add(1,2)
+print add.__name__              # add

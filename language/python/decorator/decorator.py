@@ -6,9 +6,8 @@
 def logger(func):
   # The decorated method is the one that's actually being called.
   def decorated(*args, **kwargs):
-    print 'Method call......'
+    print 'Method called......'
     result = func(*args, **kwargs)
-    print 'Method return......'
     return result
   return decorated
 
@@ -17,6 +16,9 @@ def add(a, b):
   return 'add result is %d' % (a + b)
 
 print add(1,2)
+# Note built-in variables are polluted by the decorator, i.e. __name__ is
+# 'decorated' instead of 'add', see pkg_functool.py
+print add.__name__              # decorated
 print
 
 
@@ -30,9 +32,8 @@ class Logger(object):
     self.func = func
 
   def __call__(self, *args, **kwargs):
-    print 'Method call......'
+    print 'Method called......'
     result = self.func(*args, **kwargs)
-    print 'Method return......'
     return result
 
 @Logger
