@@ -31,6 +31,7 @@ function makeCorsRequest() {
   // All HTML5 Rocks properties support CORS.
   var url = 'http://updates.html5rocks.com';
 
+  // Create an appropriate request object.
   var xhr = createCORSRequest('GET', url);
   if (!xhr) {
     alert('CORS not supported');
