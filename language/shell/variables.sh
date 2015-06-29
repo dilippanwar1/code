@@ -24,3 +24,11 @@ echo $RANDOM
 # PWD is shell variable that returns a current working directory.
 echo $PWD
 echo $(pwd)
+
+# When using 'nounset', we have to test if a variable is set or not using
+# [[ -z "${NODE-}" ]], instead of [[ -z "${NODE}" ]].
+set -o nounset
+
+if [[ -z "${NODE-}" ]]; then
+  echo "ABC"
+fi

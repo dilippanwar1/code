@@ -4,8 +4,7 @@
 
 # Use the Dockerfile at the same level to build MongoDB image. Note, there
 # are offical image available:
-#   docker pull dockerfile/mongodb
-#   docker build -t="dockerfile/mongodb" github.com/dockerfile/mongodb
+#   docker pull mongodb
 docker build -t ddysher/mongodb .
 
 # The MongoDB image use '/data/db', and port 27017, which is default config.

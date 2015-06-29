@@ -1,6 +1,10 @@
 package main
 
-import "fmt"
+import (
+	"fmt"
+	"strings"
+	"unicode"
+)
 
 func main() {
 
@@ -13,4 +17,9 @@ for multi line.`
 	// Empty string do not occpy any space.
 	s = ""
 	fmt.Printf("This is |%s|\n", s)
+
+	s = strings.ToUpper("i-e7mppdl7")
+	a := []rune(s)
+	a[0] = unicode.ToLower(a[0])
+	fmt.Println(string(a))
 }

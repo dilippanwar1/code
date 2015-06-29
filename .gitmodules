@@ -7,3 +7,6 @@
 [submodule "tool/ansible/ansible-tuto"]
 	path = tool/ansible/ansible-tuto
 	url = https://github.com/leucos/ansible-tuto.git
+[submodule "tool/salt/salt-vagrant-demo"]
+	path = tool/salt/salt-vagrant-demo
+	url = https://github.com/UtahDave/salt-vagrant-demo.git
