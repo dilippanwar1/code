@@ -48,3 +48,12 @@ if [ -f ~/.bash_profile ]; then
 else
     echo "Yikes! You have no .bash_profile!"
 fi
+
+
+if [[ -f /tmp/abc ]] && \
+     grep -q "ABC" /tmp/abc && \
+     grep -q "DEF" /tmp/abc ; then
+  echo "Found"
+else
+  echo "Not found"
+fi
