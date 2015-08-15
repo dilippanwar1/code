@@ -30,3 +30,10 @@ done
 args=("$@")
 args_length=${#args[*]}
 echo "${args[0]}, ${args[@]}, ${args_length}"
+
+# Example
+DAOCLOUD_ACCELERATOR="http://47178212.m.daocloud.io,http://dd69bd44.m.daocloud.io,\
+  http://9482cd22.m.daocloud.io,http://4a682d3b.m.daocloud.io"
+IFS=',' read -ra reg_mirror_arr <<< "${DAOCLOUD_ACCELERATOR}"
+reg_mirror=${reg_mirror_arr[$(( ${RANDOM} % 4 ))]}
+echo ${reg_mirror}
