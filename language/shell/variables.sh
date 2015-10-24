@@ -32,3 +32,9 @@ set -o nounset
 if [[ -z "${NODE-}" ]]; then
   echo "ABC"
 fi
+
+cat <<EOF | tr "\n" " " > /tmp/abc
+KUBE_APISERVER_OPTS="--logtostderr=true \
+--insecure-bind-address=2 \
+--insecure-port=1
+EOF

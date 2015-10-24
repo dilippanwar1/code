@@ -2,6 +2,7 @@
 .vagrant
 node_modules
 bin
+a.out
 
 # Ignore following directories.
 startup/*

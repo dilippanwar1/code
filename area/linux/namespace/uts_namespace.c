@@ -1,5 +1,6 @@
 // The UTS namespace isolates two specific identifiers of the system:
 // nodename and domainname.
+
 #define _GNU_SOURCE
 #include <sched.h>
 #include <stdio.h>
