@@ -64,3 +64,17 @@ function game::stop() {
 }
 game::start
 game::stop
+
+function echoecho {
+  command-exec-and-retry "echoecho-internal ABCDE"
+}
+
+function echoecho-internal {
+  echo "${1}"
+}
+
+function command-exec-and-retry {
+  eval "${1}"
+}
+
+echoecho
