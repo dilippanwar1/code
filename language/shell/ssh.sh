@@ -50,4 +50,48 @@ expect {
 EOF
 }
 
-scp-to-node "array.sh bool.sh" "root@43.254.54.58" "~" "xxxxxxx"
+
+function scp-from-instance {
+  IFS=':@' read -ra ssh_info <<< "${1}"
+  expect <<EOF
+set timeout -1
+spawn scp -r ${SSH_OPTS} ${ssh_info[0]}@${ssh_info[2]}:${2} ${3}
+expect {
+  "*?assword:" {
+    send -- "${ssh_info[1]}\r"
+    exp_continue
+  }
+  "?ommand failed" {exit 1}
+  "lost connection" { exit 1 }
+  eof {}
+}
+EOF
+}
+
+# ssh to given node and execute command, e.g.
+#   ssh-to-instance "root:password@43.254.54.58" "touch abc && mkdir def"
+#
+# Input:
+#   $1 ssh info, e.g. root:password@43.254.54.58
+#   $2 Command string
+function ssh-to-instance {
+  IFS=':@' read -ra ssh_info <<< "${1}"
+  expect <<EOF
+set timeout -1
+spawn ssh -t ${SSH_OPTS} ${ssh_info[0]}@${ssh_info[2]} ${2}
+expect {
+  "*?assword*" {
+    send -- "${ssh_info[1]}\r"
+    exp_continue
+  }
+  "?ommand failed" {exit 1}
+  "lost connection" { exit 1 }
+  eof {}
+}
+EOF
+}
+
+ssh-to-instance "ubuntu:nopasswd@43.254.54.61" "\
+touch abc && \
+echo 'hahhah' > abc && \
+echo 'xfe' >> abc"

@@ -65,16 +65,19 @@ function game::stop() {
 game::start
 game::stop
 
-function echoecho {
-  command-exec-and-retry "echoecho-internal ABCDE"
+
+# The default return value is the last statement executed within the function.
+function fail {
+  return 1
 }
 
-function echoecho-internal {
-  echo "${1}"
+function success {
+  return 0
 }
 
-function command-exec-and-retry {
-  eval "${1}"
+function fail-or-success {
+  success
 }
 
-echoecho
+fail-or-success
+echo "$?"
