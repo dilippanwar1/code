@@ -3,6 +3,7 @@ package main
 import (
 	"fmt"
 	"log"
+	"os"
 	"os/user"
 )
 
@@ -17,4 +18,7 @@ func GetHomeDir() string {
 
 func main() {
 	fmt.Println(GetHomeDir())
+
+	cwd, _ := os.Getwd()
+	fmt.Println(cwd)
 }

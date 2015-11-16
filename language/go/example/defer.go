@@ -59,9 +59,16 @@ func c() (i int) {
 	return 1
 }
 
+func d() {
+	success := false
+	defer func() { fmt.Println(success) }()
+	success = true
+}
+
 func main() {
 	a()
 	b()
 	fmt.Println()
 	fmt.Println(c())
+	d()
 }
