@@ -7,8 +7,8 @@
   "process": {
     "terminal": true,
     "user": {
-      "uid": 1000,
-      "gid": 1000,
+      "uid": 0,
+      "gid": 0,
       "additionalGids": null
     },
     "args": [
@@ -22,7 +22,7 @@
   },
   "root": {
     "path": "rootfs",
-    "readonly": false
+    "readonly": true
   },
   "hostname": "shell",
   "mounts": [
