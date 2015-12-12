@@ -3,6 +3,7 @@ package main
 import (
 	"fmt"
 	"os"
+	"strings"
 
 	docker "github.com/fsouza/go-dockerclient"
 )
@@ -66,7 +67,7 @@ func main() {
 	}
 
 	// Pull from another registry.
-	if true {
+	if false {
 		opts = docker.PullImageOptions{Repository: "gcr.io/google_containers/pause", OutputStream: os.Stdout}
 		err = client.PullImage(opts, docker.AuthConfiguration{})
 		if err != nil {
@@ -88,4 +89,26 @@ func main() {
 			fmt.Println("Image pulled")
 		}
 	}
+
+	if true {
+		a, b := ParseRepositoryTag("index.caicloud.io/hello-world:latest")
+		fmt.Println(a)
+		fmt.Println(b)
+	}
+}
+
+func ParseRepositoryTag(repos string) (string, string) {
+	n := strings.Index(repos, "@")
+	if n >= 0 {
+		parts := strings.Split(repos, "@")
+		return parts[0], parts[1]
+	}
+	n = strings.LastIndex(repos, ":")
+	if n < 0 {
+		return repos, ""
+	}
+	if tag := repos[n+1:]; !strings.Contains(tag, "/") {
+		return repos[:n], tag
+	}
+	return repos, ""
 }
