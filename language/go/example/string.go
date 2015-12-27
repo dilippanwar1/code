@@ -22,4 +22,14 @@ for multi line.`
 	a := []rune(s)
 	a[0] = unicode.ToLower(a[0])
 	fmt.Println(string(a))
+
+	ss := "trysubstring"
+	fmt.Println(getShortHash(ss, 8))
+}
+
+func getShortHash(userId string, length int) string {
+	if len(userId) < length {
+		return userId
+	}
+	return userId[len(userId)-length:]
 }
