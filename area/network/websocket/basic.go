@@ -1,7 +1,7 @@
-// Run the following js code in browser:
-// var sock = new WebSocket("ws://localhost:4000/");
-// sock.onmessage = function(m) { console.log("Received:", m.data); }
-// sock.send("Hello!\n")
+// Run the following js code in browser console:
+//   var sock = new WebSocket("ws://localhost:4000/");
+//   sock.onmessage = function(m) { console.log("Received:", m.data); }
+//   sock.send("Hello!\n")
 package main
 
 import (
@@ -18,7 +18,9 @@ func main() {
 
 func handler(c *websocket.Conn) {
 	var s string
-	fmt.Fscan(c, &s)
-	fmt.Println("Received:", s)
-	fmt.Fprint(c, "How do you do?")
+	for {
+		fmt.Fscan(c, &s)
+		fmt.Println("Received:", s)
+		fmt.Fprint(c, "How do you do?")
+	}
 }
