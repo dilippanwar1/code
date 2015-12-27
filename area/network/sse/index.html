@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+  <head>
+	  <title>HTML5 Server Sent Event Example in Go</title>
+  </head>
+  <body>
+	  Yo {{.}}, here are some facinating messages about the current time:<br>
+	  <script type="text/javascript">
+	    // Create a new HTML5 EventSource and a callback for when a new message is received.
+	    var source = new EventSource('/events/');
+	    source.onmessage = function(e) {
+	      document.body.innerHTML += e.data + '<br>';
+	    };
+      source.onopen = function(e) {
+        console.log("open")
+      }
+      source.onerror = function(e) {
+        if (e.target.readyState == 0) {
+          console.log("Reconnecting...");
+        }
+        if (e.target.readyState == 2) {
+          console.log("Giving up.");
+        }
+      }
+	  </script>
+  </body>
+</html>
