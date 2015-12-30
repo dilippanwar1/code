@@ -119,14 +119,13 @@ func MainPageHandler(w http.ResponseWriter, r *http.Request) {
 	t, err := template.ParseFiles("index.html")
 	if err != nil {
 		log.Fatal("WTF dude, error parsing your template.")
-
 	}
 
 	// Render the template, writing to `w`.
 	t.Execute(w, "Duder")
 
 	// Done.
-	log.Println("Finished HTTP request at ", r.URL.Path)
+	log.Printf("Finished HTTP request at %v", r.URL.Path)
 }
 
 // Main routine.
