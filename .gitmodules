@@ -10,3 +10,6 @@
 [submodule "tool/salt/salt-vagrant-demo"]
 	path = tool/salt/salt-vagrant-demo
 	url = https://github.com/UtahDave/salt-vagrant-demo.git
+[submodule "/Users/deyuan/code/tool/mirage-skeleton"]
+	path = /Users/deyuan/code/tool/mirage-skeleton
+	url = https://github.com/mirage/mirage-skeleton
