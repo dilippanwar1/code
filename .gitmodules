@@ -13,3 +13,6 @@
 [submodule "/Users/deyuan/code/tool/mirage-skeleton"]
 	path = /Users/deyuan/code/tool/mirage-skeleton
 	url = https://github.com/mirage/mirage-skeleton
+[submodule "/Users/deyuan/code/tool/rancher-vagrant"]
+	path = /Users/deyuan/code/tool/rancher-vagrant
+	url = https://github.com/rancher/os-vagrant.git
