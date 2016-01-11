@@ -2,29 +2,54 @@ package main
 
 import (
 	"fmt"
+	"io/ioutil"
+	"time"
 
-	"github.com/glycerine/rbuf"
+	"github.com/djherbis/buffer"
+	"github.com/hpcloud/tail"
 )
 
 func main() {
-	buf := rbuf.NewFixedSizeRingBuf(12 * 1024)
+	// Create a File-based Buffer with max size 100MB
+	file, err := ioutil.TempFile("", "buffer")
+	if err != nil {
+		return
+	}
+	// defer os.Remove(file.Name())
+	defer file.Close()
+	buf := buffer.NewFile(100*1024*1024, file)
 
-	buf.Write([]byte("ABCDEFG\n"))
-	buf.Write([]byte("AAAAAAA\n"))
-	buf.Write([]byte("CCCCCCC\n"))
+	count := 0
+	go func() {
+		ticker := time.NewTicker(time.Second)
+		for {
+			<-ticker.C
+			buf.Write([]byte(fmt.Sprintf("%d\n", count)))
+			count++
+		}
+	}()
 
-	// reader1 := bufio.NewReader(buf)
-	// line1, _ := reader1.ReadString('\n')
-	// fmt.Printf(line1)
+	go func() {
+		t, _ := tail.TailFile(file.Name(), tail.Config{Follow: true})
+		for line := range t.Lines {
+			fmt.Println("1", line.Text)
+		}
+	}()
 
-	// reader2 := bufio.NewReader(buf)
-	// line2, _ := reader1.ReadString('\n')
-	// fmt.Printf(line2)
+	go func() {
+		t, _ := tail.TailFile(file.Name(), tail.Config{Follow: true})
+		for line := range t.Lines {
+			fmt.Println("2", line.Text)
+		}
+	}()
 
-	xx := make([]byte, 10)
-	buf.Read(xx)
-	fmt.Println(string(xx))
+	select {}
+	// xx := make([]byte, 10)
+	// buf.Read(xx)
+	// fmt.Printf(string(xx))
 
-	buf.Read(xx)
-	fmt.Println(string(xx))
+	// buf.Reset()
+
+	// buf.Read(xx)
+	// fmt.Printf(string(xx))
 }
