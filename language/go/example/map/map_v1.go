@@ -1,6 +1,9 @@
 package main
 
-import "fmt"
+import (
+	"fmt"
+	"reflect"
+)
 
 func main() {
 	// Constructor 1:
@@ -42,4 +45,9 @@ func main() {
 	for k, v := range n {
 		fmt.Println(k, v)
 	}
+
+	// By default, map is NOT comparable; to compare two maps, use reflect package.
+	mm1 := map[string]string{"one": "a", "two": "b"}
+	mm2 := map[string]string{"two": "b", "one": "a"}
+	fmt.Println("mm1 == mm2:", reflect.DeepEqual(mm1, mm2)) // prints: mm1 == mm2: true
 }

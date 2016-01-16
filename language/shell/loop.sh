@@ -41,3 +41,6 @@ done
 for i in `seq 1 10`; do
   echo $i
 done
+
+# Oneliner.
+for i in {1..5}; do go run reorder.go; done
