@@ -27,7 +27,10 @@ func main() {
 
 	// Go automatically handles conversion between values and pointers for method
 	// calls. You may want to use a pointer receiver type to avoid copying on
-	// method calls or to allow the method to mutate the receiving struct.
+	// method calls or to allow the method to mutate the receiving struct. Note
+	// that we can call area(), perim() on both r and &r, because r is addressable,
+	// meaning that given r, Go is able to find the address of r, thus passing it
+	// to the function.
 	rp := &r
 	fmt.Println("Area:", rp.area())
 	fmt.Println("Perim:", rp.perim())
