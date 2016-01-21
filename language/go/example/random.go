@@ -33,6 +33,12 @@ func RandStringBytesMaskImprSrc(n int) string {
 	return string(b)
 }
 
+func RandomRange(min, max int) int {
+	rand.Seed(time.Now().UnixNano())
+	return rand.Intn(max-min) + min
+}
+
 func main() {
 	fmt.Println(RandStringBytesMaskImprSrc(16))
+	fmt.Println(RandomRange(3, 20))
 }
