@@ -1,5 +1,6 @@
 #!/bin/bash
-# Shell examples
+#
+# Shell misc examples
 
 # The characters "$( )" tell the shell, "substitute the results of the enclosed
 # command". The older backtick form also works, but try to avoid it.
@@ -25,3 +26,15 @@ echo ${TOKEN}
 # The following command will create a /tmp/token_file with the token string;
 # it has mode user=read/write, group=<none>, other=<none>
 (umask u=rw,go= ; echo "${TOKEN}" > /tmp/token_file)
+
+
+# Use 'sed' to get volume id from the volume path. Here, s|.*/\(.*\)/_data$|\1|
+# matches the volume id. \(.*\) is a grouping and \1 returns this grouping.
+# Seed 's' command in 'info sed' man page.
+echo "/var/lib/docker/volumes/323c67398780781e23099a97391d4e5c84099ef6cedef910069db107c4a88d6e/_data" | \
+  sed 's|.*/\(.*\)/_data$|\1|;s|.*/\([0-9a-f]\{64\}\)$|\1|'
+
+# Equivalent to `docker ps -a -q --no-trunc`. NR is a built in variable in awk
+# meaning number of records (lines) scanned so far. Another commonly used one
+# is NF - number of fileds in current record.
+docker ps -a --no-trunc | awk '{ if (NR != 1) print $1 }'
