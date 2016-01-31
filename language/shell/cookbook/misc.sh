@@ -38,3 +38,7 @@ echo "/var/lib/docker/volumes/323c67398780781e23099a97391d4e5c84099ef6cedef91006
 # meaning number of records (lines) scanned so far. Another commonly used one
 # is NF - number of fileds in current record.
 docker ps -a --no-trunc | awk '{ if (NR != 1) print $1 }'
+
+# Note find the first column can also be achieved via 'cut'. Note this has the
+# header.
+docker ps -a --no-trunc | cut -f1 -d" "
