@@ -1,6 +1,8 @@
-## Main workspace for golang
+## Main workspace
 
-GOPATH is set to go-workspace in .zshrc, and go-workspace/bin is added to PATH variable in .zshrc.
+### Golang environment
+
+GOPATH is set to ~/code/workspace in .zshrc, and ~/code/workspace is added to PATH variable in .zshrc.
 
 Binaries to install:
 * go get github.com/nsf/gocode
@@ -10,3 +12,7 @@ Binaries to install:
 
 Optional:
 * go get github.com/coreos/etcd
+
+### Projects cloned
+
+[docker-slim](https://github.com/cloudimmunity/docker-slim)

@@ -5,8 +5,9 @@ bin
 a.out
 
 # Ignore following directories.
-startup/*
+!source
 source/*
+!source/README.md
 
 # Ignore following files.
 .DS_Store
