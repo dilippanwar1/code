@@ -8,7 +8,9 @@
 // You may assume that each input would have exactly one solution.
 
 // Input: numbers={2, 7, 11, 15}, target=9
-// Output: index1=1, index2=2#include <vector>
+// Output: index1=1, index2=2
+
+#include <vector>
 
 #include <iostream>
 #include <unordered_map>
