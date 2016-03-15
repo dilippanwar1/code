@@ -39,3 +39,20 @@ numbers="1897329,28943,37810,498893"
 IFS=',' read -ra number_array <<< "${numbers}"
 number=${number_array[$(( ${RANDOM} % ${#number_array[*]} ))]}
 echo ${number}
+
+# Example: find executable from predefined location.
+locations=("/usr/bin/kubectl" "/usr/local/bin/kubectl" "/opt/bin/kubectl")
+for location in ${locations[@]}; do
+  if [[ -x ${location} ]]; then
+    KUBECTL_PATH=${location}
+    break
+  fi
+done
+
+if [[ ${KUBECTL_PATH} == "" ]]; then
+  if [[ -x `which kubectl` ]]; then
+    export KUBECTL_PATH=`which kubectl`
+  fi
+fi
+
+echo $KUBECTL_PATH

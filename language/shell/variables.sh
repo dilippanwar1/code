@@ -38,3 +38,7 @@ KUBE_APISERVER_OPTS="--logtostderr=true \
 --insecure-bind-address=2 \
 --insecure-port=1
 EOF
+
+# Use ';-' if a variable may not be defined.
+MASTER=${MASTER:-}
+echo ${MASTER}
