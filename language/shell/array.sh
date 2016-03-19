@@ -29,6 +29,14 @@ do
 done
 echo
 
+# Append to array in a loop.
+args=()
+for i in "abc abc xyz"; do
+  args+=("$i")
+done
+echo "${args[@]}"
+
+
 # Print arguments. As shown in special_vars, $@ returns script argument as string.
 args="$@"
 args_length="${#args[*]}"
