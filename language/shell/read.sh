@@ -20,3 +20,11 @@ echo -n "Enter your password > "
 read -s password
 echo
 echo "You entered: $password"
+
+# Read line by line.
+docker images |
+  while read -r image; do
+    name=`echo $image | awk '{print $1}'`
+    tag=`echo $image | awk '{print $2}'`
+    echo $name:$tag
+  done
