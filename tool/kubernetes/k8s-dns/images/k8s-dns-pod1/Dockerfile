@@ -9,7 +9,7 @@
 # Run the image:
 #   sudo docker run -d ddysher/k8s-dns-pod1
 
-FROM python:2.7.9
+FROM python:2.7
 
 COPY . /k8s-dns-pod1
 WORKDIR /k8s-dns-pod1
