@@ -4,6 +4,8 @@ import (
 	"fmt"
 	"strings"
 	"unicode"
+
+	"github.com/blang/semver"
 )
 
 func main() {
@@ -25,6 +27,8 @@ for multi line.`
 
 	ss := "trysubstring"
 	fmt.Println(getShortHash(ss, 8))
+
+	fmt.Println(parse("v1.2.3-2016-12"))
 }
 
 func getShortHash(userId string, length int) string {
@@ -32,4 +36,20 @@ func getShortHash(userId string, length int) string {
 		return userId
 	}
 	return userId[len(userId)-length:]
+}
+
+func parse(gitversion string) (semver.Version, error) {
+	var seen bool
+	gitversion = strings.TrimLeftFunc(gitversion, func(ch rune) bool {
+		if seen {
+			return false
+		}
+		if ch == 'v' {
+			seen = true
+			return true
+		}
+		return unicode.IsSpace(ch)
+	})
+
+	return semver.Make(gitversion)
 }
