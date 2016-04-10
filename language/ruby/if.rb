@@ -1,5 +1,6 @@
+#!/usr/bin/ruby
+#
 # Experiment with ruby if condition.
-
 
 democrats = ["Carter", "Clinton"]
 republicans = ["Ford", "Reagan", "Bush1", "Bush2"]

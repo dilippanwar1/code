@@ -1,3 +1,7 @@
+#!/usr/bin/ruby
+#
+# Experiment with ruby while loop.
+
 ss = 4
 while ss > 0
 	puts ss

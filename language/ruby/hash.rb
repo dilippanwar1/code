@@ -1,3 +1,5 @@
+#!/usr/bin/ruby
+#
 # Experiment with ruby hash.
 
 

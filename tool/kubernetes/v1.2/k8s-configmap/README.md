@@ -1,4 +1,4 @@
-### Kubernetes v1.2 deployment
+### Kubernetes v1.2 configmap
 
 #### Create
 

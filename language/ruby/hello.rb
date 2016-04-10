@@ -1,3 +1,5 @@
+#!/usr/bin/ruby
+
 print "Hello World\n"
 
 # Separate by ','.

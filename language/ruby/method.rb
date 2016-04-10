@@ -1,3 +1,7 @@
+#!/usr/bin/ruby
+#
+# Experiment with ruby method.
+
 class Boogy
   def initialize
     @dix = 15

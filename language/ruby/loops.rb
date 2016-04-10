@@ -1,4 +1,6 @@
-# Experiment with ruby loop.
+#!/usr/bin/ruby
+#
+# Experiment with ruby for loop.
 
 
 # The elipses (...) indicate the range through which to loop. 'for' is
