@@ -7,7 +7,10 @@ import (
 )
 
 func helloHandler(w http.ResponseWriter, r *http.Request) {
-	fmt.Println("Inside helloHandler")
+	fmt.Fprintln(w, "Client Headers")
+	for k, v := range r.Header {
+		fmt.Fprintf(w, "  %v=%v\n", k, v)
+	}
 	fmt.Fprintf(w, "Hello world from my Go program!\n")
 }
 
@@ -17,11 +20,11 @@ func main() {
 
 	// Listen for connections at port 9999 on the local machine. Handler is typically nil,
 	// in which case the DefaultServeMux is used.
-	go http.ListenAndServe("localhost:9999", nil)
+	go http.ListenAndServe(":9999", nil)
 
 	// Create our own server.
 	s := &http.Server{
-		Addr: "localhost:9998",
+		Addr: ":9998",
 		// 'http.HandlerFunc' is a type which converts ordinary functions to http handlers,
 		// i.e we convert helloHandler to a HandlerFunc which implements ServeHTTP based on
 		// helloHandler.
@@ -31,6 +34,8 @@ func main() {
 		MaxHeaderBytes: 1 << 20,
 	}
 	go s.ListenAndServe()
+
+	fmt.Println("Listening on :9998/ and 9999/hello")
 
 	select {}
 }
