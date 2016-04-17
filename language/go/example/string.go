@@ -16,6 +16,12 @@ for multi line.`
 
 	fmt.Println(s)
 
+	// Unicode
+	s = "邓"
+	fmt.Println(len(s)) // 3
+
+	_ = '邓' // This is a rune
+
 	// Empty string do not occpy any space.
 	s = ""
 	fmt.Printf("This is |%s|\n", s)
