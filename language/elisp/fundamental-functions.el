@@ -9,7 +9,6 @@
        (whale dolphin seal)))
 
 
-
 ;; The cdr of a list is the rest of the list, that is, the cdr function returns
 ;; the part of the list that follows the first item. Thus, while the car of the
 ;; list '(rose violet daisy buttercup) is rose, the rest of the list, the value
@@ -21,13 +20,12 @@
        (whale dolphin seal)))
 
 
-
 ;; The cons function constructs lists; it is the inverse of car and cdr. For
 ;; example, cons can be used to make a four element list from the three element
 ;; list, (fir oak maple):
 ;;   (cons 'pine '(fir oak maple))
 ;;
-;; After evaluating this list, you will see  (pine fir oak maple) appear in the
+;; After evaluating this list, you will see (pine fir oak maple) appear in the
 ;; echo area. cons causes the creation of a new list in which the element is
 ;; followed by the elements of the original list.
 ;;
@@ -36,14 +34,13 @@
 ;; since cons does not change an existing list, but creates a new one. Like car
 ;; and cdr, cons is non-destructive.
 (cons 'pine '(fir oak maple))
-
+(cons '(pine pipi) '(fir oak maple))    ; ((pine pipi) fir oak maple)
 
 
 ;; You can find out how many elements there are in a list by using the Lisp
 ;; function length.
 (length '(buttercup))
 (length '(daisy buttercup))
-
 
 
 ;; The nthcdr function does the same as repeating the call to cdr. In the
@@ -61,7 +58,6 @@
 (nth 1 '("one" "two" "three"))
 
 
-
 (setq animals '(antelope giraffe lion tiger))
 (setq domesticated-animals '(horse cow sheep goat))
 ;; animals => (hippopotamus giraffe lion tiger)
@@ -70,5 +66,6 @@
 (setcdr domesticated-animals '(cat dog))
 animals
 domesticated-animals
+
 
 

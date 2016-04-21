@@ -6,7 +6,6 @@
 ;; addresses.
 
 
-
 ;; When a variable is set to a list with a function such as setq, it stores the
 ;; address of the first box in the variable.
 ;;
@@ -17,7 +16,7 @@
 ;; address-boxes, one of which is the address of the printed word ‘bouquet’, a
 ;; second of which is the address of a function definition attached to the symbol,
 ;; if any, a third of which is the address of the first pair of address-boxes for
-;; the list (rose violet  buttercup), and so on.
+;; the list (rose violet buttercup), and so on.
 ;;
 ;; A pair of address-boxes is called a cons cell or dotted pair.
 
@@ -42,7 +41,7 @@ bouquet
 bouquet
 
 ;; Add to to list.
-(append '(1 2 3) '(4 5 6) '(7 8 9))
+(append '(1 2 3) '(4 5 6) '(7 8 9))     ; (1 2 3 4 5 6 7 8 9)
 (add-to-list 'jasmine bouquet)
 
 ;; Remove from list.

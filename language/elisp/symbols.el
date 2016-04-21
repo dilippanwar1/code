@@ -8,7 +8,7 @@
 ;; A symbol can have any value attached to it or, to use the jargon, we can
 ;; bind the variable to a value: to a number, such as 72; to a string,
 ;; "such as this"; to a list, such as (spruce pine oak); we can even bind a
-;;  variable to a function definition.
+;; variable to a function definition.
 
 
 

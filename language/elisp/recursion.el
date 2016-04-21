@@ -1,3 +1,4 @@
+;; Simple recursive function.
 (defun print-elements-recursively (list)
   "Print element of list recursively."
   (if list
@@ -9,12 +10,11 @@
 (print-elements-recursively animals)
 
 
-
-;; Recursive Pattern: every
+;; Recursive Pattern: every (map)
 ;; In the every recursive pattern, an action is performed on every element
 ;; of a list. The basic pattern is:
-;;   • If a list be empty, return nil.
-;;   • Else, act on the beginning of the list (the car of the list).
+;;   - If a list be empty, return nil.
+;;   - Else, act on the beginning of the list (the car of the list).
 ;;     − through a recursive call by the function on the rest (the cdr) of
 ;;       the list,
 ;;     − and, optionally, combine the acted-on element, using cons, with the
@@ -29,16 +29,15 @@
 (square-each '(1 2 3 4 5))
 
 
-
-;; Recursive Pattern: accumulate
+;; Recursive Pattern: accumulate (reduce)
 ;; Another recursive pattern is called the accumulate pattern. In the accumulate
 ;; recursive pattern, an action is performed on every element of a list and the
 ;; result of that action is accumulated with the results of performing the action
 ;; on the other elements.
 ;; This is very like the ‘every’ pattern using cons, except that cons is not used,
 ;; but some other combiner. The pattern is:
-;;   • If a list be empty, return zero or some other constant.
-;;   • Else, act on the beginning of the list (the car of the list),
+;;   - If a list be empty, return zero or some other constant.
+;;   - Else, act on the beginning of the list (the car of the list),
 ;;     − and combine that acted-on element, using + or some other combining
 ;;       function, with
 ;;     − a recursive call by the function on the rest (the cdr) of the list.
@@ -50,7 +49,6 @@
     0))
 
 (add-elements '(1 2 3 4 5))
-
 
 
 ;; Recursive Pattern: keep
@@ -70,7 +68,6 @@
 (keep-three-letter-words '(one two three four five six))
 
 
-
 ;; Recursion with deferment. If we pass 7 to the following function, then the
 ;; recursive call will end up with something like this:
 ;; (+ 7 (triangle-recursively 6))
@@ -86,7 +83,6 @@ Uses recursion."
     (+ number                           ; else-part
        (triangle-recursively            ; recursive call
         (1- number)))))                 ; next-step-expression
-
 
 
 ;; Recursion without deferment.
@@ -105,6 +101,3 @@ that uses recursion."
     (triangle-recursive-helper (+ sum counter) ; sum
                                (1+ counter)    ; counter
                                number)))       ; number
-
-
-

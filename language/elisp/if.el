@@ -1,18 +1,16 @@
-(if true-or-false-test
-    action-to-carry-out-if-the-test-returns-true
-  action-to-carry-out-if-the-test-returns-false )
+;; (if true-or-false-test
+;;     action-to-carry-out-if-the-test-returns-true
+;;   action-to-carry-out-if-the-test-returns-false )
 
 (defun type-of-animal (characteristic)
   "Print message in echo area depending on CHARACTERISTIC.
-If the CHARACTERISTIC is the symbol 'fierce',
-then warn of a tiger."
+If the CHARACTERISTIC is the symbol 'fierce', then warn of a tiger."
   (if (equal characteristic 'fierce)
       (message "It's a tiger!")
     (message "It's not fierce!")))
 
 (type-of-animal 'fierce)
 (type-of-animal 'zebra)
-
 
 
 ;; In fact, ‘false’ is just our old friend nil. Anything else—anything at
@@ -27,7 +25,6 @@ then warn of a tiger."
 (if nil
     'true
   'false)
-
 
 
 ;; (cond
