@@ -7,6 +7,7 @@ import (
 )
 
 func helloHandler(w http.ResponseWriter, r *http.Request) {
+	fmt.Println("Inside hello handler")
 	fmt.Fprintln(w, "Client Headers")
 	for k, v := range r.Header {
 		fmt.Fprintf(w, "  %v=%v\n", k, v)
