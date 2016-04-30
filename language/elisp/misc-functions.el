@@ -13,6 +13,7 @@
 ;; M-x compile RET etags *.el RET
 
 
-
+;; Append to specified buffer the text of the region. It is inserted into
+;; that buffer before its point.
 (append-to-buffer "*scratch*" 1 20)
 (list 1 2 3 4)

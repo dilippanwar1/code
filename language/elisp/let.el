@@ -10,7 +10,6 @@
 ;; initial value of nil, and binds the symbol needles to an initial value of 3.
 
 
-
 ;; In the varlist, Emacs binds the variable zebra to the value stripes, and
 ;; binds the variable tiger to the value fierce. In this example, both values
 ;; are symbols preceded by a quote. The values could just as well have been
@@ -21,12 +20,11 @@
            zebra tiger))
 
 
-
 ;; Default varlist value is nil.
 (let ((birch 3)
       pine
       fir
-      (oak ’some))
+      (oak 'some))
   (message
    "Here are %d variables with %s, %s, and %s value."
    birch pine fir oak))

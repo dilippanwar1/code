@@ -6,7 +6,6 @@
 ;; be primitives written in C.
 
 
-
 ;; A function definition has up to five parts following the word defun:
 ;; 1. The name of the symbol to which the function definition should be attached.
 ;; 2. A list of the arguments that will be passed to the function. If no
@@ -23,7 +22,6 @@
   (* 7 number))
 
 (multiply-by-seven 2)
-
 
 
 ;; Interestingly, when you call an interactive function interactively, the value
@@ -62,8 +60,6 @@
   (message "The result is %d" (* 7 number)))
 
 
-
-
 ;; Binds a and b to the first two actual arguments, which are required. If one
 ;; or two more arguments are provided, c and d are bound to them respectively;
 ;; any arguments after the first four are collected into a list and e is bound
@@ -72,8 +68,6 @@
 ;; There is no way to have required arguments following optional ones — it would
 ;; not make sense.
 (a b &optional c d &rest e)
-
-
 
 
 ;; Dynamic scoping in elisp.
