@@ -1,0 +1,16 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: hostpath
+spec:
+  containers:
+    - name: hostpath
+      image: index.caicloud.io/caicloud/hostpath
+      imagePullPolicy: Always
+      volumeMounts:
+        - mountPath: "/etc"
+          name: etc
+  volumes:
+    - name: etc-caicloud
+      hostPath:
+        path: "/etc"

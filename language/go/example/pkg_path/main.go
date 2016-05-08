@@ -13,4 +13,7 @@ func main() {
 	name = "/"
 	fmt.Println(path.Dir(name))  // output: "/"
 	fmt.Println(path.Base(name)) // output: "/"
+
+	name = "/etc/"
+	fmt.Println(path.Clean(name)) // output: "/"
 }

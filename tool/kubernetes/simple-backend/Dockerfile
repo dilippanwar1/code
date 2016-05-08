@@ -1,13 +1,13 @@
 # Dockerfile
 #
 # Build the image::
-#   docker build -t index.caicloud.io/ddysher/simple-backend .
+#   docker build -t index.caicloud.io/caicloud/simple-backend .
 #
 # Push the image ('docker login index.caicloud.io' first):
-#   docker push index.caicloud.io/ddysher/simple-backend
+#   docker push index.caicloud.io/caicloud/simple-backend
 #
 # Run the image:
-#   docker run -d index.caicloud.io/ddysher/simple-backend
+#   docker run -d index.caicloud.io/caicloud/simple-backend
 
 FROM python:2.7-slim
 
