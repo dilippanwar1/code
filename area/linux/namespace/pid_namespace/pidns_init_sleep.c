@@ -1,10 +1,12 @@
-/* pidns_init_sleep.c
+/*
+  pidns_init_sleep.c
 
-   Copyright 2013, Michael Kerrisk
-   Licensed under GNU General Public License v2 or later
+  Copyright 2013, Michael Kerrisk
+  Licensed under GNU General Public License v2 or later
 
-   A simple demonstration of PID namespaces.
+  A simple demonstration of PID namespaces.
 */
+
 #define _GNU_SOURCE
 #include <sched.h>
 #include <unistd.h>
@@ -20,11 +22,10 @@
 /* A simple error-handling function: print an error message based
    on the value in 'errno' and terminate the calling process */
 
-#define errExit(msg)    do { perror(msg); exit(EXIT_FAILURE); \
-  } while (0)
+#define errExit(msg) do { perror(msg); exit(EXIT_FAILURE); } while (0)
 
-static int              /* Start function for cloned child */
-childFunc(void *arg)
+/* Start function for cloned child */
+static int childFunc(void *arg)
 {
   printf("childFunc(): PID  = %ld\n", (long) getpid());
   printf("childFunc(): PPID = %ld\n", (long) getppid());
@@ -46,8 +47,7 @@ childFunc(void *arg)
 
 static char child_stack[STACK_SIZE];    /* Space for child's stack */
 
-int
-main(int argc, char *argv[])
+int main(int argc, char *argv[])
 {
   pid_t child_pid;
 

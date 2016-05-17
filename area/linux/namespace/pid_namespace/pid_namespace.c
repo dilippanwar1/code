@@ -77,7 +77,7 @@ int main(int argc, char **argv) {
   // while doing so, it detaches the new process from the original process tree
   // and creates a separate process tree for the new process.
   // `child_stack+STACK_SIZE` means pointing to the start of downwardly growing
-  // stack - child_stack has a lower address.
+  // stack - 'child_stack' has a lower address.
   pid_t child_pid = clone(child_exec, child_stack+STACK_SIZE, CLONE_NEWPID | SIGCHLD, &args);
   // The child pid here is the pid of the new child process in 'current namespace';
   // in the new namespace, the pid is 0, as printed in the child_fn() above.

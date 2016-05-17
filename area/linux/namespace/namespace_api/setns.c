@@ -8,8 +8,8 @@
 // 3. Now build the file and run:
 //    $ gcc setns.c -o setns
 //    $ sudo ./setns /proc/6612/ns/uts bash
-//    Running this command will put us in the uts namespace of the container, i.e. our hostname
-//    will be f3acd469b1ca.
+//  Running this command will put us in the uts namespace of the container, i.e. our hostname
+//  will be f3acd469b1ca.
 
 #define _GNU_SOURCE
 #include <sched.h>
