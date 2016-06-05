@@ -32,6 +32,9 @@ func main() {
 
 	counter := 0
 	for {
+		// Call wraps a function the Breaker will protect. A failure is recorded
+		// whenever the function returns an error. If the called function takes
+		// longer than timeout to run, a failure will be recorded.
 		cb.Call(func() error {
 			// This is where you'll do some remote call. If it fails, return an error.
 			if counter < 8 {

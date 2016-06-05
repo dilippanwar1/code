@@ -10,9 +10,9 @@
 [submodule "tool/salt/salt-vagrant-demo"]
 	path = tool/salt/salt-vagrant-demo
 	url = https://github.com/UtahDave/salt-vagrant-demo.git
-[submodule "/Users/deyuan/code/tool/mirage-skeleton"]
-	path = /Users/deyuan/code/tool/mirage-skeleton
+[submodule "tool/mirage-skeleton"]
+	path = tool/mirage-skeleton
 	url = https://github.com/mirage/mirage-skeleton
-[submodule "/Users/deyuan/code/tool/rancher-vagrant"]
-	path = /Users/deyuan/code/tool/rancher-vagrant
+[submodule "tool/rancher-vagrant"]
+	path = tool/rancher-vagrant
 	url = https://github.com/rancher/os-vagrant.git

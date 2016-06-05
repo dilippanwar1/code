@@ -1,78 +1,93 @@
-// This file demonstrates a typical usage of reflect.
+// Experiment with golang reflection.
 //
-// Package reflect implements run-time reflection, allowing a program to
-// manipulate objects with arbitrary types. The typical use is to take a
-// value with static type interface{} and extract its dynamic type information
-// by calling TypeOf, which returns a Type.
+// Note reflect.Type is an interface while reflect.Value is a struct implementing
+// a lot of methods (not satisfying reflect.Type interface). You can get value's
+// type via reflect.Value.Type().
 //
-// A call to ValueOf returns a Value representing the run-time data. Zero
-// takes a Type and returns a Value representing a zero value for that type.
+// A variable holds value of a type. Go value is stored in-memory and accessed via
+// variable or reflect.Value. reflect.Value contains more information about the
+// value. reflect.Type contains type informaation.
 //
+// https://blog.golang.org/laws-of-reflection
 
 package main
 
 import (
 	"fmt"
 	"reflect"
+	"time"
 )
 
-type Car struct {
-	made string
-	year int
-}
-
-type Bike struct {
-	made  string
-	brand string
-}
-
-type Train struct {
-	speed int
-	size  int
-}
-
 func main() {
+	RuntimeType()
+	fmt.Println()
+	FunctionReflect()
+	fmt.Println()
+	PointerReflect()
+}
 
-	// 'vehicle' is a map from vehicle type name to its corresponding struct.
-	// Using interface{} can help store them in the same map.
-	vehicle := map[string]interface{}{
-		"car":   Car{"Ford", 2008},
-		"bike":  Bike{"Fiet", "CC"},
-		"train": Train{200, 100},
-	}
+// Every variable in Go has a static type, even for variable of type interface{}.
+// reflect.TypeOf returns the 'run-time' Type of a variable; that is, for normal
+// type, TypeOf returns its type directly, for interface variable, TypeOf returns
+// the underline type it holds.
+func RuntimeType() {
+	a := &time.Time{}
+	b := time.Time{}
+	fmt.Println("Type of a:", reflect.TypeOf(a)) // *time.Time
+	fmt.Println("Type of b:", reflect.TypeOf(b)) // time.Time
 
-	// 'typeMap' is a map from vehicle type name to its corresponding type.
-	// All values in map 'vehicle' have static type interface{}, the 'typMap'
-	// holds their dynamic tpyes.
-	typeMap := make(map[string]reflect.Type)
-	for name, obj := range vehicle {
-		typeMap[name] = reflect.TypeOf(obj)
-	}
+	var c interface{}
+	c = a
+	fmt.Println("Type of c when assigned to a:", reflect.TypeOf(c)) // *time.Time
+	c = b
+	fmt.Println("Type of c when assigned to b:", reflect.TypeOf(c)) // time.Time
 
-	fmt.Println(vehicle)
-	fmt.Println(typeMap)
+	fmt.Println("Kind of a:", reflect.ValueOf(a).Kind()) // ptr
+	fmt.Println("Kind of a:", reflect.TypeOf(a).Kind())  // ptr
+}
 
-	// TypeOf returns the reflection Type of the value in the interface{}.
-	var mystery interface{} = Car{"BMW", 2014}
-	fmt.Println(reflect.TypeOf(mystery))                 // main.Car
-	fmt.Println("Name:", reflect.TypeOf(mystery).Name()) // Car
+func AFunc(t *time.Time) error {
+	fmt.Println(t)
+	return nil
+}
 
-	// ValueOf returns a new Value initialized to the concrete value
-	// stored in the interface.
+// A bit of reflection on function.
+func FunctionReflect() {
+	funcType := reflect.TypeOf(AFunc)
+	fmt.Println(funcType)        // func(*time.Time) error
+	fmt.Println(funcType.In(0))  // *time.Time
+	fmt.Println(funcType.Kind()) // func
+	// There are quite a few methods on reflect.Type, but not all of them
+	// can be called, e.g. reflect.Type.Key() can only be called on Map type;
+	// reflect.Type.FieldByName can only be called on struct type, etc.
+	// fmt.Println(funcType.Key())
+	// fmt.Println(funcType.FieldByName("Hello"))
 
-	// 'mystery_value' has type: "reflect.Value".
-	mystery_value := reflect.ValueOf(mystery)
-	fmt.Println(reflect.TypeOf(mystery_value))     // reflect.Value
-	fmt.Println(mystery_value.Kind())              // struct
-	fmt.Println(mystery_value.IsValid())           // true
-	fmt.Println(mystery_value.FieldByName("made")) // BMW
-	fieldByName := mystery_value.FieldByName("made")
-	fmt.Println(reflect.TypeOf(fieldByName))
+	funcValue := reflect.ValueOf(AFunc)
+	fmt.Println(funcValue) // 0x2bb0
+	// reflect.Value.Type() will return reflect.Type, similar to reflect.TypeOf
+	fmt.Println(funcValue.Type()) // func(*time.Time) error
+	fmt.Println(funcValue.Kind()) // func
+}
 
-	m := make(map[string]int)
-	// Elem returns a type's element type.
-	// It panics if the type's Kind is not Array, Chan, Map, Ptr, or Slice.
-	fmt.Println(reflect.TypeOf(m))        // map[string]int
-	fmt.Println(reflect.TypeOf(m).Elem()) // int
-	fmt.Println(reflect.TypeOf(m).Key())  // string
+type MyType struct {
+	A int
+	B string
+}
+
+// A bit of reflection on pointer.
+func PointerReflect() {
+	x := MyType{}
+	fmt.Println(reflect.TypeOf(x), reflect.ValueOf(x))
+	fmt.Println(reflect.TypeOf(&x), reflect.ValueOf(&x), reflect.ValueOf(&x).Elem())
+
+	// Addr returns a pointer value representing the address of v. For pointer,
+	// it must be the result of dereferencing a pointer.
+	fmt.Println(reflect.ValueOf(x).CanAddr())         // false
+	fmt.Println(reflect.ValueOf(&x).CanAddr())        // false
+	fmt.Println(reflect.ValueOf(&x).Elem().CanAddr()) // true
+
+	fmt.Println(reflect.ValueOf(x).CanSet())         // false
+	fmt.Println(reflect.ValueOf(&x).CanSet())        // false
+	fmt.Println(reflect.ValueOf(&x).Elem().CanSet()) // true
 }
