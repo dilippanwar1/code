@@ -1,6 +1,6 @@
 #### Notes from https://lwn.net/Articles/531381
 
-- The namespace API consists of three system calls—clone(), unshare(), and setns() — and a number of /proc files.
+- The namespace API consists of three system calls: clone(), unshare(), and setns() — and a number of /proc files.
 - As with most other namespaces (user namespaces are the exception), creating a UTS namespace requires privilege
   (specifically, CAP_SYS_ADMIN).
 - API: Creating a child in a new namespace: clone()
