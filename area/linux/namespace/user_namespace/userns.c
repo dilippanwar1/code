@@ -47,7 +47,7 @@ char * const child_args[]={
   NULL
 };
 
-void set_uid_map(int inside_id,int outside_id,int length) {
+void set_uid_map(int inside_id, int outside_id, int length) {
   char path[256];
   sprintf(path,"/proc/%d/uid_map", getpid());
   printf("%s\n", path);

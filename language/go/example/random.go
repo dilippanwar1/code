@@ -15,6 +15,14 @@ const (
 
 var src = rand.NewSource(time.Now().UnixNano())
 
+func main() {
+	fmt.Println(RandStringBytesMaskImprSrc(16))
+	fmt.Println(RandomRange(3, 20))
+	fmt.Println(ShuffleString("Caicloud"))
+	fmt.Println("Caicloud")
+	fmt.Println(ShuffleStringWithIndex("Caicloud"))
+}
+
 func RandStringBytesMaskImprSrc(n int) string {
 	b := make([]byte, n)
 	// A src.Int63() generates 63 random bits, enough for letterIdxMax characters!
@@ -38,7 +46,26 @@ func RandomRange(min, max int) int {
 	return rand.Intn(max-min) + min
 }
 
-func main() {
-	fmt.Println(RandStringBytesMaskImprSrc(16))
-	fmt.Println(RandomRange(3, 20))
+func ShuffleString(str string) string {
+	slice := []rune(str) // Use rune so we can shuffle uft8 chars.
+	for i := range slice {
+		j := rand.Intn(i + 1)
+		slice[i], slice[j] = slice[j], slice[i]
+	}
+	return string(slice)
+}
+
+// ShuffleStringWithIndex returns the shuffled string, and original index.
+func ShuffleStringWithIndex(str string) (string, []int) {
+	slice := []rune(str) // Use rune so we can shuffle uft8 chars.
+	var index []int
+	for i := 0; i < len(slice); i++ {
+		index = append(index, i)
+	}
+	for i := range slice {
+		j := rand.Intn(i + 1)
+		index[i], index[j] = index[j], index[i]
+		slice[i], slice[j] = slice[j], slice[i]
+	}
+	return string(slice), index
 }

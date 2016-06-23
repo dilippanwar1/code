@@ -28,5 +28,5 @@ sudo cgexec -g memory:/test_parent/child2 ./a.out
 ```
 
 child1 (or child2) will be killed when their **total** allocated memory is 12MB;
-then other one will proceed since memory is freed. This demonstrated the hierarchy
-tree property of cgroup.
+then the other one will proceed since memory is freed. This demonstrated cgroup
+hierarchy tree property.

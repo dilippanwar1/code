@@ -2,6 +2,7 @@ package main
 
 import (
 	"fmt"
+	"reflect"
 	"strings"
 	"unicode"
 
@@ -14,7 +15,8 @@ func main() {
 	// UpperLower()
 	// Slicing()
 	// ParseString()
-	TrimPrefix()
+	// TrimPrefix()
+	RuneUnicode()
 }
 
 func TrimPrefix() {
@@ -31,11 +33,26 @@ for multi line.`
 }
 
 func RuneUnicode() {
-	// Unicode
+	// Unicode (string)
 	s := "邓"
-	fmt.Println(len(s)) // 3
+	fmt.Println(len(s))            // 3
+	fmt.Println(reflect.TypeOf(s)) // string
 
-	_ = '邓' // This is a rune
+	// This is a rune.
+	r := '邓'
+	fmt.Println(reflect.TypeOf(r)) // int32
+	// You can't get length of rune.
+	//  fmt.Println(len(r))
+
+	// A bit of rune facts.
+	rr := "邓德源"
+	fmt.Println(len(rr))               // 9
+	fmt.Println(reflect.TypeOf(rr[0])) // uint8
+	fmt.Println(rr[0])                 // 233
+	fmt.Println(rr)                    // 邓德源
+
+	// To index rune, we'll need to convert to []rune.
+	fmt.Println(string([]rune("Hello, 世界")[8])) // UTF-8
 }
 
 func EmptyString() {
