@@ -1,0 +1,14 @@
+# kubernetes 1.3 doesn't have disruption budget, but in 1.3+
+apiVersion: policy/v1alpha1
+kind: PodDisruptionBudget
+metadata:
+  name: web
+spec:
+  minAvailable: 3
+  selector:
+    app: nginx
+status:
+  disruptionAllowed: true
+  currentHealthy: 4
+  desiredHealthy: 3
+  expectedPods: 5
