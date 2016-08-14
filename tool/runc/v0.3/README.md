@@ -1,11 +1,11 @@
-## runC example
+## runc example
 
 ### Create rootfs
 ```
 docker export $(docker create busybox) > busybox.tar
 ```
 
-### To start a container using runC:
+### To start a container using runc:
 ```sh
 cd busybox
 sudo runc start
