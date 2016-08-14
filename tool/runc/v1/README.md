@@ -1,15 +1,24 @@
 ## runc example
 
 ### Create rootfs
-```
+
+```sh
+mkdir busybox
+cd busybox
 mkdir rootfs
 docker export $(docker create busybox) | tar -C rootfs -xvf -
 ```
 
-### To start a container using runc:
+The above commands create rootfs for container, we'll also need config.json.
+Following command generates a default config.json.
+
 ```sh
-cd busybox
-sudo runc start
+runc spec
 ```
 
-Same for ubuntu
+### To start a container using runc:
+
+```sh
+cd busybox
+sudo runc run mycontainerid
+```
