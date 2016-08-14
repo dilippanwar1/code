@@ -34,8 +34,7 @@ args=()
 for i in "abc abc xyz"; do
   args+=("$i")
 done
-echo "${args[@]}"
-
+for each in "${args[@]}"; do echo "$each"; done
 
 # Print arguments. As shown in special_vars, $@ returns script argument as string.
 args="$@"
