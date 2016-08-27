@@ -50,6 +50,9 @@ static int __init hello_init(void)
   };
   printk("Entering: %s\n", __FUNCTION__);
 
+  // A struct net contains information about the network namespace, a set
+  // of network resources available to processes. init_net is the initial
+  // namespace, defined in net/core/net_namespace.c.
   nl_sk = netlink_kernel_create(&init_net, NETLINK_USER, &cfg);
   if (!nl_sk) {
     printk(KERN_ALERT "Error creating socket.\n");
