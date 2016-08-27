@@ -21,7 +21,8 @@ static void hello_nl_recv_msg(struct sk_buff *skb)
   msg_size = strlen(msg);
 
   nlh = (struct nlmsghdr*)skb->data;
-  printk(KERN_INFO "Netlink received msg payload: %s\n", (char*)nlmsg_data(nlh));
+  printk(KERN_INFO "Netlink received msg payload: %s\n",
+         (char*)nlmsg_data(nlh));
   pid = nlh->nlmsg_pid;         /* pid of sending process */
 
   // Allocate a new netlink message, see linux/include/net/netlink.h
