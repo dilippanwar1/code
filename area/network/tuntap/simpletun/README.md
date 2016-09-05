@@ -44,7 +44,7 @@ it to remote machine using tcp).
 On remote machine, simpletun.c will receive the packet (it is listening on
 public interface, with given port). It reads the data and simply sends it to
 tun tunserver. The data is then received by application as if it is received
-via the wire (though the tun interface). For example, if the data is ssh
+via the wire (through the tun interface). For example, if the data is ssh
 connection, ssh application will reply it, send the response back to tun
 interface. simpletun.c will receive the response from ssh application and write
 it back to public network. Therefore, there are a totol of 4 data exchange at
@@ -85,6 +85,7 @@ simpletun -h
 -p <port>: port to listen on (if run in server mode) or to connect to (in client mode), default 55555
 -u|-a: use TUN (-u, default) or TAP (-a)
 -d: outputs debug information while running
+-b: use base64 to encode/decode data
 -h: prints this help text
 ```
 
