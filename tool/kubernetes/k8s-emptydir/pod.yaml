@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: example
+spec:
+  containers:
+  - name: example
+    image: index.caicloud.io/caicloud/go-echoserver
+    volumeMounts:
+    - name: storage
+      mountPath: /data/data
+  volumes:
+  - name: storage
+    emptyDir: {}
