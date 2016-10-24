@@ -13,4 +13,4 @@ spec:
       - name: simple-backend
         image: ddysher/simple-backend
         ports:
-          - containerPort: 8000
+          - containerPort: 80
