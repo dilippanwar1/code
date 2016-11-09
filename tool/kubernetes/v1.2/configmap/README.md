@@ -23,7 +23,7 @@
 
 `kubectl create -f configmap-volume-pod.yaml`
 
-#### Redis
+#### Redis Example
 
 - Run redis
 
