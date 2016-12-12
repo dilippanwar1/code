@@ -13,4 +13,11 @@ spec:
       containers:
       - name: created-from-daemonset
         image: ddysher/simple-backend
+        resources:
+          limits:
+            cpu: 150m
+            memory: 150Mi
+          requests:
+            cpu: 100m
+            memory: 100Mi
       restartPolicy: Always
