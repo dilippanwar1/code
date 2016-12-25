@@ -99,11 +99,11 @@ func (d fakeVolDriver) Path(r dkvolume.Request) dkvolume.Response {
 	return dkvolume.Response{Mountpoint: d.volumes[r.Name]}
 }
 
-func (d fakeVolDriver) Mount(r dkvolume.Request) dkvolume.Response {
+func (d fakeVolDriver) Mount(r dkvolume.MountRequest) dkvolume.Response {
 	return dkvolume.Response{Mountpoint: d.volumes[r.Name]}
 }
 
-func (d fakeVolDriver) Unmount(r dkvolume.Request) dkvolume.Response {
+func (d fakeVolDriver) Unmount(r dkvolume.UnmountRequest) dkvolume.Response {
 	return dkvolume.Response{}
 }
 

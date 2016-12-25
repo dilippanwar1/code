@@ -8,19 +8,21 @@ boxes = [
   {
     :name => "server1",
     :eth1 => "192.168.205.10",
-    :mem => "1024",
-    :cpu => "1"
+    :mem => "2048",
+    :cpu => "2"
   },
   {
     :name => "server2",
     :eth1 => "192.168.205.11",
-    :mem => "1024",
-    :cpu => "1"
+    :mem => "2048",
+    :cpu => "2"
   }
 ]
 
 Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   config.vm.box = "ubuntu/trusty64"
+  config.vm.box_check_update = false
+
   # Turn off shared folders
   config.vm.synced_folder ".", "/vagrant", id: "vagrant-root", disabled: true
 
