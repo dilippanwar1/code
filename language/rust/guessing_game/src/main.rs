@@ -31,5 +31,6 @@ fn main() {
     io::stdin().read_line(&mut guess)
         .expect("Failed to read line");
 
+    // The {}s are a placeholder, and so we pass it guess as an argument.
     println!("You guessed: {}", guess);
 }
