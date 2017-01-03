@@ -114,6 +114,7 @@ func (d fakeVolDriver) Capabilities(r dkvolume.Request) dkvolume.Response {
 func main() {
 	flag.Parse()
 
+	// 'go-plugins-helpers' will create a socket file under '/run/docker/plugins/fakeVol.sock'.
 	d := newFakeVolDriver(*root)
 	h := dkvolume.NewHandler(d)
 	fmt.Println(h.ServeUnix("root", "fakeVol"))
