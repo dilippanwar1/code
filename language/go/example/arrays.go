@@ -1,3 +1,17 @@
+// https://blog.golang.org/go-slices-usage-and-internals
+//
+// Points about Go's array:
+// - An array's size is fixed; its length is part of its type ([4]int and
+//   [5]int are distinct, incompatible types).
+// - The in-memory representation of [4]int is just four integer values laid
+//   out sequentially.
+// - Go's arrays are values. An array variable denotes the entire array; it
+//   is not a pointer to the first array element (as would be the case in C).
+//   This means that when you assign or pass around an array value you will
+//   make a copy of its contents. (To avoid the copy you could pass a pointer
+//   to the array, but then that's a pointer to an array, not an array.) One
+//   way to think about arrays is as a sort of struct but with indexed rather
+//   than named fields: a fixed-size composite value.
 package main
 
 import "fmt"
@@ -23,7 +37,8 @@ func main() {
 	b := [5]int{1, 2, 3, 4, 5}
 	fmt.Println("dcl:", b)
 
-	// This is also an array ([...] = array vs [] = slice).
+	// This is also an array ([...] = array vs [] = slice). Use '...' to have
+	// compiler calculate the length.
 	c := [...]int{1, 2, 3, 4, 5}
 	fmt.Println("ccc:", c)
 
