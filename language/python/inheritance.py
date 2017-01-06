@@ -1,4 +1,4 @@
-# Experiment with inheritance in Python.
+#!/usr/bin/python
 
 class ExampleBase(object):
 

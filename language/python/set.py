@@ -16,18 +16,20 @@ class Person(object):
   def __hash__(self):
     return hash(repr(self))
 
-person1 = Person('ABC', 'M', 23)
-person2 = Person('ABC', 'F', 41)
 
-people = set()
-people.add(person1)
+if __name__ == '__main__':
+  person1 = Person('ABC', 'M', 23)
+  person2 = Person('ABC', 'F', 41)
 
-# The 'in' predicate of set type uses hash value and __eq__ for comparison.
-# General rule:
-#   'Match' if hash(a) == hash(b) and (a is b or a==b) else 'No Match'
-print person1 == person2        # True
-print person1 in people         # True
-print person2 in people         # True
+  people = set()
+  people.add(person1)
 
-person1.name = "CBA"
-print person1 in people         # True
+  # The 'in' predicate of set type uses hash value and __eq__ for comparison.
+  # General rule:
+  #   'Match' if hash(a) == hash(b) and (a is b or a==b) else 'No Match'
+  print person1 == person2        # True
+  print person1 in people         # True
+  print person2 in people         # True
+
+  person1.name = "CBA"
+  print person1 in people         # True

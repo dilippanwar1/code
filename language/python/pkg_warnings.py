@@ -1,3 +1,5 @@
+#!/usr/bin/python
+
 import warnings
 
 def some_old_function(arg1, arg2):

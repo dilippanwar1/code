@@ -1,3 +1,5 @@
+#!/usr/bin/python
+
 import os
 
 WORK_DIR = os.path.dirname(os.path.abspath(__file__))

@@ -1,4 +1,4 @@
-# Experiment with python functions.
+#!/usr/bin/python
 
 def TestMethodDataParam(data):
   """Data param (int, bool, float, etc) is passed as a 'data'."""
@@ -10,10 +10,12 @@ def TestMethodListParam(data, val):
     return
   data.append(val)
 
-data = [1,2,3]
-TestMethodListParam(data, 4)
-print data
 
-data = 1
-TestMethodDataParam(data)
-print data
+if __name__ == '__main__':
+  data = 1
+  TestMethodDataParam(data)
+  print data                    # output: 1
+
+  data = [1, 2, 3]
+  TestMethodListParam(data, 4)
+  print data                    # output: [1, 2, 3, 4]

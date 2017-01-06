@@ -1,5 +1,4 @@
-# Experiment with functionalities in string type.
-
+#!/usr/bin/python
 
 # string.lstrip, return a copy of the string with leading characters removed.
 print 'pcr12345pcr'.lstrip('pcr')
