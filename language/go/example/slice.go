@@ -18,6 +18,7 @@ func main() {
 	// concatenate()
 	// misc()
 	// sliceAppend()
+	appendSize()
 }
 
 func construction() {
@@ -193,4 +194,10 @@ func FindAndCopyDigits(filename string) []byte {
 	c := make([]byte, len(b))
 	copy(c, b)
 	return c
+}
+
+func appendSize() {
+	b := make([]int, 1024)
+	b = append(b, 99)
+	fmt.Println("len:", len(b), "cap:", cap(b))
 }
