@@ -5,7 +5,8 @@
 // physical component associated with it. It can be viewed as a simple
 // Point-to-Point or Ethernet device, which instead of receiving packets from
 // a physical media, receives them from user space program and instead of
-// sending packets via physical media writes them to the user space program.
+// sending packets via physical media writes them to the user space program
+// (from kernel's perspective).
 //
 // 1. Create a tun device name 'tuntest'
 //   $ sudo ip tuntap add dev tuntest mode tun

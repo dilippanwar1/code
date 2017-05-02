@@ -6,14 +6,20 @@ VAGRANTFILE_API_VERSION = "2"
 
 boxes = [
   {
-    :name => "server1",
-    :eth1 => "192.168.205.20",
+    :name => "host1",
+    :eth1 => "192.168.205.21",
     :mem => "2048",
     :cpu => "2"
   },
   {
-    :name => "server2",
-    :eth1 => "192.168.205.21",
+    :name => "host2",
+    :eth1 => "192.168.205.22",
+    :mem => "2048",
+    :cpu => "2"
+  },
+  {
+    :name => "host3",
+    :eth1 => "192.168.205.23",
     :mem => "2048",
     :cpu => "2"
   }
