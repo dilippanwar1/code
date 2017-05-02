@@ -1,4 +1,4 @@
-### Kubernetes v1.2 hostname
+### Kubernetes v1.2 pod hostname
 
 - Create pod with hostname/subdomain annotation (soon to be spec field)
 

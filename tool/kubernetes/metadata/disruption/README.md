@@ -1,4 +1,6 @@
-### Kubernetes v1.6 pod disruption budget
+### Kubernetes v1.6 pod disruption budget (beta)
+
+Note: alpha in kubernetes v1.3
 
 - Create a deployment
 

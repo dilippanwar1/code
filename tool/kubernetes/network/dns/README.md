@@ -1,4 +1,4 @@
-### Inspect kubernetes dns
+### Inspect kubernetes dns (k8s v1.0)
 
 - Start kubernetes.
 - Build and push images under images/ folder.
