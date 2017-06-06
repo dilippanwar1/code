@@ -1,0 +1,3 @@
+/home/deyuan/code/tool/cmake/use-lib/build/CMakeFiles/rebuild_cache.dir
+/home/deyuan/code/tool/cmake/use-lib/build/CMakeFiles/edit_cache.dir
+/home/deyuan/code/tool/cmake/use-lib/build/CMakeFiles/libtest.dir
