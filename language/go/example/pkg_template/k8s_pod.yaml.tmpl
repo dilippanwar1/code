@@ -1,0 +1,30 @@
+apiVersion: extensions/v1beta1
+kind: DaemonSet
+metadata:
+  name: local-volume-provisioner
+spec:
+  template:
+    metadata:
+      labels:
+        app: local-volume-provisioner
+    spec:
+      serviceAccount: local-storage-admin
+      containers:
+      - name: provisioner
+        image: "local-volume-provisioner:dev"
+        env:
+        - name: MY_NODE_NAME
+          valueFrom:
+            fieldRef:
+              fieldPath: spec.nodeName
+        volumeMounts:
+      {{- range $name, $path := .VolumeMounts }}
+        - name: {{ $name }}
+          mountPath: {{ $path }}
+      {{- end -}}
+      volumes:
+    {{- range $name, $path := .Volumes }}
+      - name: {{ $name }}
+        hostPath:
+          path: {{ $path }}
+    {{- end -}}
