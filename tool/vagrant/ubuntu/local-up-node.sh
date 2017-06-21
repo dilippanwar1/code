@@ -57,7 +57,6 @@ scp-to-instance-expect "vagrant:vagrant@192.168.33.33" \
 vagrant ssh -c "sudo mv /tmp/kubernetes /var/run"
 
 vagrant ssh -c "sudo /tmp/hyperkube kubelet \
-  --enable-cri=true \
   --v=3 \
   --chaos-chance=0.0 \
   --container-runtime=docker \

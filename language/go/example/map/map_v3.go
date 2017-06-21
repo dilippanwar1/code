@@ -24,4 +24,12 @@ func main() {
 	// But be careful not to access nil pointer.
 	//   m1["z"].name = "what?"
 	fmt.Println(m1["z"])
+
+	old := map[string]data{"key": data{"lsj"}}
+	changeIt(old)
+	fmt.Println(old)
+}
+
+func changeIt(val map[string]data) {
+	val["key"] = data{name: "ddy"}
 }
