@@ -7,26 +7,26 @@ VAGRANTFILE_API_VERSION = "2"
 boxes = [
   {
     :name => "host1",
-    :eth1 => "192.168.205.11",
+    :eth1 => "192.168.205.21",
     :mem => "2048",
     :cpu => "2"
   },
   {
     :name => "host2",
-    :eth1 => "192.168.205.12",
+    :eth1 => "192.168.205.22",
     :mem => "2048",
     :cpu => "2"
   },
   {
     :name => "host3",
-    :eth1 => "192.168.205.13",
+    :eth1 => "192.168.205.23",
     :mem => "2048",
     :cpu => "2"
   }
 ]
 
 Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
-  config.vm.box = "ubuntu/trusty64"
+  config.vm.box = "ubuntu/xenial64"
   config.vm.box_check_update = false
 
   # Turn off shared folders
