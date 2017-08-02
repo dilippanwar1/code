@@ -3,6 +3,7 @@
 // Compile with:
 //  $ go build hello.go
 //  $ ./hello
+//
 // Run directly with:
 //  $ go run hello.go
 
