@@ -1,5 +1,0 @@
-[mesos_masters]
-192.168.33.10 zoo_id=1 ansible_ssh_private_key_file=.vagrant/machines/host0/virtualbox/private_key
-
-[mesos_slaves]
-192.168.33.11 ansible_ssh_private_key_file=.vagrant/machines/host1/virtualbox/private_key

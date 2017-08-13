@@ -1,3 +1,0 @@
-/home/deyuan/code/tool/cmake/hello/CMakeFiles/rebuild_cache.dir
-/home/deyuan/code/tool/cmake/hello/CMakeFiles/edit_cache.dir
-/home/deyuan/code/tool/cmake/hello/CMakeFiles/hello.dir
